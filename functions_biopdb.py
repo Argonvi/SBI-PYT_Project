@@ -1,4 +1,5 @@
 #This file is for the record of useful functions for the project that can be found in the Bio.PDB package
+# link to the documentation: https://biopython.org/wiki/The_Biopython_Structural_Bioinformatics_FAQ
 
 from Bio.PDB import *
 
