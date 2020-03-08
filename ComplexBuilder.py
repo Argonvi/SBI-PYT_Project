@@ -1,6 +1,7 @@
 import argparser
 import utilities
 import logProgress
+from our_module import *
 
 # Read the command line arguments and check format
 options = argparser.readArgs()
