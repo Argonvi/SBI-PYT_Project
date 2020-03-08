@@ -1,66 +1,3 @@
-HELIX    1   1 GLU C   93  PHE C   95  1                                   3
-HELIX    2   2 PRO C  105  LYS C  107  1                                   3
-HELIX    3   3 PRO C  119  ASP C  121  1                                   3
-HELIX    4   4 LEU A  115  LEU A  123  1                                   9
-HELIX    5   5 SER A  126  MET A  145  1                                  20
-HELIX    6   6 ASP A  150  GLY A  175  1                                  26
-HELIX    7   7 PHE A  181  ARG A  185  1                                   5
-HELIX    8   8 TRP A  188  GLU A  203  1                                  16
-HELIX    9   9 VAL A  210  VAL A  227  1                                  18
-HELIX   10  10 LEU A  231  PHE A  267  1                                  37
-HELIX   11  11 ASN A  270  LYS A  272  1                                   3
-HELIX   12  12 GLU A  281  ASN A  283  1                                   3
-HELIX   13  13 LEU A  286  THR A  292  1                                   7
-HELIX   14  14 GLU A  296  TYR A  302  1                                   7
-HELIX   15  15 PHE A  347  MET A  358  1                                  12
-HELIX   16  16 TRP A  363  ALA A  374  1                                  12
-HELIX   17  17 LYS A  376  ALA A  416  1                                  41
-HELIX   18  18 SER A  727  ILE A  740  1                                  14
-HELIX   19  19 VAL A  746  ALA A  762  1                                  17
-HELIX   20  20 GLU A  770  GLN A  805  1                                  36
-HELIX   21  21 GLY A  807  VAL A  821  1                                  15
-HELIX   22  22 SER A  832  ALA A  846  1                                  15
-HELIX   23  23 PRO A  850  VAL A  863  1                                  14
-HELIX   24  24 ALA A  865  ILE A  899  1                                  35
-HELIX   25  25 PHE A  913  LEU A  924  1                                  12
-HELIX   26  26 TRP A  928  ALA A  939  1                                  12
-HELIX   27  27 GLN A  941  PHE A  971  1                                  31
-HELIX   28  28 ILE A 1177  GLU A 1190  1                                  14
-HELIX   29  29 SER A 1192  ALA A 1210  1                                  19
-HELIX   30  30 ILE A 1214  GLU A 1217  1                                   4
-HELIX   31  31 LYS A 1220  PHE A 1254  1                                  35
-HELIX   32  32 ALA A 1257  LEU A 1278  1                                  22
-HELIX   33  33 GLY A 1284  ARG A 1303  1                                  20
-HELIX   34  34 GLU A 1305  PHE A 1343  1                                  39
-HELIX   35  35 ARG A 1367  VAL A 1376  1                                  10
-HELIX   36  36 VAL A 1392  THR A 1404  1                                  13
-HELIX   37  37 TRP A 1408  ASP A 1417  1                                  10
-HELIX   38  38 TYR A 1432  LYS A 1466  1                                  35
-HELIX   39  39 GLU A 1476  GLY A 1489  1                                  14
-HELIX   40  40 LYS A 1503  THR A 1513  1                                  11
-HELIX   41  41 GLN A 1515  VAL A 1534  1                                  20
-HELIX   42  42 GLN A 1541  THR A 1575  1                                  35
-HELIX   43  43 GLY A 1577  TYR A 1602  1                                  26
-HELIX   44  44 PRO A 1606  GLY A 1626  1                                  21
-HELIX   45  45 LYS A 1628  PHE A 1666  1                                  39
-HELIX   46  46 PHE A 1684  THR A 1695  1                                  12
-HELIX   47  47 TRP A 1700  LEU A 1708  1                                   9
-HELIX   48  48 PRO A 1733  THR A 1767  1                                  35
-SHEET    1   1 1 GLU C  31  THR C  33  0
-SHEET    2   2 1 THR C  37  VAL C  40  0
-SHEET    3   3 1 ALA C  46  LEU C  48  0
-SHEET    4   4 1 THR C  51  ASN C  53  0
-SHEET    5   5 1 SER C  64  GLN C  70  0
-SHEET    6   6 1 GLU C  78  ARG C  84  0
-SHEET    7   7 1 LYS C  86  ASN C  89  0
-SHEET    8   8 1 VAL C  99  PHE C 101  0
-SHEET    9   9 1 VAL C 112  LEU C 114  0
-SHEET   10  10 1 GLY C 123  MET C 130  0
-SHEET   11  11 1 ARG C 137  VAL C 146  0
-SHEET   12  12 1 HIS A 273  ARG A 277  0
-SHEET   13  13 1 TYR A 328  LYS A 332  0
-SHEET   14  14 1 GLU A1349  ASN A1352  0
-SHEET   15  15 1 VAL A1380  LYS A1383  0
 ATOM      1  N   SER C  29     160.428 159.113 148.111  1.00 53.93           N
 ATOM      2  CA  SER C  29     161.267 158.554 149.163  1.00 49.22           C
 ATOM      3  C   SER C  29     160.456 157.646 150.082  1.00 44.19           C
@@ -10234,4 +10171,3 @@ ATOM  10170  CG  GLU A1768      94.951 145.477 151.376  1.00 93.25           C
 ATOM  10171  CD  GLU A1768      93.688 146.223 150.996  1.00 93.25           C
 ATOM  10172  OE1 GLU A1768      92.645 145.564 150.807  1.00 93.25           O
 ATOM  10173  OE2 GLU A1768      93.741 147.465 150.884  1.00 93.25           O
-END
