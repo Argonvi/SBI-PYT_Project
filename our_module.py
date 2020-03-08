@@ -14,12 +14,15 @@ def inter(pdb_files, fasta_file, threshold = 0.95):
         fasta_id = seq_record.id
         inter[fasta_id] = []
         for pdbfile in pdb_files:
-            pdb_data = PDBParser().get_structure(pdbfile.split(".")[0],pdbfile)
-            pdb_seqs = PPBuilder().build_peptides(pdb_data)
-            for i, pp in enumerate(pdb_seqs):
-                pp_seq = pp.get_sequence()
+            pdb_data = PDBParser().get_structure(pdbfile.split(".")[0],pdbfile)[0]
+            for chain in pdb_data:
+                pdb_seqs = PPBuilder().build_peptides(chain)
+                if len(pdb_seqs)>1:
+                    pp_seq = "".join(list([str(pp.get_sequence()) for pp in pdb_seqs]))
+                else:
+                    pp_seq = pdb_seqs[0].get_sequence()
                 score = pairwise2.align.globalxx(fasta_seq,pp_seq, score_only = True)
                 normalized_score = score/len(max([fasta_seq,pp_seq]))
                 if normalized_score > threshold:
-                    inter[fasta_id].append((pdbfile.split("/")[-1], i))
+                    inter[fasta_id].append((pdbfile.split("/")[-1], chain.get_id()))
     return inter
