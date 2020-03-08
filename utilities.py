@@ -19,7 +19,7 @@ def checkInputs(fastaFile, PDBDir):
                format) """)
     if isfile(fastaFile) and os.path.exists(PDBDir):
         inputList=[]        
-        inputList = [f for f in os.listdir(PDBDir) if f.endswith(".pdb")  and isfile(join(PDBDir, f))]
+        inputList = [PDBDir+f for f in os.listdir(PDBDir) if f.endswith(".pdb")  and isfile(join(PDBDir, f))]
         inputList.append(fastaFile)
         return inputList
     else:
