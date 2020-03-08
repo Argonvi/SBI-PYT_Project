@@ -5,8 +5,8 @@ from Bio import SeqIO, pairwise2
 def inter(pdb_files, fasta_file, threshold = 0.95):
     """Given a list of pdb file paths and a fasta file path (with the sequences in the full complex)
     , returns a dictionary with fasta sequence ids as keys, and a tuples as values. The tuple's
-    first value is the file where the sequence has been found and the second value is the index of
-    the sequence in such file.
+    first value is the file where the sequence has been found and the second value is the chain id
+    in such file.
     The threshold of similarity considered for the sequences to be the same is 0.95 at default."""
     inter = {}
     for seq_record in SeqIO.parse(fasta_file,"fasta"):
