@@ -1,32 +1,25 @@
-#This file is for the record of useful functions for the project that can be found in the Bio.PDB package
-# link to the documentation: https://biopython.org/wiki/The_Biopython_Structural_Bioinformatics_FAQ
-
 from Bio.PDB import *
+from Bio import SeqIO, pairwise2
 
-#Get the pdb structure into a python object
-parser = PDBParser()
-structure = parser.get_structure("protein_complex","6gmh.pdb")
 
-#Get the polypeptides
-
-ppb = PPBuilder()
-polypeptides = ppb.build_peptides(structure) #is a list of polypeptide objects
-
-#Get the sequences
-
-for pp in polypeptides:
-    pp.get_sequence() #is a sequence object, similar to a string
-
-#Performing aligment
-
-K = parser.get_structure("K","6gmh_K.pdb")
-E = parser.get_structure("E","6gmh_E.pdb")
-
-K_seq = ppb.build_peptides(K)[0].get_sequence()
-E_seq = ppb.build_peptides(E)[0].get_sequence()
-
-alignment = pairwise2.align.globalxx(K_seq, E_seq) #The aligment object is a list of the best possible aligments between the sequences
-#The default scoring system is (match = +1, mismatch = 0, gap opening and extension = -1). This means that if the score is the same as the sequence length, both sequences are identical.
-print(pairwise2.format_alignment(*alignment[0])) #We use a special function to print the results
-
-alignment_s = pairwise2.align.globalxx(K_seq, E_seq, score_only = True) #This returns only the scores
+def inter(pdb_files, fasta_file, threshold = 0.95):
+    """Given a list of pdb file paths and a fasta file path (with the sequences in the full complex)
+    , returns a dictionary with fasta sequence ids as keys, and a tuples as values. The tuple's
+    first value is the file where the sequence has been found and the second value is the index of
+    the sequence in such file.
+    The threshold of similarity considered for the sequences to be the same is 0.95 at default."""
+    inter = {}
+    for seq_record in SeqIO.parse(fasta_file,"fasta"):
+        fasta_seq = seq_record.seq
+        fasta_id = seq_record.id
+        inter[fasta_id] = []
+        for pdbfile in pdb_files:
+            pdb_data = PDBParser().get_structure(pdbfile.split(".")[0],pdbfile)
+            pdb_seqs = PPBuilder().build_peptides(pdb_data)
+            for i, pp in enumerate(pdb_seqs):
+                pp_seq = pp.get_sequence()
+                score = pairwise2.align.globalxx(fasta_seq,pp_seq, score_only = True)
+                normalized_score = score/len(max([fasta_seq,pp_seq]))
+                if normalized_score > threshold:
+                    inter[fasta_id].append((pdbfile.split("/")[-1], i))
+    return inter
