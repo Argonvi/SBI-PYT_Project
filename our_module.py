@@ -2,7 +2,7 @@ from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 
 
-def inter(pdb_files, fasta_file, threshold = 0.95):
+def seq_finder(pdb_files, fasta_file, threshold = 0.95):
     """Given a list of pdb file paths and a fasta file path (with the sequences in the full complex)
     , returns a dictionary with fasta sequence ids as keys, and a tuples as values. The tuple's
     first value is the file where the sequence has been found and the second value is the chain id
