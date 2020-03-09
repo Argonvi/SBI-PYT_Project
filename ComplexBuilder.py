@@ -11,8 +11,6 @@ if options.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
 
 pdb_files = inputFiles[:-1]
 fasta_file = inputFiles[-1]
-a = seq_finder(pdb_files,fasta_file)
-
-print(a)
-
-constructor(a)
+a = data_extraction(pdb_files,fasta_file)
+b = seq_dic(a)
+print(b)
