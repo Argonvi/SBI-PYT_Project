@@ -147,3 +147,19 @@ def constructor(information):
     return rand_model2   
 
         
+def stoichometry(file, information):
+    """Takes as input a file with the stoichomety information and stores
+    it in a dictionary format with sequences as keys and number of appearances
+    in the complex as values.
+    The sequence names should be the same as in the fasta file."""
+    fasta_ids = list(information.keys())
+    dictionary = {}
+    with open(file) as f:
+        for line in f:
+            line = line.strip()
+            line = line.split(":")
+            dictionary[line[0]] = line[1]
+    for fasta_id in fasta_ids:
+        if fasta_id not in list(dictionary.keys()):
+            dictionary[fasta_id] = 1
+    return dictionary
