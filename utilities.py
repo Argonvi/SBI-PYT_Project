@@ -4,6 +4,7 @@ from os.path import isfile, join
 from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import random
+import copy
 
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
@@ -90,24 +91,59 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     macrocomplex.add(third_chain)
     return macrocomplex
 
+
 def constructor(information):
     #Get a core model randomly
-
-    #desde aqui
-    rand_seq = random.choice(list(information.keys()))
+    chains_in_complex={}
+    chains_dict_used=[]
+    
+    #first 
+    for seq in information:
+        if len(information[seq])>1:
+            rand_seq=seq
+            break
     rand_tupla = random.choice(information[rand_seq])
     rand_model=rand_tupla[0]
     first_chain =rand_tupla[1]
+    chains_in_complex[rand_seq]= first_chain
+    chains_dict_used.append(rand_seq)
     rand_model2 = copy.deepcopy(rand_model)
-
+        
     for tupla in information[rand_seq]:
         if tupla[0] is rand_model:
             continue
         second_model = tupla[0]
         same_chain = tupla[1]
+        
         for chain in second_model.get_chains():
             if chain.get_id() != same_chain.get_id():
                 third_chain = chain
-        rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
+                rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
+                chains_in_complex[tupla[2]]=third_chain
+    
+    ##following  
 
-    return rand_model2
+    while len(chains_dict_used)<len(chains_in_complex):
+        for chain in chains_in_complex:
+            if chain not in chains_dict_used:
+                rand_seq=chain
+                break
+    
+          
+        first_chain =chains_in_complex[rand_seq]
+        chains_dict_used.append(rand_seq)
+    
+        for tupla in information[rand_seq]:
+            if tupla[2] in chains_in_complex:
+                continue
+            second_model = tupla[0]
+            same_chain = tupla[1]
+            
+            for chain in second_model.get_chains():
+                if chain.get_id() != same_chain.get_id():
+                    third_chain = chain
+                    rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
+                    chains_in_complex[tupla[2]]=third_chain
+    return rand_model2   
+
+        
