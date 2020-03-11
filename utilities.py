@@ -130,7 +130,7 @@ def stoichometry(file, information):
         for line in f:
             line = line.strip()
             line = line.split(":")
-            dictionary[line[0]] = line[1]
+            dictionary[line[0]] = int(line[1])
     for fasta_id in fasta_ids:
         if fasta_id not in list(dictionary.keys()):
             dictionary[fasta_id] = 1
@@ -155,6 +155,7 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     char = next(ascii_letters_generator)
     third_chain.id = char
     macrocomplex.add(third_chain)
+    #if third chain collapses with another chain, raise an error
     return macrocomplex
 
 
@@ -192,31 +193,31 @@ def constructor(information,stoich):
                 chains_in_complex[tupla[2]]=[third_chain]
 
     ##following
-
-    while len(chains_in_complex)<sum(list(stoich.values())):
+    n = 3
+    #sum([len(a) for a in chains_in_complex.values()])
+    while n<sum(stoich.values()):
 
         for chain in chains_in_complex:
             if chain not in chains_used:
                 rand_seq=chain
                 break
 
-        for i in range(len(chains_in_complex[rand_seq])):
-            first_chain =chains_in_complex[rand_seq][i-1]
+        for first_chain in chains_in_complex[rand_seq]:
             chains_used.append(rand_seq)
 
             for tupla in information[rand_seq]:
-                if ((tupla[2] in chains_in_complex) and (len(chains_in_complex[tupla[2]])==stoich[tupla[2]])):
-                    continue
+                if (tupla[2] in chains_in_complex) and (len(chains_in_complex[tupla[2]])==stoich[tupla[2]]): continue
                 second_model = tupla[0]
                 same_chain = tupla[1]
 
                 for chain in second_model.get_chains():
                     if chain.get_id() != same_chain.get_id():
                         third_chain = chain
+                        #try:
                         rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
-                        if tupla[2] in chains_in_complex:
-                            chains_in_complex[tupla[2]].append(third_chain)
-
-                        else:
-                            chains_in_complex[tupla[2]]=[third_chain]
+                        #except CollisionError:
+                            #print("cosas", file = "ComplexBuilder.log")
+                        chains_in_complex.setdefault(tupla[2],[third_chain])
+                        chains_in_complex[tupla[2]].append(third_chain)
+                        n += 1
     return rand_model2
