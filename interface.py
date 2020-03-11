@@ -45,8 +45,20 @@ def initGui():
         return root.directory 
 
     def stSelection():
-        """Store the stoichiometry entered by the user"""
-        labelSt.configure(text= 'Stoichiometry: ' + st.get())
+        """Open window with files in the current directory to select the the stoichiometry file"""
+        filetext="Select"
+        root.filenameSt =  filedialog.askopenfilename(initialdir = cwd,title = "Select the stoichiometry file",
+                                                    filetypes = (("Text files","*.txt"),
+                                                                ("all files","*.*")))
+        print (root.filenameSt)
+        bSt["text"]= simpleName(root.filenameSt) if root.filenameSt else filetext   
+
+        return root.filenameSt
+        
+    def checkButton(but):
+        filetext="Select"
+        if but["text"]==filetext:
+            return False
 
     def checkVerbose():
         """return TRUE if the log checkbox if checked"""
@@ -68,7 +80,7 @@ def initGui():
     # FASTA widget
     frameFA = Frame(frame)
     frameFA.pack(pady="15", padx="50",side=TOP,anchor=W, fill=X, expand=YES)
-    labelF = Label(frameFA, text="Sequence file:            ")
+    labelF = Label(frameFA, text="Sequence file:                                ")
     labelF.pack( side=LEFT )
     #Button FASTA file
     bF = Button(frameFA, text="Select", command=fastaSelection)
@@ -78,7 +90,7 @@ def initGui():
     #PDB widget
     framePDB = Frame(frame)
     framePDB.pack(pady="15", padx="50",anchor=W, fill=X, expand=YES)
-    labelF = Label(framePDB, text="Interactions directory:")
+    labelF = Label(framePDB, text="Interactions directory:                   ")
     labelF.pack( side=LEFT )
     #Button PDB dir
     bP = Button(framePDB, text="Select", command=pdbSelection)
@@ -91,13 +103,9 @@ def initGui():
     labelSt = Label(frameSt, text="Define a stoichiometry (optional):")
     labelSt.pack( side=LEFT )
     #textBox stoichiometry
-    st = StringVar()
-    button = Button(frameSt, text = "Apply", command = stSelection)
-    button.pack(pady="15", padx="17",side=RIGHT)
-    stEntered = Entry(frameSt, width = 10, textvariable = st)
-    stEntered.pack(pady="15", padx="5",side=RIGHT)
- 
-    
+    bSt = Button(frameSt, text = "Select", command = stSelection)
+    bSt.pack()
+        
 
 
     #Verbose widget
@@ -108,7 +116,7 @@ def initGui():
     #Checkbox verbose
     verb = BooleanVar()
     cV = Checkbutton(frameV, text="I do!", variable=verb, command=checkVerbose)
-    cV.pack(  )
+    cV.pack()
     
 
 
@@ -119,11 +127,18 @@ def initGui():
     root.mainloop()
 
 
+
+
     #Parse inputs 
     inputs=[]
     inputs.append( simpleName(root.filename)) 
     inputs.append( simpleName(root.directory))
     inputs.append(checkVerbose())
+    try:
+        inputs.append( simpleName(root.filenameSt))
+    except:
+        inputs.append(None)
+    
     print(inputs)
     return inputs
 

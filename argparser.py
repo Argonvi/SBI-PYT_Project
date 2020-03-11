@@ -1,9 +1,6 @@
 import sys,os,argparse, gzip
 from os.path import isfile, join
 
-
-
-
 def readArgs():
     """ Read and organize the command line arguments and return the namespace"""
     parser = argparse.ArgumentParser(description="Build a protein complex from a set "
@@ -17,8 +14,7 @@ def readArgs():
     parser.add_argument('-pdb', '--pdbDir', dest = "inpdb", action = "store", default = None, 
                         help = """PDB diretory containing the PDB files with the 
                                structure of the pairs conforming the complex you 
-                               want to build.""")
-                        
+                               want to build.""")                        
 
     parser.add_argument('-o', '--output', dest = "outfile", action = "store", default = "ComplexBuilding", 
                         help = """Directory where the complex results will be stored. 
@@ -32,7 +28,8 @@ def readArgs():
                         help = "File containing a determined stoichiometry to the complex.") 
 
     parser.add_argument('-gui', '--graphicInterface', dest="gui",action="store_true",default=False,
-                        help="Display the graphic iterface") 
+                        help="""To use ComplexBuilder with the graphical interface just use 
+                              '-gui' argument in commandline.""") 
 
     return parser.parse_args()
 

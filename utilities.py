@@ -1,35 +1,74 @@
 import os
 from os.path import isfile, join
-
+import sys
 from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import random
 import copy
 import string
+import interface
+import logProgress
+
+def checkCommands(commands):
+    """Check the mode of operation of ComplexBuilder: if '-gui' has been defined
+        it must be a unique argument, otherwise use the rest of commandline arguments"""
+    inputs=[]
+    data=[]
+    if commands.gui: #enter files through GUI
+        if len(sys.argv)==2:
+            inputList=interface.initGui()
+            inputs = checkInputs(inputList[0], inputList[1]) #FASTA file, PDB dir
+            data.append(inputs)
+            if  inputList[2]: # -v selected in GUI
+                logProgress.logStart(inputs)
+            if inputList[3]:
+                data.append(inputList[3])
+        else:
+            raise ValueError("""
+                If you want to use the graphical interface to 
+                introduce the complex data, the only commandline 
+                argument possible is '-gui'.\n
+                Type -h for more information of the required
+                format""")
+    else: #enter files through command line
+        inputs = checkInputs(commands.infasta, commands.inpdb)
+        data.append(inputs)
+    if commands.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
+        logProgress.logStart(inputs)
+    if commands.stoich:
+        data.append(commands.stoich)
+    else:
+        data.append(None)
+    
+    print('utilities inputs',inputs)
+    print('utilities data',data)
+    return data
 
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
        the command line and returns all the files in a list"""
 
     if isfile(fastaFile)==False:
-        raise ValueError("""You should introduce the name of the FASTA file
-               containing the sequences of the elements of the
-               complex you want to build after '-fa'.\n
-               (type -h for more information of the required
-               format) """)
+        raise ValueError("""
+                You should introduce the name of the FASTA file
+                containing the sequences of the elements of the
+                complex you want to build after '-fa'.\n
+                Type -h for more information of the required
+                format""")
     if PDBDir==None or os.path.exists(PDBDir)==False:
-        raise ValueError("""You should introduce the name of the directory
-               containing the PDB files for the element pairs
-               of the complex you want to build after '-pdb'.\n
-               (type -h for more information of the required
-               format) """)
+        raise ValueError("""
+                You should introduce the name of the directory
+                containing the PDB files for each interacting
+                pair of the complex after '-pdb'.\n
+                Type -h for more information of the required
+                format""")
     if isfile(fastaFile) and os.path.exists(PDBDir):
         if PDBDir.endswith("/"):
             string = ""
         else:
             string = "/"
         inputList=[]
-        inputList = [PDBDir+string+f for f in os.listdir(PDBDir) if f.endswith(".pdb")  and isfile(join(PDBDir, f))]
+        inputList = [PDBDir+string+f for f in os.listdir(PDBDir) if f.endswith(".pdb") and isfile(join(PDBDir, f))]
         inputList.append(fastaFile)
         return inputList
     else:
@@ -200,9 +239,3 @@ def constructor(information,stoich):
    
     
     return rand_model2   
-
-
-
-
-
-
