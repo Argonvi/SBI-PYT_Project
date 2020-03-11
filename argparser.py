@@ -28,8 +28,8 @@ def readArgs():
     parser.add_argument('-v', '--verbose', dest = "verbose", action = "store_true", default = False, 
                         help = "Show the detailed progression of the building.")
 
-    parser.add_argument('-st', '--stoichiometry', dest = "stoich", action = "store_true", default = False, 
-                        help = "Define a determined stoichiometry.") 
+    parser.add_argument('-st', '--stoichiometry', dest = "stoich", action = "store", default = None, 
+                        help = "File containing a determined stoichiometry to the complex.") 
 
     parser.add_argument('-gui', '--graphicInterface', dest="gui",action="store_true",default=False,
                         help="Display the graphic iterface") 
