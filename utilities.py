@@ -5,6 +5,7 @@ from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import random
 import copy
+import string
 
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
@@ -69,84 +70,16 @@ def seq_dictionary(data):
     for k, v in data.items():
         for k2, v2 in v.items():
             sequence_dictionary.setdefault(v2, [])
-            for seq_id in v.values():
-                if seq_id != v2: other_seq = seq_id
+            if list(v.values())[0]==list(v.values())[1]:
+                other_seq=list(v.values())[0]
+            else:
+                for seq_id in v.values():
+                    if seq_id != v2: other_seq = seq_id
             sequence_dictionary[v2].append((k,k[k2],other_seq))
     return sequence_dictionary
 
-def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
-    """REVISAR ESTA DESCRIPCION  PORQUE ES UN CHURRO"""
-
-    """This function takes as input 3 chain objects:
-            The chain that we take as reference in order to do the superimposition
-            The chain that we want to superimpose
-            The chain that we are going to rotate in because it interacts with the previous chain
-        It also takes the macrocomplex in order to add the third chain.
-    """
-    atom_list1 = Selection.unfold_entities(first_chain, 'A')
-    atom_list2 = Selection.unfold_entities(same_chain, 'A')
-    sup = Superimposer()
-    sup.set_atoms(atom_list1, atom_list2)
-    sup.apply(third_chain)
-    macrocomplex.add(third_chain)
-    return macrocomplex
 
 
-def constructor(information):
-    #Get a core model randomly
-    chains_in_complex={}
-    chains_dict_used=[]
-    
-    #first 
-    for seq in information:
-        if len(information[seq])>1:
-            rand_seq=seq
-            break
-    rand_tupla = random.choice(information[rand_seq])
-    rand_model=rand_tupla[0]
-    first_chain =rand_tupla[1]
-    chains_in_complex[rand_seq]= first_chain
-    chains_dict_used.append(rand_seq)
-    rand_model2 = copy.deepcopy(rand_model)
-        
-    for tupla in information[rand_seq]:
-        if tupla[0] is rand_model:
-            continue
-        second_model = tupla[0]
-        same_chain = tupla[1]
-        
-        for chain in second_model.get_chains():
-            if chain.get_id() != same_chain.get_id():
-                third_chain = chain
-                rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
-                chains_in_complex[tupla[2]]=third_chain
-    
-    ##following  
-
-    while len(chains_dict_used)<len(chains_in_complex):
-        for chain in chains_in_complex:
-            if chain not in chains_dict_used:
-                rand_seq=chain
-                break
-    
-          
-        first_chain =chains_in_complex[rand_seq]
-        chains_dict_used.append(rand_seq)
-    
-        for tupla in information[rand_seq]:
-            if tupla[2] in chains_in_complex:
-                continue
-            second_model = tupla[0]
-            same_chain = tupla[1]
-            
-            for chain in second_model.get_chains():
-                if chain.get_id() != same_chain.get_id():
-                    third_chain = chain
-                    rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
-                    chains_in_complex[tupla[2]]=third_chain
-    return rand_model2   
-
-        
 def stoichometry(file, information):
     """Takes as input a file with the stoichomety information and stores
     it in a dictionary format with sequences as keys and number of appearances
@@ -163,3 +96,113 @@ def stoichometry(file, information):
         if fasta_id not in list(dictionary.keys()):
             dictionary[fasta_id] = 1
     return dictionary
+        
+
+
+def len_complex(stoich):
+    length=0
+    for i in stoich:
+        length+=stoich[i]
+    return length
+
+def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
+    """REVISAR ESTA DESCRIPCION  PORQUE ES UN CHURRO"""
+
+    """This function takes as input 3 chain objects:
+            The chain that we take as reference in order to do the superimposition
+            The chain that we want to superimpose
+            The chain that we are going to rotate in because it interacts with the previous chain
+        It also takes the macrocomplex in order to add the third chain.
+    """
+    atom_list1 = Selection.unfold_entities(first_chain, 'A')
+    atom_list2 = Selection.unfold_entities(same_chain, 'A')
+    sup = Superimposer()
+    print(first_chain.get_id(), same_chain.get_id())
+    print(len(atom_list1))
+    print(len(atom_list2))
+
+    sup.set_atoms(atom_list1, atom_list2)
+    sup.apply(third_chain)
+    try:
+        macrocomplex.add(third_chain)
+    except:
+        third_chain.id=random.choice(string.ascii_letters)
+        macrocomplex.add(third_chain)
+    return macrocomplex
+
+
+def constructor(information,stoich):
+    #Get a core model randomly
+    chains_in_complex={}
+    chains_dict_used=[]
+    n=0
+    
+    #first 
+    for seq in information:
+        if len(information[seq])>1 and (information[seq][0][2]!=information[seq][1][2] or stoich[information[seq][0][2]]>1 ):
+            rand_seq=seq
+            break
+    rand_tupla = random.choice(information[rand_seq])
+    rand_model=rand_tupla[0]
+    first_chain =rand_tupla[1]
+    chains_in_complex[rand_seq]= [first_chain]
+    n+=1
+    chains_dict_used.append(rand_seq)
+    rand_model2 = copy.deepcopy(rand_model)
+    for chain in rand_model.get_chains():
+        if chain.get_id() != first_chain.get_id():
+            chains_in_complex[rand_tupla[2]]=[chain]
+            n+=1
+    
+        
+    for tupla in information[rand_seq]:
+        if tupla[0] is rand_model:
+            continue
+        second_model = tupla[0]
+        same_chain = tupla[1]
+        
+        for chain in second_model.get_chains():
+            if chain.get_id() != same_chain.get_id():
+                third_chain = chain
+                rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
+                chains_in_complex[tupla[2]]=[third_chain]
+                n+=1
+    
+    ##following  
+    
+    while n<len_complex(stoich):
+
+        for chain in chains_in_complex:
+            if chain not in chains_dict_used:
+                rand_seq=chain
+                break
+    
+        for i in range(len(chains_in_complex[rand_seq])):
+            first_chain =chains_in_complex[rand_seq][i-1]
+            chains_dict_used.append(rand_seq)
+    
+            for tupla in information[rand_seq]:
+                if ((tupla[2] in chains_in_complex) and (len(chains_in_complex[tupla[2]])==stoich[tupla[2]])):
+                    continue
+                second_model = tupla[0]
+                same_chain = tupla[1]
+            
+                for chain in second_model.get_chains():
+                    if chain.get_id() != same_chain.get_id():
+                        third_chain = chain
+                        rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
+                        if tupla[2] in chains_in_complex:
+                            chains_in_complex[tupla[2]].append(third_chain)
+                            n+=1
+                        else:
+                            chains_in_complex[tupla[2]]=[third_chain]
+                            n+=1
+   
+    
+    return rand_model2   
+
+
+
+
+
+
