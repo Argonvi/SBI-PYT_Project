@@ -29,7 +29,10 @@ def readArgs():
                         help = "Show the detailed progression of the building.")
 
     parser.add_argument('-st', '--stoichiometry', dest = "stoich", action = "store_true", default = False, 
-                        help = "Define a determined stoichiometry.")    
+                        help = "Define a determined stoichiometry.") 
+
+    parser.add_argument('-gui', '--graphicInterface', dest="gui",action="store_true",default=False,
+                        help="Display the graphic iterface") 
 
     return parser.parse_args()
 
