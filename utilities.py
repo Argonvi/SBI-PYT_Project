@@ -20,11 +20,11 @@ def checkCommands(commands):
         if len(sys.argv)==2:
             inputList=interface.initGui()
             inputs = checkInputs(inputList[0], inputList[1]) #FASTA file, PDB dir
-            data.append(inputs)
-            if  inputList[2]: # -v selected in GUI
+            data.append(inputs) # list of inputs : FASTA + PDB dir, data[0]
+            if  inputList[2]: # verbose T/F
                 logProgress.logStart(inputs)
-            if inputList[3]:
-                data.append(inputList[3])
+            data.append(inputList[3])  # stoichometry None/Filename, data [1]
+            data.append(inputList[4]) #output file data[2]
         else:
             raise ValueError("""
                 If you want to use the graphical interface to
@@ -35,15 +35,14 @@ def checkCommands(commands):
     else: #enter files through command line
         inputs = checkInputs(commands.infasta, commands.inpdb)
         data.append(inputs)
-    if commands.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
-        logProgress.logStart(inputs)
-    if commands.stoich:
-        data.append(commands.stoich)
-    else:
-        data.append(None)
+        if commands.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
+            logProgress.logStart(inputs)
+        if commands.stoich:
+            data.append(commands.stoich)
+        else:
+            data.append(None)
+        data.append(commands.outfile)
 
-    print('utilities inputs',inputs)
-    print('utilities data',data)
     return data
 
 def checkInputs(fastaFile, PDBDir):

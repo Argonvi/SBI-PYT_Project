@@ -14,9 +14,8 @@ inputFiles=inputData[0]
 pdb_files = inputFiles[:-1]
 fasta_file = inputFiles[-1]
 st_file=inputData[1] # if there is not stoichiometry = None
+out_file=inputData[2] 
 
-print('pdb',pdb_files)
-print('fa',fasta_file)
 a = data_extraction(pdb_files,fasta_file)
 b = seq_dictionary(a)
 print(b)
