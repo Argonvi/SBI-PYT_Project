@@ -16,7 +16,7 @@ def readArgs():
                                structure of the pairs conforming the complex you 
                                want to build.""")                        
 
-    parser.add_argument('-o', '--output', dest = "outfile", action = "store", default = "ComplexBuilding", 
+    parser.add_argument('-o', '--output', dest = "outfile", action = "store", default = None, 
                         help = """Directory where the complex results will be stored. 
                                 If it is not defined a new directory 'ComplexBuilding' 
                                 will be created.""")
@@ -25,7 +25,11 @@ def readArgs():
                         help = "Show the detailed progression of the building.")
 
     parser.add_argument('-st', '--stoichiometry', dest = "stoich", action = "store", default = None, 
-                        help = "File containing a determined stoichiometry to the complex.") 
+                        help = """File containing a determined stoichiometry to the complex. 
+                               The information of the stoichiometry must be: the ID of the 
+                               sequence chain (concordant with the FASTA file ID) followed by 
+                               the number of times it has to be present in the complex after ':'
+                               ID_as_FASTA_file : stoichiometry (one per line) in format .txt. """) 
 
     parser.add_argument('-gui', '--graphicInterface', dest="gui",action="store_true",default=False,
                         help="""To use ComplexBuilder with the graphical interface just use 

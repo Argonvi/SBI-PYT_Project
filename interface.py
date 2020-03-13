@@ -103,7 +103,7 @@ def initGui():
     menubar = Menu(root, tearoff=0)
 
     filemenu = Menu(menubar)
-    filemenu.add_command(label="Add stoichometry", command=stSelection)
+    filemenu.add_command(label="Add stoichiometry", command=stSelection)
     #filemenu.add_command(label="Energy analysis", command=menu_action)
     #filemenu.add_command(label="Open lof file", command=menu_action)
     filemenu.add_separator()
@@ -200,7 +200,7 @@ def initGui():
     inputs.append( simpleName(root.filename)) # FASTA
     inputs.append( simpleName(root.directory)) # PDB dir
     inputs.append(checkVerbose()) # verbose T/F
-    try: # stoichometry None/file
+    try: # stoichiometry None/file
         inputs.append( simpleName(root.filenameSt))
     except:
         inputs.append(None)

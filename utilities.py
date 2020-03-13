@@ -23,7 +23,7 @@ def checkCommands(commands):
             data.append(inputs) # list of inputs : FASTA + PDB dir, data[0]
             if  inputList[2]: # verbose T/F
                 logProgress.logStart(inputs)
-            data.append(inputList[3])  # stoichometry None/Filename, data [1]
+            data.append(inputList[3])  # stoichiometry None/Filename, data [1]
             data.append(inputList[4]) #output file data[2]
         else:
             raise ValueError("""
@@ -37,18 +37,46 @@ def checkCommands(commands):
         data.append(inputs)
         if commands.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
             logProgress.logStart(inputs)
-        if commands.stoich:
-            data.append(commands.stoich)
-        else:
-            data.append(None)
-        data.append(commands.outfile)
+        checkSt(commands.stoich,data)
+        checkOutput(commands.outfile, data)
 
     return data
+
+def checkSt(stName, inputsListed):
+    """Check the stoichiometry file existence entered by the user and 
+    append it to the list of input values, otherwise add None"""
+    if stName:
+        if isfile(stName) and stName.endswith('.txt'):
+            inputsListed.append(stName)
+        else:
+            raise ValueError("""
+                You should introduce the name of an existing .txt 
+                file with the sctoichiometry data after '-st'.\n
+                Type -h for more information of the required
+                format""")
+    else:
+        inputsListed.append(None)
+    return None
+
+
+def checkOutput(outputName, inputsListed):
+    """Check the output name existence defined by the user and 
+    append it to the list of input values, otherwise raise an error"""
+    if outputName is not None:
+        inputsListed.append(outputName)
+    else:
+        raise ValueError("""
+                You should introduce the name of the directory
+                where the resulting files will be stored after
+                 '-o'.\n
+                Type -h for more information of the required
+                format""")
+    return None
 
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
        the command line and returns all the files in a list"""
-
+    
     if isfile(fastaFile)==False:
         raise ValueError("""
                 You should introduce the name of the FASTA file
@@ -70,6 +98,13 @@ def checkInputs(fastaFile, PDBDir):
             string = "/"
         inputList=[]
         inputList = [PDBDir+string+f for f in os.listdir(PDBDir) if f.endswith(".pdb") and isfile(join(PDBDir, f))]
+        if len(inputList)<1: # not PDB files inside PDBdir
+            raise ValueError("""
+                You should introduce the name of the directory
+                containing the PDB files for each interacting
+                pair of the complex after '-pdb'.\n
+                Type -h for more information of the required
+                format""")
         inputList.append(fastaFile)
         return inputList
     else:
