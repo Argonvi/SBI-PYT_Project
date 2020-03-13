@@ -43,14 +43,14 @@ def checkCommands(commands):
     return data
 
 def checkSt(stName, inputsListed):
-    """Check the stoichiometry file existence entered by the user and 
+    """Check the stoichiometry file existence entered by the user and
     append it to the list of input values, otherwise add None"""
     if stName:
         if isfile(stName) and stName.endswith('.txt'):
             inputsListed.append(stName)
         else:
             raise ValueError("""
-                You should introduce the name of an existing .txt 
+                You should introduce the name of an existing .txt
                 file with the sctoichiometry data after '-st'.\n
                 Type -h for more information of the required
                 format""")
@@ -60,7 +60,7 @@ def checkSt(stName, inputsListed):
 
 
 def checkOutput(outputName, inputsListed):
-    """Check the output name existence defined by the user and 
+    """Check the output name existence defined by the user and
     append it to the list of input values, otherwise raise an error"""
     if outputName is not None:
         inputsListed.append(outputName)
@@ -76,7 +76,7 @@ def checkOutput(outputName, inputsListed):
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
        the command line and returns all the files in a list"""
-    
+
     if isfile(fastaFile)==False:
         raise ValueError("""
                 You should introduce the name of the FASTA file
@@ -137,7 +137,7 @@ def data_extraction(pdb_files, fasta_file, threshold = 0.95):
 def seq_dictionary(data):
     """Transforms the dictionary of dictionaries given by data_extraction()
     into a dictionary with the fasta_ids as keys and as values, a list of
-    tuples wich have:
+    interactions wich have:
      1: The model in which the sequence is found
      2: The corresponding chain in said model
      3: The other sequence (id) with which it is interacting"""
@@ -160,11 +160,12 @@ def stoichometry(file, information):
     The sequence names should be the same as in the fasta file."""
     fasta_ids = list(information.keys())
     dictionary = {}
-    with open(file) as f:
-        for line in f:
-            line = line.strip()
-            line = line.split(":")
-            dictionary[line[0]] = int(line[1])
+    if file is not None:
+        with open(file) as f:
+            for line in f:
+                line = line.strip()
+                line = line.split(":")
+                dictionary[line[0]] = int(line[1])
     for fasta_id in fasta_ids:
         if fasta_id not in list(dictionary.keys()):
             dictionary[fasta_id] = 1
@@ -194,64 +195,55 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
 
 
 def constructor(information,stoich):
-    #Get a core model randomly
+    """Description"""
     chains_in_complex={}
-    chains_used=[]
 
-    #first
+    #Choose a model to start iterating
     for seq, interactions in information.items():
-        if len(interactions)>1 and (interactions[0][2]!=interactions[1][2] or stoich[interactions[0][2]]>1):
-            rand_seq=seq
-            break
-    rand_tupla = random.choice(information[rand_seq])
-    rand_model = rand_tupla[0]
-    first_chain = rand_tupla[1]
-    chains_in_complex[rand_seq] = [first_chain]
+        if len(interactions)>1 and (interactions[0][2]!=interactions[1][2] or stoich[interactions[0][2]]>1): break
+    rand_interaction = random.choice(information[seq])
+    start_model = rand_interaction[0]
+    first_chain = rand_interaction[1]
 
-    chains_used.append(rand_seq)
-    rand_model2 = copy.deepcopy(rand_model)
-    for chain in rand_model.get_chains():
-        if chain.get_id() != first_chain.get_id():
-            chains_in_complex[rand_tupla[2]]=[chain]
+    #Store its chains in the complex dictionary and used chains list
+    chains_in_complex[seq] = [first_chain]
+    chains_in_complex[rand_interaction[2]] = [chain for chain in start_model.get_chains() if chain.get_id() != first_chain.get_id()]
+    chains_used = [seq]
 
-    for tupla in information[rand_seq]:
-        if tupla[0] is rand_model:
-            continue
-        second_model = tupla[0]
-        same_chain = tupla[1]
+    #Make a copy to modify
+    start_model_copy = copy.deepcopy(start_model)
+
+
+    for interaction in information[seq]:
+        if interaction[0] is start_model: continue
+        second_model = interaction[0]
+        same_chain = interaction[1]
+        other_seq = interaction[2]
 
         for chain in second_model.get_chains():
             if chain.get_id() != same_chain.get_id():
                 third_chain = chain
-                rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
-                chains_in_complex[tupla[2]]=[third_chain]
-
-    ##following
+                complex=superimpositor(first_chain, same_chain, third_chain,start_model_copy)
+                chains_in_complex[other_seq]=[third_chain]
+    #We have a complex with 3 subunits
     n = 3
     #sum([len(a) for a in chains_in_complex.values()])
-    while n<sum(stoich.values()):
+    while n < sum(stoich.values()):
 
-        for chain in chains_in_complex:
-            if chain not in chains_used:
-                rand_seq=chain
-                break
+        seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
 
-        for first_chain in chains_in_complex[rand_seq]:
-            chains_used.append(rand_seq)
+        for first_chain in chains_in_complex[seq]:
+            chains_used.append(seq)
 
-            for tupla in information[rand_seq]:
-                if (tupla[2] in chains_in_complex) and (len(chains_in_complex[tupla[2]])==stoich[tupla[2]]): continue
-                second_model = tupla[0]
-                same_chain = tupla[1]
+            for interaction in information[seq]:
+                if (interaction[2] in chains_in_complex) and (len(chains_in_complex[interaction[2]])==stoich[interaction[2]]): continue
+                second_model = interaction[0]
+                same_chain = interaction[1]
 
                 for chain in second_model.get_chains():
-                    if chain.get_id() != same_chain.get_id():
-                        third_chain = chain
-                        #try:
-                        rand_model2=superimpositor(first_chain, same_chain, third_chain,rand_model2)
-                        #except CollisionError:
-                            #print("cosas", file = "ComplexBuilder.log")
-                        chains_in_complex.setdefault(tupla[2],[third_chain])
-                        chains_in_complex[tupla[2]].append(third_chain)
-                        n += 1
-    return rand_model2
+                    if chain.get_id() == same_chain.get_id(): continue
+                    complex=superimpositor(first_chain, same_chain, chain, complex)
+                    chains_in_complex.setdefault(interaction[2],[chain])
+                    chains_in_complex[interaction[2]].append(chain)
+                    n += 1
+    return complex
