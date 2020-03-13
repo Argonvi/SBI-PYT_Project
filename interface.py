@@ -15,8 +15,9 @@ def initGui():
     #initialize main window
     root = Tk() 
     root.title("ComplexBuilder") 
-    img = Image("photo", file='CB_icon.png')
-    root.call('wm','iconphoto',root._w, img)
+    logo = Image("photo", file='CB_icon.png')
+    logo_sm = Image("photo", file='CB_icon_sm.png')
+    root.call('wm','iconphoto',root._w, logo)
     #root.geometry("400x400")
     #root.option_add("*Button.Background", "grey")
     #root.option_add("*Button.Foreground", "#4f91b4")
@@ -78,7 +79,7 @@ def initGui():
         """Display help of the ComplexBuilder in a new window"""
         t = Toplevel(root)
         t.wm_title("Help")
-        l = Label(t, text=helpText.helpMessage)
+        l = Label(t, text=helpText.helpMessage,justify=LEFT)
         l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
 
     def openTutorial():
@@ -115,25 +116,31 @@ def initGui():
     helpmenu.add_command(label="About", command=openTutorial)
 
     menubar.add_cascade(label="Options", menu=filemenu)
-    menubar.add_cascade(label="Help", menu=helpmenu)
-
+    menubar.add_cascade(label="Help", menu=helpmenu)  
 
     root.config(menu=menubar)
-
 
 
     #Console frame
     frame = Frame(root)
     frame.pack(pady="10", padx="10")
+
     
-    wellcome = Label(frame, text="Introduce the FASTA file and the directory with the interactions in PDB:")
-    wellcome.pack(side=TOP,pady="15", padx="45")
+    frameWll = Frame(frame)
+    frameWll.pack(pady="10")
+    
+    panel = Label(frameWll, image = logo_sm)
+    panel.pack(side=LEFT, padx="9")
+    wellcome = Label(frameWll, text="Introduce the FASTA file and the directory with the interactions in PDB:    ")
+    wellcome.pack(side=TOP,pady="10")
+    
+    
     
 
     # FASTA widget
     frameFA = Frame(frame)
     frameFA.pack(pady="15", padx="50",side=TOP,anchor=W, fill=X, expand=YES)
-    labelF = Label(frameFA, text="Sequence file:                                    ")
+    labelF = Label(frameFA, text="Sequence file:                                          ")
     labelF.pack( side=LEFT )
     #Button FASTA file
     bF = Button(frameFA, text="Select", command=fastaSelection)
@@ -143,7 +150,7 @@ def initGui():
     #PDB widget
     framePDB = Frame(frame)
     framePDB.pack(pady="15", padx="50",anchor=W, fill=X, expand=YES)
-    labelF = Label(framePDB, text="Interactions directory:                       ")
+    labelF = Label(framePDB, text="Interactions directory:                             ")
     labelF.pack( side=LEFT )
     #Button PDB dir
     bP = Button(framePDB, text="Select", command=pdbSelection)
@@ -189,7 +196,7 @@ def initGui():
     #Submit widget
     bEnter = Button(root, text="Build complex", command=runCB, bd="2", 
                      relief="solid",padx="10", pady="10") #fg="red", bg="blue",     
-    bEnter.pack( side=BOTTOM ,pady="10", padx="1") 
+    bEnter.pack( side=BOTTOM ,pady="5") 
     root.mainloop()
 
 
