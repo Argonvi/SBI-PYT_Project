@@ -71,35 +71,13 @@ $ pip install biopython --upgrade
 
 ## Options
 
-ComplexBuilder can be run using command-line argument or using the graphical interface.
+ComplexBuilder can be run using command-line arguments or using the graphical interface.
 
-### Graphical interface
 
-To build the macrocomplex with the graphical interface 
-
-```shell
-$ python3 ComplexBuilder.py -gui
-```
-
->In this case just the -gui tag is needed!
-
-- To build the macrocomplex fill in the main window requirements. As for running via command-line, a FASTA file with the sequences and a directory with the PDB files of the interacting are required. In addition, a name for the folder where the results will be stored is needed, after typing it you should confirm it. 
-
-> Note that, as seeing in the following demonstration, to select the PDB directory you have to enter in the desired directory and then select it. 
-
-Furthermore, additional options can be set:
-
-- In the main window you can specify if you want to create a log file where the process of the execution will be displayed. 
-
-- In the top menu, in the 'Options' dropdown there is the 'Add Stoichiometry' option. You can upload a file with a determined stoichiometry to be applied to the macrocomplex. The format of this file has to be the ID of the sequence, concordant with the one in the FASTA file, followed by ':' and a number. This number will be the number of times the corresponging sequence will be in the final complex. See an example [here](#optional arguments).
-
-<!-- ADD A GIF OF THE GUI OPERATION -->
-
-Finally, in the top menu you can consult the ComplexBuilder 'Help' as well.
 
 ### Command-line
 
-Otherwise, you can introduce the arguments via command line.
+You can introduce the arguments via command-line:
 
 #### Mandatory arguments
 
@@ -115,13 +93,37 @@ To execute ComplexBuilder three arguments are required:
 
 - -v: show the detailed progression of the building process in a file called 'ComplexBuilder.log'.
 
-- -st: File containing a determined stoichiometry to the complex. The information of the stoichiometry must be: the ID of the sequence chain (concordant with the FASTA file ID) followed by the number of times it has to be present in the complex after ':'
+- -st: File containing a determined stoichiometry to the complex. The information of the stoichiometry must be: the ID of the sequence chain (concordant with the FASTA file ID) followed by the number of times it has to be present in the complex after ' : '
 ID_as_FASTA_file : stoichiometry (one per line) in format .txt. Example for a stoichiometry 2A2B for '1GZX':
 
 ```shell
 1GZXA:2
 1GZXB:2
 ```
+
+### Graphical interface
+
+Otherwise, the macrocomplex can also be build using the graphical interface:
+
+```shell
+$ python3 ComplexBuilder.py -gui
+```
+
+>In this case just the -gui tag is needed!
+
+- To build the macrocomplex fill in the main window requirements. As for running via command-line, a FASTA file with the sequences and a directory with the PDB files of the interacting pairs are required. In addition, a name for the folder where the results will be stored is needed, after typing it you should confirm it. 
+
+> Note that, as seeing in the following demonstration, to select the PDB directory you have to enter in the desired directory and then select it. 
+
+Furthermore, additional options can be set:
+
+- In the main window you can specify if you want to create a log file where the process of the execution will be displayed. 
+
+- In the top menu, in the 'Options' dropdown, there is the 'Add Stoichiometry' option. You can upload a file with a determined stoichiometry to be applied to the macrocomplex. As said before, the format of this file has to be the ID of the sequence, concordant with the one in the FASTA file, followed by ':' and a number. This number will be the number of times the corresponging sequence will be in the final complex.
+
+<!-- ADD A GIF OF THE GUI OPERATION -->
+
+Finally, in the top menu you can consult the ComplexBuilder 'Help' as well.
 
 ## Examples
 
