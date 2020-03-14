@@ -213,22 +213,19 @@ def constructor(information,stoich):
     #Make a copy to modify
     start_model_copy = copy.deepcopy(start_model)
 
-
+    #Extend this model as much as possible from the first chain
     for interaction in information[seq]:
         if interaction[0] is start_model: continue
         second_model = interaction[0]
         same_chain = interaction[1]
         other_seq = interaction[2]
+        third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
+        complex=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
+        chains_in_complex.setdefault(other_seq,[])
+        chains_in_complex[other_seq].append(third_chain)
 
-        for chain in second_model.get_chains():
-            if chain.get_id() != same_chain.get_id():
-                third_chain = chain
-                complex=superimpositor(first_chain, same_chain, third_chain,start_model_copy)
-                chains_in_complex[other_seq]=[third_chain]
-    #We have a complex with 3 subunits
-    n = 3
-    #sum([len(a) for a in chains_in_complex.values()])
-    while n < sum(stoich.values()):
+    #From the resulting model, keep adding chains
+    while sum([len(a) for a in chains_in_complex.values()]) < sum(stoich.values()):
 
         seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
 
@@ -245,5 +242,5 @@ def constructor(information,stoich):
                     complex=superimpositor(first_chain, same_chain, chain, complex)
                     chains_in_complex.setdefault(interaction[2],[chain])
                     chains_in_complex[interaction[2]].append(chain)
-                    n += 1
+
     return complex
