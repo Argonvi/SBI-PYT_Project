@@ -95,7 +95,7 @@ To execute ComplexBuilder three arguments are required:
 
 - -st: File containing a determined stoichiometry to the complex. The information of the stoichiometry must be: the ID of the sequence chain (concordant with the FASTA file ID) followed by the number of times it has to be present in the complex after ' : '
 
-ID_as_FASTA_file : stoichiometry (one per line) in format .txt. 
+     ID_as_FASTA_file : stoichiometry (one per line) in format .txt. 
 Example for a stoichiometry 2A2B for '1GZX':
 
 ```shell
