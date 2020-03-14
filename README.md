@@ -85,7 +85,7 @@ To execute ComplexBuilder three arguments are required:
 
 - -fa: FASTA file with the sequences of the proteins or DNA that will conform the complex.
 
-- -pdb: diretory containing the PDB files with the structure of the pairs that will conform the complex.
+- -pdb: directory containing the PDB files with the structure of the pairs that will conform the complex.
 
 - -o: directory name where the complex results will be stored. 
 
