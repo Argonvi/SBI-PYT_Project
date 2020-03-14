@@ -171,6 +171,16 @@ def stoichometry(file, information):
             dictionary[fasta_id] = 1
     return dictionary
 
+
+class sequence_clashing(Exception):
+    def __init__(self, seq):
+        self.seq=seq
+    def __str__(self):
+        return "The sequence " + str(self.seq)+ "can't be added as it clashes the complex." 
+
+
+
+
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     """REVISAR ESTA DESCRIPCION  PORQUE ES UN CHURRO"""
 
