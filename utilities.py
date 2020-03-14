@@ -189,15 +189,20 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
 
     char = next(ascii_letters_generator)
     third_chain.id = char
-    macrocomplex.add(third_chain)
-    #if third chain collapses with another chain, raise an error
+    sup.set_atoms(macrocomplex,third_chain)
+    if sup.rms>0.1:
+        macrocomplex.add(third_chain)
+    else:
+        raise sequence_clashing(third_chain)
     return macrocomplex
+
 
 def writte_pdb(structure,directory,name_pdb):
     io = PDBIO()
     io.set_structure(structure)
     save=directory+"/"+name_pdb
     io.save(save)
+
 
 
 
