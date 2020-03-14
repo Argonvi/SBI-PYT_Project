@@ -193,6 +193,13 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     #if third chain collapses with another chain, raise an error
     return macrocomplex
 
+def writte_pdb(structure,directory,name_pdb):
+    io = PDBIO()
+    io.set_structure(structure)
+    save=directory+"/"+name_pdb
+    io.save(save)
+
+
 
 def constructor(information,stoich):
     """Description"""
