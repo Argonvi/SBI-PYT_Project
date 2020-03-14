@@ -18,4 +18,8 @@ out_file=inputData[2]
 
 a = data_extraction(pdb_files,fasta_file)
 b = seq_dictionary(a)
-print(b)
+#print(b)
+
+mycomplex=constructor(b,stoich)
+
+writte_pdb(mycomplex,out_directory,"file_name.pdb")
