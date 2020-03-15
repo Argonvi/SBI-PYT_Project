@@ -6,7 +6,7 @@ from Bio import SeqIO, pairwise2
 import random
 import copy
 import string
-import interface
+#import interface
 import logProgress
 
 ascii_letters_generator = (a for a in string.ascii_letters)
@@ -62,14 +62,14 @@ def checkSt(stName, inputsListed):
 def checkOutput(outputName, inputsListed):
     """Checks the output name existence defined by the user and
     append it to the list of input values, otherwise raise an error.
-    Creates a new folder with the given name if it does not already 
+    Creates a new folder with the given name if it does not already
     exist, otherwise create a new folder called nameDir_1"""
     if outputName is not None:
         if not os.path.exists(outputName):
             os.mkdir(outputName)
             print("Directory " , outputName ,  " created ")
             inputsListed.append(outputName)
-        else: 
+        else:
             print("Directory " , outputName ,  " already exists.")
         inputsListed.append(outputName)
     else:
@@ -80,7 +80,7 @@ def checkOutput(outputName, inputsListed):
                 Type -h for more information of the required
                 format.""")
     return None
-  
+
 
 
 def checkInputs(fastaFile, PDBDir):
@@ -120,20 +120,28 @@ def checkInputs(fastaFile, PDBDir):
     else:
         return None
 
-def data_extraction(pdb_files, fasta_file, threshold = 0.95):
+def pdb_dna_to_sequence(chain):
+    seq = ""
+    for res in chain:
+        seq += res.get_resname()[-1]
+    return seq
+
+def data_extraction(pdb_files, fasta_file, threshold = 0.99):
     """Takes as input a list of pdb files and a fasta file
     Returns a dictionary of dictionaries. The primary key is the model, the secondary
     key is the chain_id in said model and the value is the fasta_id of said chain."""
     big_dictionary = {}
     for pdb_file in pdb_files:
-        model = PDBParser().get_structure(pdb_file.split(".")[0],pdb_file)[0]
+        model = PDBParser(QUIET = True).get_structure(pdb_file.split(".")[0], pdb_file)[0]
         big_dictionary[model] = {}
         for chain in model.get_chains():
             pdb_seqs = PPBuilder().build_peptides(chain)
             if len(pdb_seqs)>1:
                 pp_seq = "".join(list([str(pp.get_sequence()) for pp in pdb_seqs]))
-            else:
+            elif len(pdb_seqs) == 1:
                 pp_seq = pdb_seqs[0].get_sequence()
+            else:
+                pp_seq = pdb_dna_to_sequence(chain)
             for seq_record in SeqIO.parse(fasta_file,"fasta"):
                 fasta_seq = seq_record.seq
                 fasta_id = seq_record.id
@@ -179,32 +187,6 @@ def stoichometry(file, information):
             dictionary[fasta_id] = 1
     return dictionary
 
-class sequence_clashing_error(Exception):
-    def __init__(self, seq):
-        self.seq=seq
-    def __str__(self):
-        return "The sequence " + str(self.seq)+ "can't be added as it clashes the complex." 
-
-def sequence_clashing(macrocomplex, third_chain):
-    """ MARTA REVISA ESTO Y CAMBIA ALGO SI LO VES MEJOR DE OTRA FORMA
-    
-    Takes as input a complex and a chain and uses pdb.NeighborSearch in order to 
-    find how many CA atoms from the chain are closer than 2 Angstroms to some CA atom in 
-    the complex. If it finds more than 20 atoms, it returns True. 
-    
-    """
-    atoms_complex = [atom for atom in macrocomplex.get_atoms() if atom.get_id() == 'CA']
-    atoms_chain = [atom for atom in third_chain.get_atoms() if atom.get_id() == 'CA']
-    neig_search = NeighborSearch(atoms_complex)
-    n = 0
-    for atom in atoms_chain:
-         n+=len(list(neig_search.search(atom.get_coord(), 2.0, 'A')))
-         if n >= 20:
-             return True
-    return False
-
-
-
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     """REVISAR ESTA DESCRIPCION  PORQUE ES UN CHURRO"""
 
@@ -223,14 +205,11 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
 
     char = next(ascii_letters_generator)
     third_chain.id = char
-    if sequence_clashing(macrocomplex,third_chain):
-        raise sequence_clashing_error(third_chain)
-    else:
-        macrocomplex.add(third_chain)
-        return macrocomplex
-    
-    
-def writte_pdb(structure,directory,name_pdb):
+    macrocomplex.add(third_chain)
+    #if third chain collapses with another chain, raise an error
+    return macrocomplex
+
+def write_pdb(structure,directory,name_pdb):
     io = PDBIO()
     io.set_structure(structure)
     save=directory+"/"+name_pdb
