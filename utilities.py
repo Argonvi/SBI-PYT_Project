@@ -243,6 +243,7 @@ def write_pdb(structure,directory,name_pdb):
     io.save(save)
 
 
+
 def constructor(information,stoich):
     """Description"""
     chains_in_complex={}
@@ -271,7 +272,8 @@ def constructor(information,stoich):
         third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
-        ### ¿?¿?¿? aqui hay que poner algo o ya el mensaje de error es el q sale en la definicion de la exception
+        except:
+            pass
         chains_in_complex.setdefault(other_seq,[])
         chains_in_complex[other_seq].append(third_chain)
 
@@ -292,6 +294,8 @@ def constructor(information,stoich):
                     if chain.get_id() == same_chain.get_id(): continue
                     try:
                         complex_out=superimpositor(first_chain, same_chain, chain, complex_out)
+                    except:
+                        pass
                     chains_in_complex.setdefault(interaction[2],[chain])
                     chains_in_complex[interaction[2]].append(chain)
     return complex_out
