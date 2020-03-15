@@ -21,24 +21,24 @@ def checkCommands(commands):
             inputList=interface.initGui()
             inputs = checkInputs(inputList[0], inputList[1]) #FASTA file, PDB dir
             data.append(inputs) # list of inputs : FASTA + PDB dir, data[0]
-            if  inputList[2]: # verbose T/F
-                logProgress.logStart(inputs)
             data.append(inputList[3])  # stoichiometry None/Filename, data [1]
-            data.append(inputList[4]) #output file data[2]
+            checkOutput(inputList[4], data) #output file data[2]
+            if  inputList[2]: # verbose T/F
+                logProgress.logStart(inputs,data)
         else:
             raise ValueError("""
                 If you want to use the graphical interface to
                 introduce the complex data, the only commandline
                 argument possible is '-gui'.\n
                 Type -h for more information of the required
-                format""")
+                format.""")
     else: #enter files through command line
         inputs = checkInputs(commands.infasta, commands.inpdb)
         data.append(inputs)
-        if commands.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
-            logProgress.logStart(inputs)
         checkSt(commands.stoich,data)
         checkOutput(commands.outfile, data)
+        if commands.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
+            logProgress.logStart(inputs,data)
 
     return data
 
@@ -53,16 +53,24 @@ def checkSt(stName, inputsListed):
                 You should introduce the name of an existing .txt
                 file with the sctoichiometry data after '-st'.\n
                 Type -h for more information of the required
-                format""")
+                format.""")
     else:
         inputsListed.append(None)
     return None
 
 
 def checkOutput(outputName, inputsListed):
-    """Check the output name existence defined by the user and
-    append it to the list of input values, otherwise raise an error"""
+    """Checks the output name existence defined by the user and
+    append it to the list of input values, otherwise raise an error.
+    Creates a new folder with the given name if it does not already 
+    exist, otherwise create a new folder called nameDir_1"""
     if outputName is not None:
+        if not os.path.exists(outputName):
+            os.mkdir(outputName)
+            print("Directory " , outputName ,  " created ")
+            inputsListed.append(outputName)
+        else: 
+            print("Directory " , outputName ,  " already exists.")
         inputsListed.append(outputName)
     else:
         raise ValueError("""
@@ -70,8 +78,10 @@ def checkOutput(outputName, inputsListed):
                 where the resulting files will be stored after
                  '-o'.\n
                 Type -h for more information of the required
-                format""")
+                format.""")
     return None
+  
+
 
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
@@ -83,14 +93,14 @@ def checkInputs(fastaFile, PDBDir):
                 containing the sequences of the elements of the
                 complex you want to build after '-fa'.\n
                 Type -h for more information of the required
-                format""")
+                format.""")
     if PDBDir==None or os.path.exists(PDBDir)==False:
         raise ValueError("""
                 You should introduce the name of the directory
                 containing the PDB files for each interacting
                 pair of the complex after '-pdb'.\n
                 Type -h for more information of the required
-                format""")
+                format.""")
     if isfile(fastaFile) and os.path.exists(PDBDir):
         if PDBDir.endswith("/"):
             string = ""
@@ -104,7 +114,7 @@ def checkInputs(fastaFile, PDBDir):
                 containing the PDB files for each interacting
                 pair of the complex after '-pdb'.\n
                 Type -h for more information of the required
-                format""")
+                format.""")
         inputList.append(fastaFile)
         return inputList
     else:
