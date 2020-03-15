@@ -188,10 +188,10 @@ def stoichometry(file, information):
     return dictionary
 
 class sequence_clashing_error(Exception):
-    def __init__(self, seq):
-        self.seq=seq
+    def __init__(self, chain):
+        self.chain=chain
     def __str__(self):
-        return "The sequence " + str(self.seq)+ "can't be added as it clashes the complex." 
+        return "The chain " + str(self.chain)+ "can't be added as it clashes the complex." 
 
  def sequence_clashing(macrocomplex, third_chain):
     """ MARTA REVISA ESTO Y CAMBIA ALGO SI LO VES MEJOR DE OTRA FORMA
