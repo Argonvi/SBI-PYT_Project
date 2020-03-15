@@ -179,6 +179,32 @@ def stoichometry(file, information):
             dictionary[fasta_id] = 1
     return dictionary
 
+class sequence_clashing_error(Exception):
+    def __init__(self, seq):
+        self.seq=seq
+    def __str__(self):
+        return "The sequence " + str(self.seq)+ "can't be added as it clashes the complex." 
+
+def sequence_clashing(macrocomplex, third_chain):
+    """ MARTA REVISA ESTO Y CAMBIA ALGO SI LO VES MEJOR DE OTRA FORMA
+    
+    Takes as input a complex and a chain and uses pdb.NeighborSearch in order to 
+    find how many CA atoms from the chain are closer than 2 Angstroms to some CA atom in 
+    the complex. If it finds more than 20 atoms, it returns True. 
+    
+    """
+    atoms_complex = [atom for atom in macrocomplex.get_atoms() if atom.get_id() == 'CA']
+    atoms_chain = [atom for atom in third_chain.get_atoms() if atom.get_id() == 'CA']
+    neig_search = NeighborSearch(atoms_complex)
+    n = 0
+    for atom in atoms_chain:
+         n+=len(list(neig_search.search(atom.get_coord(), 2.0, 'A')))
+         if n >= 20:
+             return True
+    return False
+
+
+
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     """REVISAR ESTA DESCRIPCION  PORQUE ES UN CHURRO"""
 
@@ -197,10 +223,13 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
 
     char = next(ascii_letters_generator)
     third_chain.id = char
-    macrocomplex.add(third_chain)
-    #if third chain collapses with another chain, raise an error
-    return macrocomplex
-
+    if sequence_clashing(macrocomplex,third_chain):
+        raise sequence_clashing_error(third_chain)
+    else:
+        macrocomplex.add(third_chain)
+        return macrocomplex
+    
+    
 def writte_pdb(structure,directory,name_pdb):
     io = PDBIO()
     io.set_structure(structure)
