@@ -211,6 +211,15 @@ def sequence_clashing(macrocomplex, third_chain):
     return False
 
 
+class sequence_clashing_error(Exception):
+    """Error due to more than 20 clashes between new added chain and the previous 
+    structure"""
+    def __init__(self, chain):
+        self.chain=chain
+    def __str__(self):
+        return "The chain " + str(self.chain.get_id())+ "can't be added as it clashes with the complex." 
+
+
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     """ Adds new chain to the existing macrocomplex.
     Example: to add chain 'C' to the macrocomplex 'AB', when 'C' interacts with 'B', 'BC'
@@ -234,10 +243,8 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     char = next(ascii_letters_generator)
     third_chain.id = char
     if sequence_clashing(macrocomplex,third_chain):
-        logProgress.clash(True,third_chain)
         raise sequence_clashing_error(third_chain)
     else:
-        logProgress.clash(False,third_chain)
         macrocomplex.add(third_chain)
     return macrocomplex
 
@@ -277,8 +284,9 @@ def constructor(information,stoich):
         third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
+            logProgress.clash(False,other_seq)
         except:
-            pass
+            logProgress.clash(True,other_seq)
             
         chains_in_complex.setdefault(other_seq,[])
         chains_in_complex[other_seq].append(third_chain)
@@ -300,8 +308,9 @@ def constructor(information,stoich):
                     if chain.get_id() == same_chain.get_id(): continue
                     try:
                         complex_out=superimpositor(first_chain, same_chain, chain, complex_out)
+                        logProgress.clash(False,interaction[2])
                     except:
-                        pass
+                        logProgress.clash(True,interaction[2])
                     chains_in_complex.setdefault(interaction[2],[chain])
                     chains_in_complex[interaction[2]].append(chain)
     return complex_out
