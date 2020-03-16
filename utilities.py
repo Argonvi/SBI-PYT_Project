@@ -6,8 +6,10 @@ from Bio import SeqIO, pairwise2
 import random
 import copy
 import string
-#import interface
+import interface
 import logProgress
+
+
 
 ascii_letters_generator = (a for a in string.ascii_letters)
 
@@ -23,8 +25,9 @@ def checkCommands(commands):
             data.append(inputs) # list of inputs : FASTA + PDB dir, data[0]
             data.append(inputList[3])  # stoichiometry None/Filename, data [1]
             checkOutput(inputList[4], data) #output file data[2]
-            if  inputList[2]: # verbose T/F
+            if  inputList[2]: # verbose T
                 logProgress.logStart(inputs,data)
+            data.append(inputList[2]) # verbose T/F data[3]
         else:
             raise ValueError("""
                 If you want to use the graphical interface to
@@ -39,6 +42,7 @@ def checkCommands(commands):
         checkOutput(commands.outfile, data)
         if commands.verbose: # if verbose is ON write progress in "ComplexBuilder.log"
             logProgress.logStart(inputs,data)
+        data.append(commands.verbose) # verbose T/F data [3]
 
     return data
 
@@ -62,14 +66,14 @@ def checkSt(stName, inputsListed):
 def checkOutput(outputName, inputsListed):
     """Checks the output name existence defined by the user and
     append it to the list of input values, otherwise raise an error.
-    Creates a new folder with the given name if it does not already
-    exist, otherwise create a new folder called nameDir_1"""
+    Creates a new folder with the given name if it does not already 
+    exist, otherwise the results will be overwritten."""
     if outputName is not None:
         if not os.path.exists(outputName):
             os.mkdir(outputName)
             print("Directory " , outputName ,  " created ")
             inputsListed.append(outputName)
-        else:
+        else: 
             print("Directory " , outputName ,  " already exists.")
         inputsListed.append(outputName)
     else:
@@ -80,7 +84,7 @@ def checkOutput(outputName, inputsListed):
                 Type -h for more information of the required
                 format.""")
     return None
-
+  
 
 
 def checkInputs(fastaFile, PDBDir):
@@ -187,19 +191,14 @@ def stoichometry(file, information):
             dictionary[fasta_id] = 1
     return dictionary
 
-class sequence_clashing_error(Exception):
-    def __init__(self, chain):
-        self.chain=chain
-    def __str__(self):
-        return "The chain " + str(self.chain)+ "can't be added as it clashes the complex." 
 
- def sequence_clashing(macrocomplex, third_chain):
-    """ MARTA REVISA ESTO Y CAMBIA ALGO SI LO VES MEJOR DE OTRA FORMA
-    
-    Takes as input a complex and a chain and uses pdb.NeighborSearch in order to 
-    find how many CA atoms from the chain are closer than 2 Angstroms to some CA atom in 
-    the complex. If it finds more than 20 atoms, it returns True. 
-    
+
+def sequence_clashing(macrocomplex, third_chain):
+    """Checks the number of clashes when adding a new chain to the macrocomplex.
+    Takes as input a complex and a chain and uses pdb.NeighborSearch() in order to 
+    find how many CA atoms from the new chain are closer than 2 Angstroms to some  
+    CA atom in the complex. If it finds more than 20 atoms, it returns True, and so,  
+    the new chain will be discarted.    
     """
     atoms_complex = [atom for atom in macrocomplex.get_atoms() if atom.get_id() == 'CA']
     atoms_chain = [atom for atom in third_chain.get_atoms() if atom.get_id() == 'CA']
@@ -213,13 +212,17 @@ class sequence_clashing_error(Exception):
 
 
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
-    """REVISAR ESTA DESCRIPCION  PORQUE ES UN CHURRO"""
-
-    """This function takes as input 3 chain objects:
-            The chain that we take as reference in order to do the superimposition
-            The chain that we want to superimpose
-            The chain that we are going to rotate in because it interacts with the previous chain
-        It also takes the macrocomplex in order to add the third chain.
+    """ Adds new chain to the existing macrocomplex.
+    Example: to add chain 'C' to the macrocomplex 'AB', when 'C' interacts with 'B', 'BC'
+    This function takes as input 3 chain objects:
+        1. 'first chain': the chain that we take as reference in 
+           order to do the superimposition -> 'B' from macrocomplex 'AB'
+        2. 'same_chain': the chain that will be rotated because it interacts with the 
+            new chain (3) -> 'B' from interacting pair 'BC'
+        3. 'third_chain': the new chain that we want to add to the macrocomplex -> 'C'
+    Finally, it also takes the macrocomplex in order to add the third_chain-> 'AB'.
+    It returns the new macrocomplex 'ABC' if 'C' does not clash with the previous 
+    structure 'AB'.
     """
     atom_list1 = Selection.unfold_entities(first_chain, 'A')
     atom_list2 = Selection.unfold_entities(same_chain, 'A')
@@ -231,8 +234,10 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     char = next(ascii_letters_generator)
     third_chain.id = char
     if sequence_clashing(macrocomplex,third_chain):
+        logProgress.clash(True,third_chain)
         raise sequence_clashing_error(third_chain)
     else:
+        logProgress.clash(False,third_chain)
         macrocomplex.add(third_chain)
     return macrocomplex
 
@@ -274,6 +279,7 @@ def constructor(information,stoich):
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
         except:
             pass
+            
         chains_in_complex.setdefault(other_seq,[])
         chains_in_complex[other_seq].append(third_chain)
 
