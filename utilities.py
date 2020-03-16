@@ -256,7 +256,7 @@ def write_pdb(structure,directory,name_pdb):
 
 
 
-def constructor(information,stoich):
+def constructor(information,stoich, verb):
     """Description"""
     chains_in_complex={}
 
@@ -284,9 +284,9 @@ def constructor(information,stoich):
         third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
-            logProgress.clash(False,other_seq)
+            logProgress.clash(False,other_seq,verb)
         except:
-            logProgress.clash(True,other_seq)
+            logProgress.clash(True,other_seq,verb)
             
         chains_in_complex.setdefault(other_seq,[])
         chains_in_complex[other_seq].append(third_chain)

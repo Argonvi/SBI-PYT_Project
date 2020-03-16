@@ -2,7 +2,6 @@ import sys
 import os
 from datetime import datetime
 
-
 def logStart(inputList, dataList):
    """Creates the log file 'ComplexBuilderLog' and writes initial message in log file
       with the date and the input files"""
@@ -36,14 +35,16 @@ def progress(outDir,dic,stValues):
       print("\nThe stoichiometry for those chains is: ", file=sys.stderr)
       for element in stValues:
          print(element,": ",stValues[element], file=sys.stderr)
-
+   pritn("\n", file=sys.stderr)
    return None
 
-def clash(boolean,chainName):
-   if boolean:
-      print("New chain %s has not been added." %chainName, file=sys.stderr)
-   else:
-      print("New chain %s has been correctly added." %chainName, file=sys.stderr)
+def clash(boolean,chainName,verboseOn):
+   """Show message in logFile when a chain is added or discarted due to clashes"""
+   if verboseOn:
+      if boolean:
+         print("Chain %s has not been added, due to clashes with the macrocomplex strcuture." %chainName, file=sys.stderr)
+      else:
+         print("Chain %s has been correctly added." %chainName, file=sys.stderr)
    return None
 
 def end(outDir):
