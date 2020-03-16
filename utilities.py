@@ -308,9 +308,9 @@ def constructor(information,stoich, verb):
                     if chain.get_id() == same_chain.get_id(): continue
                     try:
                         complex_out=superimpositor(first_chain, same_chain, chain, complex_out)
-                        logProgress.clash(False,interaction[2])
+                        logProgress.clash(False,interaction[2],verb)
                     except:
-                        logProgress.clash(True,interaction[2])
+                        logProgress.clash(True,interaction[2],verb)
                     chains_in_complex.setdefault(interaction[2],[chain])
                     chains_in_complex[interaction[2]].append(chain)
     return complex_out
