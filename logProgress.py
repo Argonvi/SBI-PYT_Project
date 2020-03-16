@@ -2,13 +2,6 @@ import sys
 import os
 from datetime import datetime
 
-class sequence_clashing_error(Exception):
-    """Error due to more than 20 clashes between new added chain and the previous 
-    structure"""
-    def __init__(self, chain):
-        self.chain=chain
-    def __str__(self):
-        return "The chain " + str(self.chain.get_id())+ "can't be added as it clashes with the complex." 
 
 def logStart(inputList, dataList):
    """Creates the log file 'ComplexBuilderLog' and writes initial message in log file
@@ -48,9 +41,9 @@ def progress(outDir,dic,stValues):
 
 def clash(boolean,chainName):
    if boolean:
-      print("New chain %s not added." %chainName.get_id(), file=sys.stderr)
+      print("New chain %s has not been added." %chainName, file=sys.stderr)
    else:
-      print("New chain %s correctly added." %chainName.get_id(), file=sys.stderr)
+      print("New chain %s has been correctly added." %chainName, file=sys.stderr)
    return None
 
 def end(outDir):
