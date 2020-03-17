@@ -166,9 +166,9 @@ def seq_dictionary(data):
         for k2, v2 in v.items():
             sequence_dictionary.setdefault(v2, [])
             if list(k.get_chains()) in [list(a[0].get_chains()) for a in sequence_dictionary[v2]]: continue
-            if list(v.values())[0]==list(v.values())[1]: other_seq=list(v.values())[0]
-            else: other_seq = [seq_id for seq_id in v.values() if seq_id != v2][0]
-            sequence_dictionary[v2].append((k,remove_heteroatoms(k[k2]),other_seq))
+            if list(v.values())[0]==list(v.values())[1]: other_id=list(v.values())[0]
+            else: other_id = [seq_id for seq_id in v.values() if seq_id != v2][0]
+            sequence_dictionary[v2].append((k,remove_heteroatoms(k[k2]),other_id))
     return sequence_dictionary
 
 def stoichometry(file, information):
@@ -287,44 +287,53 @@ def constructor(information,stoich, verb):
         if interaction[0] is start_model: continue
         second_model = interaction[0]
         same_chain = interaction[1]
-        other_seq = interaction[2]
+        other_id = interaction[2]
         third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
-            logProgress.clash(False,other_seq,verb)
         except sequence_clashing_error:
-            logProgress.clash(True,other_seq,verb)
+            logProgress.clash(True,other_id,verb)
         else:
-            chains_in_complex.setdefault(other_seq,[])
-            chains_in_complex[other_seq].append(third_chain)
+            logProgress.clash(False,other_id,verb)
+            chains_in_complex.setdefault(other_id,[])
+            chains_in_complex[other_id].append(third_chain)
 
     #From the resulting model, keep adding chains, until the model has as many chains as specified in the stoichiometry
     while len(list(complex_out.get_chains())) < sum(stoich.values()):
         print(list(complex_out.get_chains()))
         print(chains_in_complex)
         print(chains_used,"\n")
+
         #Get a sequence that is in the complex but is yet to be used as a core for the extension of the complex
         try:
             seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
+        #If it cannot find any, break the loop even if the complex is incomplete
         except IndexError:
             break
 
+        #For each chain that is in the complex with this identifier
         for first_chain in chains_in_complex[seq]:
+            #Add it to the used chains list
             chains_used.append(seq)
-
+            #Inspect every interaction in this sequence identifier
             for interaction in information[seq]:
-                if (interaction[2] in chains_in_complex) and (len(chains_in_complex[interaction[2]])==stoich[interaction[2]]): continue
+                #If it appears in the complex the same number of times times than it is specified in the stoichiometry, skip this interaction
+                if (interaction[2] in chains_in_complex) and (len(chains_in_complex[interaction[2]])>=stoich[interaction[2]]): continue
+                #Store the variables as in the first segment
                 second_model = interaction[0]
                 same_chain = interaction[1]
-
-                for chain in second_model.get_chains():
-                    if chain.get_id() == same_chain.get_id(): continue
-                    try:
-                        complex_out=superimpositor(first_chain, same_chain, chain, complex_out)
-                    except sequence_clashing_error:
-                        logProgress.clash(True,interaction[2],verb)
-                    else:
-                        logProgress.clash(False,interaction[2],verb)
-                        chains_in_complex.setdefault(interaction[2],[])
-                        chains_in_complex[interaction[2]].append(chain)
+                other_id = interaction[2]
+                #Get the other sequence
+                third_chain = [a for a in second_model.get_chains() if a.get_id() != same_chain.get_id()][0]
+                #Try adding it to the complex
+                try:
+                    complex_out=superimpositor(first_chain, same_chain, third_chain, complex_out)
+                #If it does not work, do nothing
+                except sequence_clashing_error:
+                    logProgress.clash(True,other_id,verb)
+                #If it works, add it to the chains_in_complex dictionary
+                else:
+                    logProgress.clash(False,other_id,verb)
+                    chains_in_complex.setdefault(other_id,[])
+                    chains_in_complex[other_id].append(third_chain)
     return complex_out
