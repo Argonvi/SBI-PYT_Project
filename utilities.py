@@ -6,12 +6,8 @@ from Bio import SeqIO, pairwise2
 import random
 import copy
 import string
-import interface
+#import interface
 import logProgress
-
-
-
-ascii_letters_generator = (a for a in string.ascii_letters)
 
 def checkCommands(commands):
     """Check the mode of operation of ComplexBuilder: if '-gui' has been defined
@@ -66,14 +62,14 @@ def checkSt(stName, inputsListed):
 def checkOutput(outputName, inputsListed):
     """Checks the output name existence defined by the user and
     append it to the list of input values, otherwise raise an error.
-    Creates a new folder with the given name if it does not already 
+    Creates a new folder with the given name if it does not already
     exist, otherwise the results will be overwritten."""
     if outputName is not None:
         if not os.path.exists(outputName):
             os.mkdir(outputName)
             print("Directory " , outputName ,  " created ")
             inputsListed.append(outputName)
-        else: 
+        else:
             print("Directory " , outputName ,  " already exists.")
         inputsListed.append(outputName)
     else:
@@ -84,7 +80,7 @@ def checkOutput(outputName, inputsListed):
                 Type -h for more information of the required
                 format.""")
     return None
-  
+
 
 
 def checkInputs(fastaFile, PDBDir):
@@ -183,8 +179,7 @@ def stoichometry(file, information):
     if file is not None:
         with open(file) as f:
             for line in f:
-                line = line.strip()
-                line = line.split(":")
+                line = line.strip().split(":")
                 dictionary[line[0]] = int(line[1])
     for fasta_id in fasta_ids:
         if fasta_id not in list(dictionary.keys()):
@@ -195,10 +190,10 @@ def stoichometry(file, information):
 
 def sequence_clashing(macrocomplex, third_chain):
     """Checks the number of clashes when adding a new chain to the macrocomplex.
-    Takes as input a complex and a chain and uses pdb.NeighborSearch() in order to 
-    find how many CA atoms from the new chain are closer than 2 Angstroms to some  
-    CA atom in the complex. If it finds more than 20 atoms, it returns True, and so,  
-    the new chain will be discarted.    
+    Takes as input a complex and a chain and uses pdb.NeighborSearch() in order to
+    find how many CA atoms from the new chain are closer than 2 Angstroms to some
+    CA atom in the complex. If it finds more than 20 atoms, it returns True, and so,
+    the new chain will be discarted.
     """
     atoms_complex = [atom for atom in macrocomplex.get_atoms() if atom.get_id() == 'CA']
     atoms_chain = [atom for atom in third_chain.get_atoms() if atom.get_id() == 'CA']
@@ -212,40 +207,43 @@ def sequence_clashing(macrocomplex, third_chain):
 
 
 class sequence_clashing_error(Exception):
-    """Error due to more than 20 clashes between new added chain and the previous 
+    """Error due to more than 20 clashes between new added chain and the previous
     structure"""
     def __init__(self, chain):
         self.chain=chain
     def __str__(self):
-        return "The chain " + str(self.chain.get_id())+ "can't be added as it clashes with the complex." 
+        return "The chain " + str(self.chain.get_id())+ "can't be added as it clashes with the complex."
 
 
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     """ Adds new chain to the existing macrocomplex.
     Example: to add chain 'C' to the macrocomplex 'AB', when 'C' interacts with 'B', 'BC'
     This function takes as input 3 chain objects:
-        1. 'first chain': the chain that we take as reference in 
+        1. 'first chain': the chain that we take as reference in
            order to do the superimposition -> 'B' from macrocomplex 'AB'
-        2. 'same_chain': the chain that will be rotated because it interacts with the 
+        2. 'same_chain': the chain that will be rotated because it interacts with the
             new chain (3) -> 'B' from interacting pair 'BC'
         3. 'third_chain': the new chain that we want to add to the macrocomplex -> 'C'
     Finally, it also takes the macrocomplex in order to add the third_chain-> 'AB'.
-    It returns the new macrocomplex 'ABC' if 'C' does not clash with the previous 
+    It returns the new macrocomplex 'ABC' if 'C' does not clash with the previous
     structure 'AB'.
     """
     atom_list1 = Selection.unfold_entities(first_chain, 'A')
     atom_list2 = Selection.unfold_entities(same_chain, 'A')
     sup = Superimposer()
+    chain_copy = copy.deepcopy(third_chain)
 
     sup.set_atoms(atom_list1, atom_list2)
-    sup.apply(third_chain)
+    sup.apply(chain_copy)
 
-    char = next(ascii_letters_generator)
-    third_chain.id = char
-    if sequence_clashing(macrocomplex,third_chain):
-        raise sequence_clashing_error(third_chain)
+    if sequence_clashing(macrocomplex,chain_copy):
+        raise sequence_clashing_error(chain_copy)
     else:
-        macrocomplex.add(third_chain)
+        N = 1
+        while chain_copy.get_id() in [a.get_id() for a in macrocomplex.get_chains()]:
+            N += 1
+            chain_copy.id = chain_copy.get_id()+str(N)
+        macrocomplex.add(chain_copy)
     return macrocomplex
 
 def write_pdb(structure,directory,name_pdb):
@@ -285,14 +283,17 @@ def constructor(information,stoich, verb):
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
             logProgress.clash(False,other_seq,verb)
-        except:
+        except sequence_clashing_error:
             logProgress.clash(True,other_seq,verb)
-            
-        chains_in_complex.setdefault(other_seq,[])
-        chains_in_complex[other_seq].append(third_chain)
+        else:
+            chains_in_complex.setdefault(other_seq,[])
+            chains_in_complex[other_seq].append(third_chain)
 
     #From the resulting model, keep adding chains, until the model has as many chains as specified in the stoichiometry
     while len(list(complex_out.get_chains())) < sum(stoich.values()):
+        print(list(complex_out.get_chains()))
+        print(chains_in_complex)
+        print(chains_used,"\n")
         #Get a sequence that is in the complex but is yet to be used as a core for the extension of the complex
         seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
 
@@ -309,8 +310,9 @@ def constructor(information,stoich, verb):
                     try:
                         complex_out=superimpositor(first_chain, same_chain, chain, complex_out)
                         logProgress.clash(False,interaction[2],verb)
-                    except:
+                    except sequence_clashing_error:
                         logProgress.clash(True,interaction[2],verb)
-                    chains_in_complex.setdefault(interaction[2],[chain])
-                    chains_in_complex[interaction[2]].append(chain)
+                    else:
+                        chains_in_complex.setdefault(interaction[2],[])
+                        chains_in_complex[interaction[2]].append(chain)
     return complex_out
