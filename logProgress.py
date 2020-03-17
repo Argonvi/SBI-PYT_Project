@@ -35,14 +35,14 @@ def progress(outDir,dic,stValues):
       print("\nThe stoichiometry for those chains is: ", file=sys.stderr)
       for element in stValues:
          print(element,": ",stValues[element], file=sys.stderr)
-   pritn("\n", file=sys.stderr)
+   print("\n", file=sys.stderr)
    return None
 
 def clash(boolean,chainName,verboseOn):
    """Show message in logFile when a chain is added or discarted due to clashes"""
    if verboseOn:
       if boolean:
-         print("Chain %s has not been added, due to clashes with the macrocomplex strcuture." %chainName, file=sys.stderr)
+         print("Chain %s has not been added, due to clashes with the macrocomplex structure." %chainName, file=sys.stderr)
       else:
          print("Chain %s has been correctly added." %chainName, file=sys.stderr)
    return None
