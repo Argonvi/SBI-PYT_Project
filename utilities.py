@@ -239,10 +239,10 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     if sequence_clashing(macrocomplex,chain_copy):
         raise sequence_clashing_error(chain_copy)
     else:
-        N = 1
+        N = 0
         while chain_copy.get_id() in [a.get_id() for a in macrocomplex.get_chains()]:
+            chain_copy.id = alphabet[N]
             N += 1
-            chain_copy.id = chain_copy.get_id()+str(N)
         macrocomplex.add(chain_copy)
     return macrocomplex
 
