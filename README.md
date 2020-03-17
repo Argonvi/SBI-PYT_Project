@@ -131,7 +131,7 @@ Finally, in the top menu you can consult the ComplexBuilder 'Help' as well.
 
 ## Examples
 
-As said before, to generate any macrocomplex estructure it is required the FASTA file with the IDs and sequences of all the elements composing the estructure. In addition, it is also required a direcory with paired estructures, in PDB format, of the different elements. 
+As said before, to generate any macrocomplex structure it is required the FASTA file with the IDs and sequences of all the elements composing the structure. In addition, it is also required a direcory with paired structures, in PDB format, of the different elements. 
 
 ### 1GZX
 To perform the construction of T state haemoglobin, which structure follows an stoichiometry of 2A2B, first we need to create a a .txt file where the stoichiometry is explicited, for example,  `1gzx_st.txt`:
@@ -140,7 +140,7 @@ To perform the construction of T state haemoglobin, which structure follows an s
 1GZXa:2
 1GZXb:2
 ```
-- Command line execution:
+1. Command line execution:
 
 ```shell
 python3 ComplexBuilder.py -fa 1gzx.fa -pdb 1gzxDir -o 1GZX_result -st 1gzx_st.txt -v
@@ -149,7 +149,7 @@ python3 ComplexBuilder.py -fa 1gzx.fa -pdb 1gzxDir -o 1GZX_result -st 1gzx_st.tx
 
 > This file must contain two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
 
-- `-pdb`, mandatory: followed by the directory with paired estructures in PDB `1gzxDir`.
+- `-pdb`, mandatory: followed by the directory with paired structures in PDB `1gzxDir`.
 
 > In this case inside this folder we should have at least three PDB files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there are redundant pairs they won't be considered. 
 
@@ -161,18 +161,22 @@ python3 ComplexBuilder.py -fa 1gzx.fa -pdb 1gzxDir -o 1GZX_result -st 1gzx_st.tx
 
 - `-v`: turn ON the the verbose option. It is always recommended to create a logfile where the process information will be displayed. To deactivate the creation of the logfile, don't add the `-v` flag. 
 
+2. Graphical interface execution:
+
+<img src="/assets/1gzxExample/1gzx.gif" title="1gzxGUI" alt="1gzxGUI" >
+
 
 | **Complex Builder** | **Reference structure** | **Superimposition** |
-| :---: |:---:| :---:|
+| :---: | :---: | :---: |
 |<img src="/assets/1gzxExample/1gzxCB.png" title="1gzxCB" alt="1gzxCB" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CB.png" title="1gzxREF_CB" alt="1gzxREF_CB" >
 
-We can observe that the resulting estructure from Complex Builder fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
+We can observe that the resulting structure from Complex Builder fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
 
 ## Performance
 
 <img src="/assets/ComplexBuilderDiagram.jpg" title="ComplexBuilderLogo" alt="ComplexBuilderDiagram" >
 
-- Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous estructure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
+- Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
 
 ## Limitations
 
