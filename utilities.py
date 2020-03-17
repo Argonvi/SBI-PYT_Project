@@ -291,11 +291,11 @@ def constructor(information,stoich, verb):
 
     #From the resulting model, keep adding chains, until the model has as many chains as specified in the stoichiometry
     while len(list(complex_out.get_chains())) < sum(stoich.values()):
-        print(list(complex_out.get_chains()))
-        print(chains_in_complex)
-        print(chains_used,"\n")
         #Get a sequence that is in the complex but is yet to be used as a core for the extension of the complex
-        seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
+        try:
+            seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
+        except IndexError:
+            break
 
         for first_chain in chains_in_complex[seq]:
             chains_used.append(seq)
