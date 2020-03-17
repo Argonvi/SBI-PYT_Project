@@ -9,7 +9,7 @@ import string
 #import interface
 import logProgress
 
-alphabet = ["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"]
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
 def checkCommands(commands):
     """Check the mode of operation of ComplexBuilder: if '-gui' has been defined
@@ -168,7 +168,7 @@ def seq_dictionary(data):
             if list(k.get_chains()) in [list(a[0].get_chains()) for a in sequence_dictionary[v2]]: continue
             if list(v.values())[0]==list(v.values())[1]: other_seq=list(v.values())[0]
             else: other_seq = [seq_id for seq_id in v.values() if seq_id != v2][0]
-            sequence_dictionary[v2].append((k,k[k2],other_seq))
+            sequence_dictionary[v2].append((k,remove_heteroatoms(k[k2]),other_seq))
     return sequence_dictionary
 
 def stoichometry(file, information):
@@ -188,7 +188,14 @@ def stoichometry(file, information):
             dictionary[fasta_id] = 1
     return dictionary
 
-
+def remove_heteroatoms(chain):
+    """Removes the heteroatoms of a given chain."""
+    chain_copy = copy.deepcopy(chain)
+    heteroatoms = list(filter(lambda x: x.id[0] != " ",
+                              chain.get_residues()))
+    for heteroatom in heteroatoms:
+        chain_copy.detach_child(heteroatom.id)
+    return chain_copy
 
 def sequence_clashing(macrocomplex, third_chain):
     """Checks the number of clashes when adding a new chain to the macrocomplex.
@@ -237,13 +244,15 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
 
     sup.set_atoms(atom_list1, atom_list2)
     sup.apply(chain_copy)
-
     if sequence_clashing(macrocomplex,chain_copy):
         raise sequence_clashing_error(chain_copy)
     else:
         N = 0
         while chain_copy.get_id() in [a.get_id() for a in macrocomplex.get_chains()]:
-            chain_copy.id = alphabet[N]
+            try:
+                chain_copy.id = alphabet[N]
+            except ValueError:
+                pass
             N += 1
         macrocomplex.add(chain_copy)
     return macrocomplex
@@ -253,8 +262,6 @@ def write_pdb(structure,directory,name_pdb):
     io.set_structure(structure)
     save=directory+"/"+name_pdb
     io.save(save)
-
-
 
 def constructor(information,stoich, verb):
     """Description"""
@@ -293,6 +300,9 @@ def constructor(information,stoich, verb):
 
     #From the resulting model, keep adding chains, until the model has as many chains as specified in the stoichiometry
     while len(list(complex_out.get_chains())) < sum(stoich.values()):
+        print(list(complex_out.get_chains()))
+        print(chains_in_complex)
+        print(chains_used,"\n")
         #Get a sequence that is in the complex but is yet to be used as a core for the extension of the complex
         try:
             seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
@@ -311,10 +321,10 @@ def constructor(information,stoich, verb):
                     if chain.get_id() == same_chain.get_id(): continue
                     try:
                         complex_out=superimpositor(first_chain, same_chain, chain, complex_out)
-                        logProgress.clash(False,interaction[2],verb)
                     except sequence_clashing_error:
                         logProgress.clash(True,interaction[2],verb)
                     else:
+                        logProgress.clash(False,interaction[2],verb)
                         chains_in_complex.setdefault(interaction[2],[])
                         chains_in_complex[interaction[2]].append(chain)
     return complex_out
