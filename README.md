@@ -164,7 +164,7 @@ python3 ComplexBuilder.py -fa 1gzx.fa -pdb 1gzxDir -o 1GZX_result -st 1gzx_st.tx
 
 | **Complex Builder** | **Reference structure** | **Superimposition** |
 | :---: |:---:| :---:|
-|<img src="/assets/1gzxCB.jpg" title="1gzxCB" alt="1gzxCB" >|<img src="/assets/1gzxREF.jpg" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxCB_REF.jpg" title="1gzxCB_REF" alt="1gzxCB_REF" >
+|<img src="/assets/1gzxExample/1gzxCB.png" title="1gzxCB" alt="1gzxCB" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxCB_REF.png" title="1gzxCB_REF" alt="1gzxCB_REF" >
 
 We can observe that the resulting estructure from Complex Builder fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
 
