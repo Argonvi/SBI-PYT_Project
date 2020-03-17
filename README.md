@@ -35,7 +35,7 @@ Identifying the structure of interacting proteins, complexes, is not an easy tas
 
 ComplexBuilder tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of PDB files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
 
-The core of ComplexBuilder is the `constructor` function, which is the responsible of the building process. The PDBs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different PDB files are identified: they will have more than 95% of identity in their sequences and an RMSD of less than 7<!-- Confirm this --> angstroms after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements and, the next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
+The core of ComplexBuilder is the `constructor` function, which is the responsible of the building process. The PDBs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different PDB files are identified: they will have more than 95% of identity in their sequences and an RMSD of less than 0.05 after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements and, the next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
 
 In addition, as a lot of complexes follow a determined stoichiometry, ComplexBuilder can also make the construction following it. If a stoichiometry is defined, the final structure will contain the exact number of elements indicated by it.
 
@@ -101,8 +101,8 @@ To execute ComplexBuilder three arguments are required:
 Example for a stoichiometry 2A2B for '1GZX':
 
 ```shell
-1GZXA:2
-1GZXB:2
+1GZXa:2
+1GZXb:2
 ```
 
 ### Graphical interface
@@ -130,6 +130,43 @@ Furthermore, additional options can be set:
 Finally, in the top menu you can consult the ComplexBuilder 'Help' as well.
 
 ## Examples
+
+As said before, to generate any macrocomplex estructure it is required the FASTA file with the IDs and sequences of all the elements composing the estructure. In addition, it is also required a direcory with paired estructures, in PDB format, of the different elements. 
+
+### 1GZX
+To perform the construction of T state haemoglobin, which structure follows an stoichiometry of 2A2B, first we need to create a a .txt file where the stoichiometry is explicited, for example,  `1gzx_st.txt`:
+
+```shell
+1GZXa:2
+1GZXb:2
+```
+- Command line execution:
+
+```shell
+python3 ComplexBuilder.py -fa 1gzx.fa -pdb 1gzxDir -o 1GZX_result -st 1gzx_st.txt -v
+```
+- `-fa`, mandatory: followed by the FASTA file `1gzx.fa`.
+
+> This file must contain two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
+
+- `-pdb`, mandatory: followed by the directory with paired estructures in PDB `1gzxDir`.
+
+> In this case inside this folder we should have at least three PDB files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there are redundant pairs they won't be considered. 
+
+- `-o`, mandatory: followed by the name given to the output directory where the results will be stored, `1GZX_result`.
+
+> If it already exists a directory with the same name in the working folder it will be replaced.
+
+- `-st`: followed by the stoychiometry information of the complex 2A2B that is in the file `1gzx_st.txt`.
+
+- `-v`: turn ON the the verbose option. It is always recommended to create a logfile where the process information will be displayed. To deactivate the creation of the logfile, don't add the `-v` flag. 
+
+
+| **Complex Builder** | **Reference structure** | **Superimposition** |
+| :---: |:---:| :---:|
+|<img src="/assets/1gzxExample/1gzxCB.jpg" title="1gzxCB" alt="1gzxCB" >|<img src="/assets/1gzxExample/1gzxREF.jpg" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxCB_REF.jpg" title="1gzxCB_REF" alt="1gzxCB_REF" >
+
+We can observe that the resulting estructure from Complex Builder fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
 
 ## Performance
 
