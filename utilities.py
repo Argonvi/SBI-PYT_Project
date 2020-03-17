@@ -9,6 +9,8 @@ import string
 #import interface
 import logProgress
 
+alphabet = ["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"]
+
 def checkCommands(commands):
     """Check the mode of operation of ComplexBuilder: if '-gui' has been defined
         it must be a unique argument, otherwise use the rest of commandline arguments"""
