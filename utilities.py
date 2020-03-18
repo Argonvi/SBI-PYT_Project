@@ -5,7 +5,7 @@ from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import random
 import copy
-import interface
+#import interface
 import logProgress
 
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -66,7 +66,6 @@ def checkSt(stName, inputsListed):
         inputsListed.append(None)
     return None
 
-
 def checkOutput(outputName, inputsListed):
     """Checks the output name existence defined by the user and
     append it to the list of input values, otherwise raise an error.
@@ -88,6 +87,8 @@ def checkOutput(outputName, inputsListed):
                 Type -h for more information of the required
                 format.""")
     return None
+
+
 
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
@@ -174,7 +175,7 @@ def data_extraction(pdb_files, fasta_file, threshold = 0.95):
     return big_dictionary
 
 def seq_dictionary(data):
-    """Transforms the dictionary of dictionaries given by data_extraction()
+    """Transforms the dictionary of dictionaries given by data_extraction
     into a dictionary with the fasta_ids as keys and as values, a list of
     interactions wich have:
      1: The model in which the sequence is found
@@ -255,7 +256,7 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     sup.set_atoms(atom_list1, atom_list2)
     sup.apply(chain_copy)
     if sequence_clashing(macrocomplex,chain_copy):
-        raise sequence_clashing_error(chain_copy)
+        raise sequence_clashing_error(third_chain)
     else:
         N = 0
         while chain_copy.get_id() in [a.get_id() for a in macrocomplex.get_chains()]:
@@ -274,14 +275,13 @@ def write_pdb(structure,path):
     io.save(path)
 
 def constructor(information,stoich, verb):
-    """This function takes as input the output of seq_dictionary, the stoichiometry dictionary and a boolean indicanting
-    if the user whishes to see the progression log."""
+    """Description"""
     chains_in_complex={}
 
     #Choose a model to start iterating
     for seq, interactions in information.items():
         if len(interactions)>1 and (interactions[0][2]!=interactions[1][2] or stoich[interactions[0][2]]>1): break
-    rand_interaction = random.choice(information[seq])
+    rand_interaction = information[seq][0]
     start_model = rand_interaction[0]
     first_chain = rand_interaction[1]
 
@@ -342,4 +342,8 @@ def constructor(information,stoich, verb):
                     if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
                     chains_in_complex.setdefault(other_id,[])
                     chains_in_complex[other_id].append(third_chain)
+    if verb:
+        print("\nThe resulting complex has a total of %s chains. Its stoichiometry is the following: "%len(complex_out),file = sys.stderr)
+        for id, chains in chains_in_complex.items():
+            print("\t%s : %s"%(id, len(chains)), file = sys.stderr)
     return complex_out
