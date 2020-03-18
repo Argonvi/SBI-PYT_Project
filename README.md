@@ -1,10 +1,10 @@
-<img src="https://cdn.pixabay.com/photo/2017/10/25/06/13/protein-icon-2887050_960_720.png" title="ComplexBuilderLogo" alt="ComplexBuilderLogo" height="100" width="100">
+<img src="https://cdn.pixabay.com/photo/2017/10/25/06/13/protein-icon-2887050_960_720.png" title="ComplexConstructorLogo" alt="ComplexConstructorLogo" height="100" width="100">
 
 <!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
 
 <!--***INSERT GRAPHIC HERE (include hyperlink in image)***-->
 
-# Complex Builder
+# Complex Constructor
 
 > Generate macrocomplexes superimposing paired interacting elements
 
@@ -17,7 +17,7 @@
 - [Why building complexes?](#whybuildingcomplexes?)
 - [Installation](#installation)
 - [Options](#options)
-- [Examples](#exmples)
+- [Examples](#examples)
 - [Performance](#performance)
 - [Limitations](#limitations)
 - [Team](#team)
@@ -33,13 +33,13 @@ So, the complex-structure coverage, including homologs, is around the 30%, much 
 
 Identifying the structure of interacting proteins, complexes, is not an easy task. In monomers, homology modelling can be used to nearly cover all folds to determine a protein structure but, for interactions it is not enough. 
 
-ComplexBuilder tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of PDB files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
+ComplexConstructor tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of PDB files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
 
-The core of ComplexBuilder is the `constructor` function, which is the responsible of the building process. The PDBs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different PDB files are identified: they will have more than 95% of identity in their sequences and an RMSD of less than 0.05 after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements and, the next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
+The core of ComplexConstructor is the `constructor` function, which is the responsible of the building process. The PDBs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different PDB files are identified: they will have more than 95% of identity in their sequences and an RMSD of less than 0.05 after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements and, the next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
 
-In addition, as a lot of complexes follow a determined stoichiometry, ComplexBuilder can also make the construction following it. If a stoichiometry is defined, the final structure will contain the exact number of elements indicated by it.
+In addition, as a lot of complexes follow a determined stoichiometry, ComplexConstructor can also make the construction following it. If a stoichiometry is defined, the final structure will contain the exact number of elements indicated by it.
 
-Finally, a new PDB file is stored in an output folder(...)
+Finally, a new PDB file with the resulting structure of the macrocomples is stored in the output folder called `outputFolder_model.pdb`.
 
 <!-- Chimera comparison with prediction etc  --> 
 
@@ -50,7 +50,6 @@ Prerequisites:
 
 - Python 3.0 `https://www.python.org/download/releases/3.0/`
 <!-- modeler/itasser/chimera? -->
-
 
 ### Clone
 
@@ -68,11 +67,17 @@ $ pip install biopython
 $ pip install biopython --upgrade
 ```
 
+### Install from pip
+
+- ComplexConstructor can also be installed with `pip`
+
+```shell
+$ pip install complexconstructor
+```
+<!-- Change name of the repo! ComplexConstructor, pip ComplexConstructor?? -->
 ## Options
 
-ComplexBuilder can be run using command-line arguments or using the graphical interface.
-
-
+ComplexConstructor can be run using command-line arguments or using the graphical interface.
 
 ### Command-line
 
@@ -80,80 +85,91 @@ You can introduce the arguments via command-line:
 
 #### Mandatory arguments
 
-To execute ComplexBuilder three arguments are required:
+To execute ComplexConstructor three arguments are required:
 
-- -fa: FASTA file with the sequences of the proteins or DNA that will conform the complex.
+- `-fa` `--fasta`: FASTA file with the sequences of the proteins or DNA that will conform the complex.
 
-- -pdb: directory containing the PDB files with the structure of the pairs that will conform the complex.
+- `-pdb` `--pdbDir`: directory containing the PDB files with the structure of the pairs that will conform the complex.
 
-- -o: directory name where the complex results will be stored. 
+- `-o` `--output`: directory name where the complex results will be stored. 
 
 > Note that, if the output directory already exists, the results will be overwritten.
 
 
 #### Optional arguments
 
-- -v: show the detailed progression of the building process in a file called 'ComplexBuilder.log'.
+- `-v` `--verbose`: show the detailed progression of the building process in a file called 'ComplexConstructor.log'.
 
-- -st: File containing a determined stoichiometry to the complex. The information of the stoichiometry must be: the ID of the sequence chain (concordant with the FASTA file ID) followed by the number of times it has to be present in the complex after ' : '
+- `-st` `--stoichiometry`: File containing a determined stoichiometry to the complex. The information of the stoichiometry must be: the ID of the sequence chain (concordant with the FASTA file ID) followed by the number of times it has to be present in the complex after ' : '
 
-     ID_as_FASTA_file : stoichiometry (one per line) in format .txt. 
-Example for a stoichiometry 2A2B for '1GZX':
-
-```shell
-1GZXa:2
-1GZXb:2
-```
+     ID_FASTA_file : stoichiometry (one per line) in format .txt. Take a look at some examples [here](#examples).
 
 ### Graphical interface
 
 Otherwise, the macrocomplex can also be build using the graphical interface:
 
 ```shell
-$ python3 ComplexBuilder.py -gui
+$ python3 complexconstructor -gui
 ```
 
->In this case just the -gui tag is needed!
+>In this case just the `-gui` tag is needed!
 
 - To build the macrocomplex fill in the main window requirements. As for running via command-line, a FASTA file with the sequences and a directory with the PDB files of the interacting pairs are required. In addition, a name for the folder where the results will be stored is needed, after typing it you should confirm it. 
 
-> Note that, as seeing in the following demonstration, to select the PDB directory you have to enter in the desired directory and then select it. 
+> Note that, to select the PDB directory you have to enter in the desired directory and then select it. You can see how it works in the [examples](#examples).
 
 Furthermore, additional options can be set:
+
+<img src="/assets/gui.gif" title="GUI" alt="GUI" style="max-width:70%;" >
 
 - In the main window you can specify if you want to create a log file where the process of the execution will be displayed. 
 
 - In the top menu, in the 'Options' dropdown, there is the 'Add Stoichiometry' option. You can upload a file with a determined stoichiometry to be applied to the macrocomplex. As said before, the format of this file has to be the ID of the sequence, concordant with the one in the FASTA file, followed by ':' and a number. This number will be the number of times the corresponging sequence will be in the final complex.
 
-<!-- ADD A GIF OF THE GUI OPERATION -->
-
-Finally, in the top menu you can consult the ComplexBuilder 'Help' as well.
+Finally, in the top menu you can consult the ComplexConstructor 'Help' as well.
 
 ## Examples
 
 As said before, to generate any macrocomplex structure it is required the FASTA file with the IDs and sequences of all the elements composing the structure. In addition, it is also required a direcory with paired structures, in PDB format, of the different elements. 
 
+All the data needed to execute the following examples is already located in the folder `examples`. Tu run them, we need to be in the folder of the package. 
+
+```shell
+$ cd ComplexConstructor
+```
+
+You can make sure you are in the correct folder with `ls`
+
+```shell
+$ ls
+```
+
+If you obtain the following directories: `assets`,  `complexconstructor`,  `examples`, together with other items, you are in the correct place!
+
 ### 1GZX
-To perform the construction of T state haemoglobin, which structure follows an stoichiometry of 2A2B, first we need to create a a .txt file where the stoichiometry is explicited, for example,  `1gzx_st.txt`:
+
+Lest begin with the first example, the protein 1GZX. To perform the construction of T state haemoglobin, which structure follows an stoichiometry of 2A2B, we use the .txt file where the stoichiometry is explicited, in this case, `1gzx_st.txt`, already in the `examples/1gzx` folder:
 
 ```shell
 1GZXa:2
 1GZXb:2
 ```
+
 1. Command line execution:
 
 ```shell
-python3 ComplexBuilder.py -fa 1gzx.fa -pdb 1gzxDir -o 1GZX_result -st 1gzx_st.txt -v
+$ python3 complexconstructor -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDir -o 1GZX -st examples/1gzx/1gzx_st.txt -v
 ```
-- `-fa`, mandatory: followed by the FASTA file `1gzx.fa`.
 
-> This file must contain two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
+- `-fa`, mandatory: followed by the location of the FASTA file `1gzx.fa`.
 
-- `-pdb`, mandatory: followed by the directory with paired structures in PDB `1gzxDir`.
+> This file contain two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
+
+- `-pdb`, mandatory: followed by the location of directory with paired structures in PDB `1gzxDir`.
 
 > In this case inside this folder we should have at least three PDB files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there are redundant pairs they won't be considered. 
 
-- `-o`, mandatory: followed by the name given to the output directory where the results will be stored, `1GZX_result`.
+- `-o`, mandatory: followed by the name given to the output directory where the results will be stored, `1GZX`.
 
 > If it already exists a directory with the same name in the working folder it will be replaced.
 
@@ -163,22 +179,43 @@ python3 ComplexBuilder.py -fa 1gzx.fa -pdb 1gzxDir -o 1GZX_result -st 1gzx_st.tx
 
 2. Graphical interface execution:
 
-<img src="/assets/1gzxExample/1gzx.gif" title="1gzxGUI" alt="1gzxGUI" >
+<img src="/assets/1gzxExample/1gzx.gif" title="1gzxGUI" alt="1gzxGUI" style="max-width:60%;" >
 
 
-| **Complex Builder** | **Reference structure** | **Superimposition** |
+| **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/1gzxExample/1gzxCB.png" title="1gzxCB" alt="1gzxCB" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CB.png" title="1gzxREF_CB" alt="1gzxREF_CB" >
+|<img src="/assets/1gzxExample/1gzxCB.png" title="1gzxCB" alt="1gzxCB" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CB.png" title="1gzxREF_CB" alt="1gzxREF_CB" style="max-width:92%;">
 
-We can observe that the resulting structure from Complex Builder fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
+We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
 
 ## Performance
 
-<img src="/assets/ComplexBuilderDiagram.jpg" title="ComplexBuilderLogo" alt="ComplexBuilderDiagram" >
+<img src="/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
 - Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
 
+### Structure of the package
+
+- `main.py`: main module of CompleBuilder. It connects with all the rest of modules. 
+
+- `utilities.py`: module with all the functions needed to run the construction of the macrocomeplex as `constructor` or `superimpositor`.
+
+- `argparser.py`: reads and organizes the command line arguments.
+
+- `interface.py`: contains the configuration of the graphical interface and passes the inputs to the main module.
+
+- `logProgress.py`: this module creates the log file and its contents when the verbose option is selected.
+
+- `helpText.py`: is a module with the help text to be added to the graphical interface help option.
+
+
 ## Limitations
+
+- Although the similarity of chains from different pdb files is double checked, only the ones with sequence identity over 95% and also with an RMSD under 0.05 (ICM calculation) when both structures are superimposed, the small differences between them may be propagated when building big structures. It could be partly solved if the similarity conditions were harder or with small structure corrections everytime a chain is added.
+
+- The refinement of the structures obtained would have been also very usefull. 
+
+- We would have also liked to check the Z-scores of the resulting structures through the energy analisys to check the validity of the results.
 
 
 ## Team
