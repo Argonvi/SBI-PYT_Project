@@ -209,7 +209,7 @@ def sequence_clashing(macrocomplex, third_chain):
     neig_search = NeighborSearch(atoms_complex)
     n = 0
     for atom in atoms_chain:
-         n+=len(list(neig_search.search(atom.get_coord(), 2.0, 'A')))
+         n+=len(list(neig_search.search(atom.get_coord(), 5.0, 'A')))
          if n >= 20:
              return True
     return False
