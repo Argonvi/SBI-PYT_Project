@@ -274,7 +274,8 @@ def write_pdb(structure,path):
     io.save(path)
 
 def constructor(information,stoich, verb):
-    """Description"""
+    """This function takes as input the output of seq_dictionary, the stoichiometry dictionary and a boolean indicanting
+    if the user whishes to see the progression log."""
     chains_in_complex={}
 
     #Choose a model to start iterating
