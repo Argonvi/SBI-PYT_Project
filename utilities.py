@@ -1,15 +1,21 @@
 import os
-from os.path import isfile, join
 import sys
+from os.path import isfile, join
 from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import random
 import copy
-import string
-#import interface
+import interface
 import logProgress
 
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+class sequence_clashing_error(Exception):
+    """Error due to clashes between new added chain and the previous structure"""
+    def __init__(self, chain):
+        self.chain=chain
+    def __str__(self):
+        return "The chain %s can't be added as it clashes with the complex." % (self.chain.get_id())
 
 def checkCommands(commands):
     """Check the mode of operation of ComplexBuilder: if '-gui' has been defined
@@ -83,8 +89,6 @@ def checkOutput(outputName, inputsListed):
                 format.""")
     return None
 
-
-
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
        the command line and returns all the files in a list"""
@@ -123,16 +127,24 @@ def checkInputs(fastaFile, PDBDir):
         return None
 
 def pdb_dna_to_sequence(chain):
+    """This function receives a Chain object as input that is expected to be
+    a DNA sequence, and returns the sequence as a string in single letter
+    format."""
     seq = ""
     for res in chain:
         seq += res.get_resname()[-1]
     return seq
 
-def data_extraction(pdb_files, fasta_file, threshold = 0.99):
+def data_extraction(pdb_files, fasta_file, threshold = 0.95):
     """Takes as input a list of pdb files and a fasta file
     Returns a dictionary of dictionaries. The primary key is the model, the secondary
-    key is the chain_id in said model and the value is the fasta_id of said chain."""
+    key is the chain_id in said model and the value is the fasta_id of said chain.
+    This function finds sequences by pairwise sequence alignment. If a pdb chain
+    aligns with 0.95 (by default) identity with a fasta sequence, it is given the fasta identifier.
+    If an aminoacid sequence is fragmented because of discontinuity or some other reason, the
+    function puts it together."""
     big_dictionary = {}
+    fasta_ids = []
     for pdb_file in pdb_files:
         model = PDBParser(QUIET = True).get_structure(pdb_file.split(".")[0], pdb_file)[0]
         big_dictionary[model] = {}
@@ -147,11 +159,18 @@ def data_extraction(pdb_files, fasta_file, threshold = 0.99):
             for seq_record in SeqIO.parse(fasta_file,"fasta"):
                 fasta_seq = seq_record.seq
                 fasta_id = seq_record.id
+                if fasta_id not in fasta_ids: fasta_ids.append(fasta_id)
                 score = pairwise2.align.globalxx(fasta_seq,pp_seq, score_only = True)
                 normalized_score = score/len(max([fasta_seq,pp_seq]))
                 if normalized_score > threshold:
                     big_dictionary[model][chain.get_id()] = fasta_id
-                    continue
+                    break
+
+    valores = []
+    for lista in [list(a.values()) for a in big_dictionary.values()]:
+        valores += lista
+    for fasta_id in fasta_ids:
+        if fasta_id not in set(valores): print("Fasta sequence with ID %s was not found between PDB files."%fasta_id,file = sys.stderr)
     return big_dictionary
 
 def seq_dictionary(data):
@@ -175,7 +194,9 @@ def stoichometry(file, information):
     """Takes as input a file with the stoichomety information and stores
     it in a dictionary format with sequences as keys and number of appearances
     in the complex as values.
-    The sequence names should be the same as in the fasta file."""
+    The sequence names should be the same as in the fasta file.
+    The sequences found in the fasta and not in the stoichiometry file, are given
+    stoichiometry 1."""
     fasta_ids = list(information.keys())
     dictionary = {}
     if file is not None:
@@ -189,10 +210,9 @@ def stoichometry(file, information):
     return dictionary
 
 def remove_heteroatoms(chain):
-    """Removes the heteroatoms of a given chain."""
+    """Takes a chain as input and returns the same chain with heteroatoms removed."""
     chain_copy = copy.deepcopy(chain)
-    heteroatoms = list(filter(lambda x: x.id[0] != " ",
-                              chain.get_residues()))
+    heteroatoms = [atom for atom in chain.get_residues() if atom.id[0] != " "]
     for heteroatom in heteroatoms:
         chain_copy.detach_child(heteroatom.id)
     return chain_copy
@@ -213,16 +233,6 @@ def sequence_clashing(macrocomplex, third_chain):
          if n >= 20:
              return True
     return False
-
-
-class sequence_clashing_error(Exception):
-    """Error due to more than 20 clashes between new added chain and the previous
-    structure"""
-    def __init__(self, chain):
-        self.chain=chain
-    def __str__(self):
-        return "The chain " + str(self.chain.get_id())+ "can't be added as it clashes with the complex."
-
 
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     """ Adds new chain to the existing macrocomplex.
@@ -257,11 +267,11 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
         macrocomplex.add(chain_copy)
     return macrocomplex
 
-def write_pdb(structure,directory,name_pdb):
+def write_pdb(structure,path):
+    "Writes a pdb file based of the specified structure in the given path."
     io = PDBIO()
     io.set_structure(structure)
-    save=directory+"/"+name_pdb
-    io.save(save)
+    io.save(path)
 
 def constructor(information,stoich, verb):
     """Description"""
@@ -278,7 +288,6 @@ def constructor(information,stoich, verb):
     chains_in_complex[seq] = [first_chain]
     chains_in_complex[rand_interaction[2]] = [chain for chain in start_model.get_chains() if chain.get_id() != first_chain.get_id()]
     chains_used = [seq]
-
     #Make a copy to modify
     start_model_copy = copy.deepcopy(start_model)
 
@@ -291,19 +300,15 @@ def constructor(information,stoich, verb):
         third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
-        except sequence_clashing_error:
-            logProgress.clash(True,other_id,verb)
+        except sequence_clashing_error as error:
+            if verb: print(error, file = sys.stderr)
         else:
-            logProgress.clash(False,other_id,verb)
+            if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
             chains_in_complex.setdefault(other_id,[])
             chains_in_complex[other_id].append(third_chain)
 
     #From the resulting model, keep adding chains, until the model has as many chains as specified in the stoichiometry
     while len(list(complex_out.get_chains())) < sum(stoich.values()):
-        print(list(complex_out.get_chains()))
-        print(chains_in_complex)
-        print(chains_used,"\n")
-
         #Get a sequence that is in the complex but is yet to be used as a core for the extension of the complex
         try:
             seq = [chain for chain in chains_in_complex if chain not in chains_used][0]
@@ -329,11 +334,11 @@ def constructor(information,stoich, verb):
                 try:
                     complex_out=superimpositor(first_chain, same_chain, third_chain, complex_out)
                 #If it does not work, do nothing
-                except sequence_clashing_error:
-                    logProgress.clash(True,other_id,verb)
+                except sequence_clashing_error as error:
+                    if verb: print(error, file = sys.stderr)
                 #If it works, add it to the chains_in_complex dictionary
                 else:
-                    logProgress.clash(False,other_id,verb)
+                    if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
                     chains_in_complex.setdefault(other_id,[])
                     chains_in_complex[other_id].append(third_chain)
     return complex_out
