@@ -33,6 +33,6 @@ list(mycomplex.get_chains())
 
 # Write results in output directory
 path = out_directory+"/resultado.pdb"
-write_pdb(mycomplex,"final_prueba.pdb")
+write_pdb(mycomplex,path)
 if inputData[3]:
     logProgress.end(out_directory)
