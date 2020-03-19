@@ -1,0 +1,84 @@
+
+                              ComplexBuilder
+     BUILDING OF COMPLEXES USING THE PAIRED INTERACTION OF ITS ELEMENTS
+Written by Paula Gomis Rosa, Arturo González Vilanova and Marta López Balastegui
+
+Job starting time:  19/03/2020 18:52:20
+
+Input files:
+	 - FASTA sequences in file:
+	 5fj8/5fj8.fasta
+
+	 - PDB files:
+	 ['5fj8_pdbs/5fj8_AB.pdb', '5fj8_pdbs/5fj8_AC.pdb', '5fj8_pdbs/5fj8_AD.pdb', '5fj8_pdbs/5fj8_AE.pdb', '5fj8_pdbs/5fj8_AF.pdb', '5fj8_pdbs/5fj8_AG.pdb', '5fj8_pdbs/5fj8_AH.pdb', '5fj8_pdbs/5fj8_AI.pdb', '5fj8_pdbs/5fj8_AK.pdb', '5fj8_pdbs/5fj8_AO.pdb', '5fj8_pdbs/5fj8_AP.pdb', '5fj8_pdbs/5fj8_AR.pdb', '5fj8_pdbs/5fj8_AS.pdb', '5fj8_pdbs/5fj8_AT.pdb', '5fj8_pdbs/5fj8_BC.pdb', '5fj8_pdbs/5fj8_BF.pdb', '5fj8_pdbs/5fj8_BG.pdb', '5fj8_pdbs/5fj8_BI.pdb', '5fj8_pdbs/5fj8_BJ.pdb', '5fj8_pdbs/5fj8_BK.pdb', '5fj8_pdbs/5fj8_BL.pdb', '5fj8_pdbs/5fj8_BM.pdb', '5fj8_pdbs/5fj8_BN.pdb', '5fj8_pdbs/5fj8_BR.pdb', '5fj8_pdbs/5fj8_BS.pdb', '5fj8_pdbs/5fj8_BT.pdb', '5fj8_pdbs/5fj8_CH.pdb', '5fj8_pdbs/5fj8_CJ.pdb', '5fj8_pdbs/5fj8_CK.pdb', '5fj8_pdbs/5fj8_CL.pdb', '5fj8_pdbs/5fj8_DG.pdb', '5fj8_pdbs/5fj8_EF.pdb', '5fj8_pdbs/5fj8_EO.pdb', '5fj8_pdbs/5fj8_ER.pdb', '5fj8_pdbs/5fj8_ES.pdb', '5fj8_pdbs/5fj8_FG.pdb', '5fj8_pdbs/5fj8_HK.pdb', '5fj8_pdbs/5fj8_IM.pdb', '5fj8_pdbs/5fj8_JL.pdb', '5fj8_pdbs/5fj8_MN.pdb', '5fj8_pdbs/5fj8_OP.pdb', '5fj8_pdbs/5fj8_OQ.pdb', '5fj8_pdbs/5fj8_RS.pdb', '5fj8_pdbs/5fj8_RT.pdb']
+
+Number of chains found:  20
+IDs of the chains:  5fj8A, 5fj8B, 5fj8C, 5fj8D, 5fj8E, 5fj8F, 5fj8G, 5fj8H, 5fj8I, 5fj8K, 5fj8O, 5fj8P, 5fj8R, 5fj8S, 5fj8T, 5fj8J, 5fj8L, 5fj8M, 5fj8N, 5fj8Q
+
+The stoichiometry for those chains is: 
+5fj8A :  1
+5fj8B :  1
+5fj8C :  1
+5fj8D :  1
+5fj8E :  1
+5fj8F :  1
+5fj8G :  1
+5fj8H :  1
+5fj8I :  1
+5fj8J :  1
+5fj8K :  1
+5fj8L :  1
+5fj8M :  1
+5fj8N :  1
+5fj8O :  1
+5fj8P :  1
+5fj8Q :  1
+5fj8R :  1
+5fj8S :  1
+5fj8T :  1
+
+
+Chain 5fj8C has been correctly added.
+Chain 5fj8D has been correctly added.
+Chain 5fj8E has been correctly added.
+Chain 5fj8F has been correctly added.
+Chain 5fj8G has been correctly added.
+Chain 5fj8H has been correctly added.
+Chain 5fj8I has been correctly added.
+Chain 5fj8K has been correctly added.
+Chain 5fj8O has been correctly added.
+Chain 5fj8P has been correctly added.
+Chain 5fj8R has been correctly added.
+Chain 5fj8S has been correctly added.
+Chain 5fj8T has been correctly added.
+Chain 5fj8J has been correctly added.
+Chain 5fj8L has been correctly added.
+Chain 5fj8M has been correctly added.
+Chain 5fj8N has been correctly added.
+Chain 5fj8Q has been correctly added.
+
+The resulting complex has a total of 20 chains. Its stoichiometry is the following: 
+	5fj8A : 1
+	5fj8B : 1
+	5fj8C : 1
+	5fj8D : 1
+	5fj8E : 1
+	5fj8F : 1
+	5fj8G : 1
+	5fj8H : 1
+	5fj8I : 1
+	5fj8K : 1
+	5fj8O : 1
+	5fj8P : 1
+	5fj8R : 1
+	5fj8S : 1
+	5fj8T : 1
+	5fj8J : 1
+	5fj8L : 1
+	5fj8M : 1
+	5fj8N : 1
+	5fj8Q : 1
+
+Process completed correctly
+
+The results are stored in directory 'D:\1 1 A Master Bioinformatics\PYT\project\SBI-PYT_Project-first_edits/5fj8/5fj8_result'.
