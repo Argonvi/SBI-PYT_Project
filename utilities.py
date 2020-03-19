@@ -136,7 +136,7 @@ def pdb_dna_to_sequence(chain):
         seq += res.get_resname()[-1]
     return seq
 
-def data_extraction(pdb_files, fasta_file, threshold = 0.95):
+def data_extraction(pdb_files, fasta_file, threshold = 0.99):
     """Takes as input a list of pdb files and a fasta file
     Returns a dictionary of dictionaries. The primary key is the model, the secondary
     key is the chain_id in said model and the value is the fasta_id of said chain.
@@ -163,7 +163,7 @@ def data_extraction(pdb_files, fasta_file, threshold = 0.95):
                 if fasta_id not in fasta_ids: fasta_ids.append(fasta_id)
                 score = pairwise2.align.globalxx(fasta_seq,pp_seq, score_only = True)
                 normalized_score = score/len(max([fasta_seq,pp_seq]))
-                if normalized_score > threshold:
+                if (normalized_score >= threshold and abs(len(fasta_seq)-len(pp_seq))<=5):                  
                     big_dictionary[model][chain.get_id()] = fasta_id
                     break
 
@@ -225,15 +225,16 @@ def sequence_clashing(macrocomplex, third_chain):
     CA atom in the complex. If it finds more than 20 atoms, it returns True, and so,
     the new chain will be discarted.
     """
-    atoms_complex = [atom for atom in macrocomplex.get_atoms() if atom.get_id() == 'CA']
-    atoms_chain = [atom for atom in third_chain.get_atoms() if atom.get_id() == 'CA']
+    atoms_complex = [atom for atom in macrocomplex.get_atoms() if (atom.get_id() == 'CA' or atom.get_id() == 'P' or atom.get_id() == 'N1') ]
+    atoms_chain = [atom for atom in third_chain.get_atoms() if (atom.get_id() == 'CA' or atom.get_id() == 'P' or atom.get_id() == 'N1')]
     neig_search = NeighborSearch(atoms_complex)
     n = 0
     for atom in atoms_chain:
-         n+=len(list(neig_search.search(atom.get_coord(), 5.0, 'A')))
-         if n >= 20:
+         n+=len(list(neig_search.search(atom.get_coord(), 2.0, 'A')))
+         if n >= 35:
              return True
     return False
+
 
 def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     """ Adds new chain to the existing macrocomplex.
@@ -252,9 +253,20 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     atom_list2 = Selection.unfold_entities(same_chain, 'A')
     sup = Superimposer()
     chain_copy = copy.deepcopy(third_chain)
+    print((len(atom_list1),len(atom_list2)))
 
+    if abs(len(atom_list1)-len(atom_list2))<30:
+        if len(atom_list1)-len(atom_list2)>0:
+            atom_list1=atom_list1[0:len(atom_list2)]
+        elif len(atom_list1)-len(atom_list2)<0:
+            atom_list2=atom_list2[0:len(atom_list1)]
+    elif abs(len(atom_list1)-len(atom_list2))>=30:
+        raise sequence_clashing_error(third_chain) 
+        
+    print((len(atom_list1),len(atom_list2)))
     sup.set_atoms(atom_list1, atom_list2)
     sup.apply(chain_copy)
+    sup.apply(third_chain)
     if sequence_clashing(macrocomplex,chain_copy):
         raise sequence_clashing_error(third_chain)
     else:
@@ -295,6 +307,7 @@ def constructor(information,stoich, verb):
     #Extend this model as much as possible from the first chain
     for interaction in information[seq]:
         if interaction[0] is start_model: continue
+        if (interaction[2] in chains_in_complex) and (len(chains_in_complex[interaction[2]])>=stoich[interaction[2]]): continue
         second_model = interaction[0]
         same_chain = interaction[1]
         other_id = interaction[2]
@@ -309,6 +322,7 @@ def constructor(information,stoich, verb):
             chains_in_complex[other_id].append(third_chain)
 
     #From the resulting model, keep adding chains, until the model has as many chains as specified in the stoichiometry
+
     while len(list(complex_out.get_chains())) < sum(stoich.values()):
         #Get a sequence that is in the complex but is yet to be used as a core for the extension of the complex
         try:
@@ -316,8 +330,8 @@ def constructor(information,stoich, verb):
         #If it cannot find any, break the loop even if the complex is incomplete
         except IndexError:
             break
-
-        #For each chain that is in the complex with this identifier
+    
+    #For each chain that is in the complex with this identifier
         for first_chain in chains_in_complex[seq]:
             #Add it to the used chains list
             chains_used.append(seq)
@@ -346,4 +360,6 @@ def constructor(information,stoich, verb):
         print("\nThe resulting complex has a total of %s chains. Its stoichiometry is the following: "%len(complex_out),file = sys.stderr)
         for id, chains in chains_in_complex.items():
             print("\t%s : %s"%(id, len(chains)), file = sys.stderr)
+                
+        
     return complex_out
