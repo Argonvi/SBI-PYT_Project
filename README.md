@@ -35,7 +35,7 @@ Identifying the structure of interacting proteins, complexes, is not an easy tas
 
 ComplexConstructor tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of PDB files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
 
-The core of ComplexConstructor is the `constructor` function, which is the responsible of the building process. The PDBs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different PDB files are identified: they will have more than 95% of identity in their sequences and an RMSD of less than 0.05 after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements and, the next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
+The core of ComplexConstructor is the `constructor` function, which is the responsible of the building process. The PDBs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different PDB files are identified: they will have more than 99% of identity in their sequences and an RMSD of less than 0.05 after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements and, the next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
 
 In addition, as a lot of complexes follow a determined stoichiometry, ComplexConstructor can also make the construction following it. If a stoichiometry is defined, the final structure will contain the exact number of elements indicated by it.
 
@@ -184,9 +184,28 @@ $ python3 complexconstructor -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDi
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/1gzxExample/1gzxCB.png" title="1gzxCB" alt="1gzxCB" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CB.png" title="1gzxREF_CB" alt="1gzxREF_CB" style="max-width:92%;">
+|<img src="/assets/1gzxExample/1gzxCB.png" title="1gzxCC" alt="1gzxCC" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CB.png" title="1gzxREF_CB" alt="1gzxREF_CB" style="max-width:92%;">
 
 We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
+
+### 5FJ8
+
+This complex is composed by aminoacid and nuclotide sequences. It is composed by 20 chains all just present once in the structure. All the required inputs to coonstruct this complex is inside the folder `examples`, in `5fj8`. To run this expemple in command-line:
+
+```shell
+$ python3 complexconstructor -fa examples/5fj8/5fj8.fa -pdb examples/5fj8/5fj8Dir -o 5FJ8 -st examples/5fj8/5fj8_st.txt -v
+
+```
+
+The resulting structure is stored in the directory `5FJ8` file `5FJ8_model.pdb`.
+
+> To execute this example with the graphical interface repeat the same process as for the previous example with the inputs of the folder `examples/5fj8`.
+
+| **Complex Constructor** | **Reference structure** | **Superimposition** |
+| :---: | :---: | :---: |
+|<img src="/assets/5jf8Example/5jf8CC.png" title="5jf8CC" alt="1gzxCC" >|<img src="/assets/5jf8Example/5jf8REF.png" title="5jf8REF" alt="5jf8REF" >|<img src="/assets/5jf8Example/5jf8REF_CC.png" title="5jf8REF_CC" alt="5jf8REF_CC" style="max-width:92%;">
+
+The model and the reference are superimposed with very little difference between both structures. In this particular case, the aminoacid chain, Q, had several aminoacids labelled as 'unknown' in the pdb files and as 'X' in the fasta sequence. To deal with this, we had to take out this aminoacids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly repoduced.
 
 ## Performance
 
@@ -211,7 +230,9 @@ We can observe that the resulting structure from Complex Constructor fits the re
 
 ## Limitations
 
-- Although the similarity of chains from different pdb files is double checked, only the ones with sequence identity over 95% and also with an RMSD under 0.05 (ICM calculation) when both structures are superimposed, the small differences between them may be propagated when building big structures. It could be partly solved if the similarity conditions were harder or with small structure corrections everytime a chain is added.
+- Although the similarity of chains from different pdb files is double checked, only the ones with sequence identity over 99% and also with an RMSD under 0.05 (ICM calculation) when both structures are superimposed, the small differences between them may be propagated when building big structures. It could be partly solved if the similarity conditions were harder or with small structure corrections everytime a chain is added.
+
+- The aminoacids labelled ad 'unknown' in the pdb files and as 'X' in the fasta sequence cannot be correctly identified, they should not be present in the input files. As a consequence, this chains are partly constrcuted in the final model. 
 
 - The refinement of the structures obtained would have been also very usefull. 
 
