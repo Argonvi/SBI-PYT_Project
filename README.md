@@ -205,7 +205,7 @@ The resulting structure is stored in the directory `5FJ8` file `5FJ8_model.pdb`.
 | :---: | :---: | :---: |
 |<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Rref" >|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" style="max-width:92%;">
 
-The model and the reference are superimposed with very little difference between both structures. In this particular case, the aminoacid chain, Q, had several aminoacids labelled as 'unknown' in the pdb files and as 'X' in the fasta sequence. To deal with this, we had to take out this aminoacids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly repoduced.
+The model and the reference are superimposed with very little difference between both structures. In this particular case, the aminoacid chain Q, had several aminoacids labelled as 'unknown' in the pdb files and as 'X' in the fasta sequence. To deal with this, we had to take out this aminoacids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.
 
 ## Performance
 
@@ -232,7 +232,7 @@ The model and the reference are superimposed with very little difference between
 
 - Although the similarity of chains from different pdb files is double checked, only the ones with sequence identity over 99% and also with an RMSD under 0.05 (ICM calculation) when both structures are superimposed, the small differences between them may be propagated when building big structures. It could be partly solved if the similarity conditions were harder or with small structure corrections everytime a chain is added.
 
-- The aminoacids labelled ad 'unknown' in the pdb files and as 'X' in the fasta sequence cannot be correctly identified, they should not be present in the input files. As a consequence, this chains are partly constrcuted in the final model. 
+- The aminoacids labelled as 'unknown' in the pdb files and as 'X' in the fasta sequence, cannot be correctly identified so they should not be present in the input files. As a consequence, those chains are just partly constructed in the final model. 
 
 - The refinement of the structures obtained would have been also very usefull. 
 
