@@ -5,7 +5,7 @@ from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import random
 import copy
-#import interface
+import interface
 import logProgress
 
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -136,7 +136,7 @@ def pdb_dna_to_sequence(chain):
         seq += res.get_resname()[-1]
     return seq
 
-def data_extraction(pdb_files, fasta_file, threshold = 0.99):
+def data_extraction(pdb_files, fasta_file, verb, threshold = 0.95):
     """Takes as input a list of pdb files and a fasta file
     Returns a dictionary of dictionaries. The primary key is the model, the secondary
     key is the chain_id in said model and the value is the fasta_id of said chain.
@@ -166,12 +166,16 @@ def data_extraction(pdb_files, fasta_file, threshold = 0.99):
                 if (normalized_score >= threshold and abs(len(fasta_seq)-len(pp_seq))<=5):                  
                     big_dictionary[model][chain.get_id()] = fasta_id
                     break
-
     valores = []
+    tag = 0
     for lista in [list(a.values()) for a in big_dictionary.values()]:
         valores += lista
     for fasta_id in fasta_ids:
-        if fasta_id not in set(valores): print("Fasta sequence with ID %s was not found between PDB files."%fasta_id,file = sys.stderr)
+        if fasta_id not in set(valores):
+            tag = 1
+            if verb: print("Fasta sequence with ID %s was not found between PDB files."%fasta_id,file = sys.stderr)
+    if tag:
+        raise SystemExit("Program stopped due to missing sequences.")
     return big_dictionary
 
 def seq_dictionary(data):
