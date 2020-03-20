@@ -203,7 +203,7 @@ The resulting structure is stored in the directory `5FJ8` file `5FJ8_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/5jf8Example/5jf8CC.png" title="5jf8CC" alt="1gzxCC" >|<img src="/assets/5jf8Example/5jf8REF.png" title="5jf8REF" alt="5jf8REF" >|<img src="/assets/5jf8Example/5jf8REF_CC.png" title="5jf8REF_CC" alt="5jf8REF_CC" style="max-width:92%;">
+|<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="/assets/5fj8Example/5fj8REF.png" title="5fj8REF" alt="5fj8REF" >|<img src="/assets/5fj8Example/5fj8REF_CC.png" title="5fj8REF_CC" alt="5fj8REF_CC" style="max-width:92%;">
 
 The model and the reference are superimposed with very little difference between both structures. In this particular case, the aminoacid chain, Q, had several aminoacids labelled as 'unknown' in the pdb files and as 'X' in the fasta sequence. To deal with this, we had to take out this aminoacids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly repoduced.
 
