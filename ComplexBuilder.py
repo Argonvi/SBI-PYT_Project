@@ -17,7 +17,7 @@ st_file=inputData[1] # if there is not stoichiometry = None
 out_directory=inputData[2] 
 
 # Identify common elements between different pairs
-a = data_extraction(pdb_files,fasta_file)
+a = data_extraction(pdb_files,inputData[3],fasta_file)
 b = seq_dictionary(a)
 print(b)
 
