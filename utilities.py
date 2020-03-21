@@ -17,6 +17,15 @@ class sequence_clashing_error(Exception):
     def __str__(self):
         return "The chain %s can't be added as it clashes with the complex." % (self.chain.get_id())
 
+class different_length_error(Exception):
+    """Error due to clashes between new added chain and the previous structure"""
+    def __init__(self, chain):
+        self.chain1=chain1
+        self.chain2=chain2
+    def __str__(self):
+        return "The chains %s and %s can't be superimposed as they have different length." % (self.chain1.get_id(), self.chain2.get_id())
+
+
 def checkCommands(commands):
     """Check the mode of operation of ComplexBuilder: if '-gui' has been defined
         it must be a unique argument, otherwise use the rest of commandline arguments"""
@@ -136,7 +145,7 @@ def pdb_dna_to_sequence(chain):
         seq += res.get_resname()[-1]
     return seq
 
-def data_extraction(pdb_files, fasta_file, verb, threshold = 0.95):
+def data_extraction(pdb_files, fasta_file, threshold = 0.99):
     """Takes as input a list of pdb files and a fasta file
     Returns a dictionary of dictionaries. The primary key is the model, the secondary
     key is the chain_id in said model and the value is the fasta_id of said chain.
@@ -166,16 +175,12 @@ def data_extraction(pdb_files, fasta_file, verb, threshold = 0.95):
                 if (normalized_score >= threshold and abs(len(fasta_seq)-len(pp_seq))<=5):                  
                     big_dictionary[model][chain.get_id()] = fasta_id
                     break
+
     valores = []
-    tag = 0
     for lista in [list(a.values()) for a in big_dictionary.values()]:
         valores += lista
     for fasta_id in fasta_ids:
-        if fasta_id not in set(valores):
-            tag = 1
-            if verb: print("Fasta sequence with ID %s was not found between PDB files."%fasta_id,file = sys.stderr)
-    if tag:
-        raise SystemExit("Program stopped due to missing sequences.")
+        if fasta_id not in set(valores): print("Fasta sequence with ID %s was not found between PDB files."%fasta_id,file = sys.stderr)
     return big_dictionary
 
 def seq_dictionary(data):
@@ -265,7 +270,7 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
         elif len(atom_list1)-len(atom_list2)<0:
             atom_list2=atom_list2[0:len(atom_list1)]
     elif abs(len(atom_list1)-len(atom_list2))>=30:
-        raise sequence_clashing_error(third_chain) 
+        raise different_length_error(first_chain,same_chain) 
         
     print((len(atom_list1),len(atom_list2)))
     sup.set_atoms(atom_list1, atom_list2)
@@ -304,6 +309,7 @@ def constructor(information,stoich, verb):
     #Store its chains in the complex dictionary and used chains list
     chains_in_complex[seq] = [first_chain]
     chains_in_complex[rand_interaction[2]] = [chain for chain in start_model.get_chains() if chain.get_id() != first_chain.get_id()]
+    if verb: print("Chain %s has been correctly added. \nChain %s has been correctly added. " %(seq, rand_interaction[2]), file=sys.stderr)
     chains_used = [seq]
     #Make a copy to modify
     start_model_copy = copy.deepcopy(start_model)
@@ -318,7 +324,7 @@ def constructor(information,stoich, verb):
         third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
-        except sequence_clashing_error as error:
+        except (sequence_clashing_error or different_length_error) as error:
             if verb: print(error, file = sys.stderr)
         else:
             if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
