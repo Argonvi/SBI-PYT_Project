@@ -372,8 +372,9 @@ def constructor(information,stoich, verb):
                     chains_in_complex[other_id].append(third_chain)
                     
     
-    #We check the stoichiometry of the first chain
-    if len(chains_in_complex[chain1])<stoich[chain1]:
+    #We check if the stoichiometry is correct for all the chains
+    chains_incomplete=[chain for chain in information if len(chains_in_complex[chain])<stoich[chain] ]
+    for chain1 in chains_incomplete:
         found=False
         chains_interacting=[interaction[2] for interaction in information[chain1]]
         for chain in chains_interacting:
