@@ -19,7 +19,7 @@ class sequence_clashing_error(Exception):
 
 class different_length_error(Exception):
     """Error due to clashes between new added chain and the previous structure"""
-    def __init__(self, chain):
+    def __init__(self, chain1, chain2):
         self.chain1=chain1
         self.chain2=chain2
     def __str__(self):
@@ -182,11 +182,10 @@ def data_extraction(pdb_files, fasta_file, verb, threshold = 0.99):
         values += lista
     for fasta_id in fasta_ids:
         if fasta_id not in set(values):
-            tag = 1
+            tag += 1
             if verb: print("Fasta sequence with ID %s was not found between PDB files."%fasta_id,file = sys.stderr)
-    if tag:
+    if tag>4:
         raise SystemExit("Program stopped due to missing sequences.")
-        if fasta_id not in set(values): print("Fasta sequence with ID %s was not found between PDB files."%fasta_id,file = sys.stderr)
     return big_dictionary
 
 def seq_dictionary(data):
@@ -268,7 +267,6 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     atom_list2 = Selection.unfold_entities(same_chain, 'A')
     sup = Superimposer()
     chain_copy = copy.deepcopy(third_chain)
-    print((len(atom_list1),len(atom_list2)))
 
     if abs(len(atom_list1)-len(atom_list2))<30:
         if len(atom_list1)-len(atom_list2)>0:
@@ -278,7 +276,6 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     elif abs(len(atom_list1)-len(atom_list2))>=30:
         raise different_length_error(first_chain,same_chain) 
         
-    print((len(atom_list1),len(atom_list2)))
     sup.set_atoms(atom_list1, atom_list2)
     sup.apply(chain_copy)
     sup.apply(third_chain)
@@ -311,6 +308,7 @@ def constructor(information,stoich, verb):
     rand_interaction = information[seq][0]
     start_model = rand_interaction[0]
     first_chain = rand_interaction[1]
+    chain1=copy.deepcopy(seq)
 
     #Store its chains in the complex dictionary and used chains list
     chains_in_complex[seq] = [first_chain]
@@ -330,8 +328,8 @@ def constructor(information,stoich, verb):
         third_chain = [chain for chain in second_model.get_chains() if chain.get_id() != same_chain.get_id()][0]
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
-        except (sequence_clashing_error or different_length_error) as error:
-            if verb: print(error, file = sys.stderr)
+        except (sequence_clashing_error, different_length_error)  as error:
+            if verb: print(error, file = sys.stderr)        
         else:
             if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
             chains_in_complex.setdefault(other_id,[])
@@ -365,17 +363,49 @@ def constructor(information,stoich, verb):
                 try:
                     complex_out=superimpositor(first_chain, same_chain, third_chain, complex_out)
                 #If it does not work, do nothing
-                except sequence_clashing_error as error:
-                    if verb: print(error, file = sys.stderr)
+                except (sequence_clashing_error,different_length_error)  as error:
+                    if verb: print(error, file = sys.stderr)            
                 #If it works, add it to the chains_in_complex dictionary
                 else:
                     if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
                     chains_in_complex.setdefault(other_id,[])
                     chains_in_complex[other_id].append(third_chain)
+                    
+    
+    #We check the stoichiometry of the first chain
+    if len(chains_in_complex[chain1])<stoich[chain1]:
+        found=False
+        chains_interacting=[interaction[2] for interaction in information[chain1]]
+        for chain in chains_interacting:
+            if found:
+                break
+            interactions_with_chain1= [interaction for interaction in information[chain] if interaction[2]==chain1]
+            for interaction in interactions_with_chain1:
+                if found:
+                    break
+                for first_chain in chains_in_complex[chain]:
+                    second_model = interaction[0]
+                    same_chain = interaction[1]
+                    third_chain = [a for a in second_model.get_chains() if a.get_id() != same_chain.get_id()][0]
+                    try:
+                        complex_out=superimpositor(first_chain, same_chain, third_chain, complex_out)
+                    except (sequence_clashing_error,different_length_error)  as error:
+                        if verb: print(error, file = sys.stderr)            
+                    else:                        
+                        if verb: print("Chain %s has been correctly added." %chain1, file=sys.stderr)
+                        chains_in_complex.setdefault(chain1,[])
+                        chains_in_complex[chain1].append(third_chain)
+                        if len(chains_in_complex[chain1])==stoich[chain1]:
+                            found=True
+                            break
+    
+    
+    
+    
     if verb:
         print("\nThe resulting complex has a total of %s chains. Its stoichiometry is the following: "%len(complex_out),file = sys.stderr)
-        for id, chains in chains_in_complex.items():
-            print("\t%s : %s"%(id, len(chains)), file = sys.stderr)
+        for id_, chains in chains_in_complex.items():
+            print("\t%s : %s"%(id_, len(chains)), file = sys.stderr)
                 
         
     return complex_out
