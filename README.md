@@ -203,9 +203,23 @@ The resulting structure is stored in the directory `5FJ8` file `5FJ8_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Rref" >|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" style="max-width:92%;">
+|<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref" >|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" style="max-width:92%;">
 
 The model and the reference are superimposed with very little difference between both structures. In this particular case, the aminoacid chain Q, had several aminoacids labelled as 'unknown' in the pdb files and as 'X' in the fasta sequence. To deal with this, we had to take out this aminoacids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.
+
+### 6GMH
+Another non-symetric example with aminoacid and DNA sequences is 6gmh. It has 17 aminoacid chains and 3 DNA chains.
+
+```shell
+$ python3 complexconstructor -fa examples/6gmh/6gmh.fa -pdb examples/6gmh/6gmhDir -o 6GMH -st examples/6gmh/6gmh_st.txt -v
+
+```
+
+| **Complex Constructor** | **Reference structure** | **Superimposition** |
+| :---: | :---: | :---: |
+|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="/assets/6gmhExample/6gmhRef.png" title="6gmhref" alt="6gmhRef" >|<img src="/assets/6gmhExample/6gmhRef_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
+
+In this case, the pdb strucure had bigger regions labelled as 'unknown'. As those regions are not recognized by ComplexConstructor, we removed them from the input pdb pairs as in the previous example. That is why the 'Q' chain is not completelly constructed: from the original number of 884 aminoacids, after the deletion of the 'unknowns', 584 remained. But, here as well, the correctly characterized aminoacids, and all the DNA sequences, are constructed in the right way as we can see in the image of the superimposition. 
 
 ## Performance
 
