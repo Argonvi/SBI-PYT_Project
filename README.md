@@ -217,7 +217,7 @@ $ python3 complexconstructor -fa examples/6gmh/6gmh.fa -pdb examples/6gmh/6gmhDi
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="/assets/6gmhExample/6gmhRef.png" title="6gmhref" alt="6gmhRef" >|<img src="/assets/6gmhExample/6gmhRef_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
+|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
 
 In this case, the pdb strucure had bigger regions labelled as 'unknown'. As those regions are not recognized by ComplexConstructor, we removed them from the input pdb pairs as in the previous example. That is why the 'Q' chain is not completelly constructed: from the original number of 884 aminoacids, after the deletion of the 'unknowns', 584 remained. But, here as well, the correctly characterized aminoacids, and all the DNA sequences, are constructed in the right way as we can see in the image of the superimposition. 
 
