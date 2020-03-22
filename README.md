@@ -120,7 +120,7 @@ $ python3 complexconstructor -gui
 
 Furthermore, additional options can be set:
 
-<img src="/assets/gui.gif" title="GUI" alt="GUI" style="max-width:70%;" >
+<img src="assets/gui.gif" title="GUI" alt="GUI" style="max-width:70%;" >
 
 - In the main window you can specify if you want to create a log file where the process of the execution will be displayed. 
 
