@@ -14,9 +14,9 @@ def initGui():
     #initialize main window
     root = Tk() 
     root.title("ComplexConstructor") 
-    fileLogo='assets/CB_icon.png'
+    fileLogo='CB_icon.png'
     logo = Image("photo", file=fileLogo)
-    logo_sm = Image("photo", file='assets/CB_icon_sm.png')
+    logo_sm = Image("photo", file='CB_icon_sm.png')
     root.call('wm','iconphoto',root._w, logo)
     root.configure(background = "#2da6e6")
     
