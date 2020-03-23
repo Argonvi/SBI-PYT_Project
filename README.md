@@ -168,15 +168,15 @@ $ python3 complexconstructor -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDi
 
 - `-pdb`, mandatory: followed by the location of directory with paired structures in pdb `1gzxDir`.
 
-> In this case inside this folder we should have at least three pdb files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there are redundant pairs they won't be considered. 
+> In this case inside this folder we should have at least three pdb files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there were redundant pairs they wouldn't be considered. 
 
-- `-o`, mandatory: followed by the name given to the output directory where the results will be stored, `1GZX`. 
+- `-o`, mandatory: followed by the name of the output directory where the results will be stored, `1GZX`. 
 
-> If a directory with the same name already exists in the working folder it will be overwritten.
+> If a directory with the same name already existed in the working folder, it would be overwritten.
 
-- `-st`: followed by the stoychiometry information of the complex 2A2B that is in the file `1gzx_st.txt`.
+- `-st`: followed by the location of the file that contains the stoichiometry information of the complex (2A2B), that is, the file `1gzx_st.txt`.
 
-- `-v`: turn ON the the verbose option. It is always recommended to create a logfile where the process information will be displayed. To deactivate the creation of the logfile, do not add the `-v` flag. 
+- `-v`: when it is used it turns ON the verbose option. It is always recommended to create a logfile where the process information will be displayed. In order to deactivate the creation of the logfile, do not add the `-v` flag. 
 
 2. Graphical interface execution:
 
