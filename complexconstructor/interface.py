@@ -22,12 +22,12 @@ def initGui():
     
     
     def simpleName(inputPath):
-        """Return the last element of a path to display just the input name"""
+        """Returns the last element of a path to display just the input name"""
         justInput=re.search('([^/]+)/?$', inputPath)   
         return justInput.group(0)  
     
     def fastaSelection():
-        """Open window with *.fa files in the current directory to select the FASTA file"""
+        """Opens window with *.fa files in the current directory to select the FASTA file"""
         filetext="Select"
         root.filename =  filedialog.askopenfilename(initialdir = cwd,title = "Select the FASTA file",
                                                     filetypes = (("FASTA files","*.fa"),
@@ -37,7 +37,7 @@ def initGui():
         return root.filename
 
     def pdbSelection():
-        """Open window with directories present in the current folder to select the the one 
+        """Opens window with directories present in the current folder to select the the one 
         with the pair interactions in PDB"""
         filetext="Select"
         root.directory = filedialog.askdirectory(title = "Select the directory with PDB files")
@@ -46,14 +46,14 @@ def initGui():
         return root.directory 
 
     def oSelection():
-        """Store the name introduced for the output file """
+        """Stores the name introduced for the output file """
         filetext="Confirm"
         print (outputName.get())
         bO["text"]= simpleName(outputName.get()) if outputName.get() else filetext
         return outputName.get()
 
     def stSelection():
-        """Open window with files in the current directory to select the the stoichiometry file"""
+        """Opens window with files in the current directory to select the the stoichiometry file"""
         filetext="Select"
         root.filenameSt =  filedialog.askopenfilename(initialdir = cwd,title = "Select the stoichiometry file",
                                                     filetypes = (("Text files","*.txt"),
@@ -69,22 +69,22 @@ def initGui():
         return root.filenameSt
 
     def checkVerbose():
-        """return TRUE if the log checkbox if checked"""
+        """Returns TRUE if the log checkbox if checked"""
         return verb.get()
 
     def showHelp():
-        """Display help of the ComplexBuilder in a new window"""
+        """Displays help of the ComplexConstructor in a new window"""
         t = Toplevel(root)
         t.wm_title("Help")
         l = Label(t, text=helpText.helpMessage,justify=LEFT)
         l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
 
     def openTutorial():
-        """Display README file from gitHub"""
+        """Displays README file from gitHub"""
         webbrowser.open_new("https://github.com/Argonvi/SBI-PYT_Project/blob/master/README.md")
 
     def runCB():
-        """Check that all the mandatory inputs are defined and run the program"""
+        """Checks that all the mandatory inputs are defined and run the program"""
         if outputName.get()!='':
             try:
                 print(root.filename)
@@ -97,13 +97,13 @@ def initGui():
             messagebox.showerror("Ups!", "You should specify and confirm the name of the directory where the output files will be stored.")
              
 
-
+    # Setting of the topmenu
     menubar = Menu(root, tearoff=0)
-
     filemenu = Menu(menubar)
+
     filemenu.add_command(label="Add stoichiometry", command=stSelection)
     #filemenu.add_command(label="Energy analysis", command=menu_action)
-    #filemenu.add_command(label="Open lof file", command=menu_action)
+    #filemenu.add_command(label="Open log file", command=menu_action)
     filemenu.add_separator()
     filemenu.add_command(label="Quit", command=root.quit)
 
@@ -121,17 +121,15 @@ def initGui():
     #Console frame
     frame = Frame(root)
     frame.pack(pady="10", padx="10")
-
     
     frameWll = Frame(frame)
     frameWll.pack(pady="10")
     
+    #Initial text
     panel = Label(frameWll, image = logo_sm)
     panel.pack(side=LEFT, padx="9")
     wellcome = Label(frameWll, text="Introduce the FASTA file and the directory with the interactions in PDB:    ")
-    wellcome.pack(side=TOP,pady="10")
-    
-    
+    wellcome.pack(side=TOP,pady="10")    
     
 
     # FASTA widget
@@ -139,8 +137,7 @@ def initGui():
     frameFA.pack(pady="15", padx="50",side=TOP,anchor=W, fill=X, expand=YES)
     labelF = Label(frameFA, text="Sequence file:                                          ")
     labelF.pack( side=LEFT )
-    #Button FASTA file
-    bF = Button(frameFA, text="Select", command=fastaSelection)
+    bF = Button(frameFA, text="Select", command=fastaSelection) #Button FASTA file
     bF.pack( )
 
 
@@ -149,9 +146,8 @@ def initGui():
     framePDB.pack(pady="15", padx="50",anchor=W, fill=X, expand=YES)
     labelF = Label(framePDB, text="Interactions directory:                             ")
     labelF.pack( side=LEFT )
-    #Button PDB dir
-    bP = Button(framePDB, text="Select", command=pdbSelection)
-    bP.pack(  )
+    bP = Button(framePDB, text="Select", command=pdbSelection)  #Button PDB dir
+    bP.pack( )
 
 
     #Output widget
@@ -159,8 +155,7 @@ def initGui():
     frameO.pack(pady="15", padx="50",anchor=W, fill=X, expand=YES)
     labelO = Label(frameO, text="Output directory name:    ")
     labelO.pack( side=LEFT )
-    #textBox stoichiometry
-    outputName = StringVar()
+    outputName = StringVar()  #textBox for output folder
     nameEntered = Entry(frameO, width = 15, textvariable = outputName)
     nameEntered.pack(side=LEFT, padx="5")
     bO = Button(frameO, text = "Confirm", command = oSelection)
@@ -172,31 +167,24 @@ def initGui():
     frameV.pack(pady="15", padx="50",side=LEFT,anchor=W, fill=X, expand=YES)
     labelF = Label(frameV, text="Do you want to create a log file?")
     labelF.pack( side=LEFT )
-    #Checkbox verbose
-    verb = BooleanVar()
+    verb = BooleanVar()  #Checkbox verbose
     cV = Checkbutton(frameV, text="I do!", variable=verb, command=checkVerbose)
     cV.pack()
 
-    #stoichiometry widget
+    #Stoichiometry widget
     frameSt = Frame(frame)
-    #frameSt.pack(pady="15", padx="50",anchor=W, fill=X, expand=YES)
     frameSt.pack_forget()
     labelSt = Label(frameSt, text="Define a stoichiometry:  ")
-    #labelSt.pack( side=LEFT )
     labelSt.lower()
     bSt = Button(frameSt, text = "Select", command = stSelection)
-    #bSt.pack()
     bSt.lower()
     
-
 
     #Submit widget
     bEnter = Button(root, text="Build complex", command=runCB, bd="2", 
                      relief="solid",padx="10", pady="10") #fg="red", bg="blue",     
     bEnter.pack( side=BOTTOM ,pady="5") 
     root.mainloop()
-
-
 
 
     #Parse inputs 
@@ -208,7 +196,7 @@ def initGui():
         inputs.append( root.filenameSt)
     except:
         inputs.append(None)
-    inputs.append(outputName.get())
+    inputs.append(outputName.get()) #Output folder
     print(inputs)
     return inputs
 
