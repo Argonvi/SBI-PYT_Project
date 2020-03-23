@@ -3,12 +3,9 @@ from os.path import isfile, join
 import sys
 from Bio.PDB import *
 from Bio import SeqIO, pairwise2
-import random
 import copy
-import interface
-import logProgress
-
-
+import complexconstructor.interface
+import complexconstructor.logProgress
 
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
@@ -18,7 +15,7 @@ class sequence_clashing_error(Exception):
         self.chain=chain
     def __str__(self):
         return "The chain %s can't be added as it clashes with the complex." % (self.chain.get_id())
-        
+
 class different_length_error(Exception):
     """Error due to different lengths of the two chains to be superimposed"""
     def __init__(self, chain1, chain2):
@@ -26,7 +23,6 @@ class different_length_error(Exception):
         self.chain2=chain2
     def __str__(self):
         return "The chains %s and %s can't be superimposed as they have different length." % (self.chain1.get_id(), self.chain2.get_id())
-
 
 def checkCommands(commands):
     """Check the mode of operation of ComplexBuilder: if '-gui' has been defined
@@ -81,7 +77,7 @@ def checkSt(stName, inputsListed):
 def checkOutput(outputName, inputsListed):
     """Checks the output name existence defined by the user and
     append it to the list of input values, otherwise raise an error.
-    Creates a new folder with the given name if it does not already 
+    Creates a new folder with the given name if it does not already
     exist, otherwise the results will be overwritten."""
     if outputName is not None:
         if not os.path.exists(outputName):
@@ -96,8 +92,6 @@ def checkOutput(outputName, inputsListed):
                 Type -h for more information of the required
                 format.""")
     return None
-  
-
 
 def checkInputs(fastaFile, PDBDir):
     """Check if the FASTA file and PDB directory is introduced in
@@ -180,7 +174,7 @@ def data_extraction(pdb_files, fasta_file, verb, threshold = 0.90):
                 if fasta_id not in fasta_ids: fasta_ids.append(fasta_id)
                 score = pairwise2.align.globalxx(fasta_seq,pp_seq, score_only = True)
                 normalized_score = score/len(max([fasta_seq,pp_seq]))
-                if (normalized_score >= threshold and abs(len(fasta_seq)-len(pp_seq))<=40): 
+                if (normalized_score >= threshold and abs(len(fasta_seq)-len(pp_seq))<=40):
                     big_dictionary[model][chain.get_id()] = fasta_id
                     break
 
@@ -281,8 +275,8 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
         elif len(atom_list1)-len(atom_list2)<0:
             atom_list2=atom_list2[0:len(atom_list1)]
     elif abs(len(atom_list1)-len(atom_list2))>=30:
-        raise different_length_error(first_chain,same_chain) 
-        
+        raise different_length_error(first_chain,same_chain)
+
     sup.set_atoms(atom_list1, atom_list2)
     sup.apply(chain_copy)
     sup.apply(third_chain)
@@ -336,7 +330,7 @@ def constructor(information,stoich, verb):
         try:
             complex_out=superimpositor(first_chain, same_chain, third_chain, start_model_copy)
         except (sequence_clashing_error, different_length_error)  as error:
-            if verb: print(error, file = sys.stderr)        
+            if verb: print(error, file = sys.stderr)
         else:
             if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
             chains_in_complex.setdefault(other_id,[])
@@ -351,7 +345,7 @@ def constructor(information,stoich, verb):
         #If it cannot find any, break the loop even if the complex is incomplete
         except IndexError:
             break
-    
+
     #For each chain that is in the complex with this identifier
         for first_chain in chains_in_complex[seq]:
             #Add it to the used chains list
@@ -371,13 +365,13 @@ def constructor(information,stoich, verb):
                     complex_out=superimpositor(first_chain, same_chain, third_chain, complex_out)
                 #If it does not work, do nothing
                 except (sequence_clashing_error,different_length_error)  as error:
-                    if verb: print(error, file = sys.stderr)            
+                    if verb: print(error, file = sys.stderr)
                 #If it works, add it to the chains_in_complex dictionary
                 else:
                     if verb: print("Chain %s has been correctly added." %other_id, file=sys.stderr)
                     chains_in_complex.setdefault(other_id,[])
-                    chains_in_complex[other_id].append(third_chain)                    
-    
+                    chains_in_complex[other_id].append(third_chain)
+
     #We check if the stoichiometry is correct for all the chains
     chains_incomplete=[chain for chain in information if len(chains_in_complex[chain])<stoich[chain] ]
     for chain1 in chains_incomplete:
@@ -397,18 +391,18 @@ def constructor(information,stoich, verb):
                     try:
                         complex_out=superimpositor(first_chain, same_chain, third_chain, complex_out)
                     except (sequence_clashing_error,different_length_error)  as error:
-                        if verb: print(error, file = sys.stderr)            
-                    else:                        
+                        if verb: print(error, file = sys.stderr)
+                    else:
                         if verb: print("Chain %s has been correctly added." %chain1, file=sys.stderr)
                         chains_in_complex.setdefault(chain1,[])
                         chains_in_complex[chain1].append(third_chain)
                         if len(chains_in_complex[chain1])==stoich[chain1]:
                             found=True
-                            break    
-    
+                            break
+
     if verb:
         print("\nThe resulting complex has a total of %s chains. Its stoichiometry is the following: "%len(complex_out),file = sys.stderr)
         for id_, chains in chains_in_complex.items():
-            print("\t%s : %s"%(id_, len(chains)), file = sys.stderr)                
-        
+            print("\t%s : %s"%(id_, len(chains)), file = sys.stderr)
+
     return complex_out
