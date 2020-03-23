@@ -172,7 +172,7 @@ $ python3 complexconstructor -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDi
 
 - `-o`, mandatory: followed by the name of the output directory where the results will be stored, `1GZX`. 
 
-> If a directory with the same name already existed in the working folder, it would be overwritten.
+> If a directory with the same name already exists in the working folder, it will be overwritten.
 
 - `-st`: followed by the location of the file that contains the stoichiometry information of the complex (2A2B), that is, the file `1gzx_st.txt`.
 
