@@ -193,15 +193,15 @@ We can observe that the resulting structure from Complex Constructor fits the re
 
 ### 3KUY
 
-3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one of nuclotides, all with stoichiometry two, which make a total of 10 chains. The procedure to run this example is the same as before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
+3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one nuclotide chain, all of them have stoichiometry two, which makes a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
 
 ```shell
 $ python3 complexconstructor -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDir -o 3KUY -st examples/3kuy/3kuy_st.txt -v
 ```
 
-The resulting structure in directory `3KUY`, file `3KUY_model.pdb`.
+The resulting structure is stored in the file `3KUY_model.pdb`, which is in the directory `3KUY`, .
 
-> To execute this example, and the same for all the rest, with the graphical interface repeat the same process as for the previous example with the inputs of the folder `examples/3kuy`.
+> To construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as the explained in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
