@@ -6,8 +6,6 @@ import re
 import complexconstructor.helpText as helpText
 import webbrowser
 
-
-
 def initGui():
     cwd = os.getcwd()
 
