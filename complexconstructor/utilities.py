@@ -4,8 +4,8 @@ import sys
 from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import copy
-import complexconstructor.interface
-import complexconstructor.logProgress
+import complexconstructor.interface as interface
+import complexconstructor.logProgress as logProgress
 
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
