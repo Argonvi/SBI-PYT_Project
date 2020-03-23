@@ -1,8 +1,8 @@
-#!/usr/bin/python3
-import argparser
-import logProgress
-import interface
-from utilities import *
+#!/usr/bin/env python3
+import complexconstructor.argparser as argparser
+import complexconstructor.logProgress as logProgress
+import complexconstructor.interface as interface
+from complexconstructor.utilities import *
 
 
 # Read the command line arguments and check format
