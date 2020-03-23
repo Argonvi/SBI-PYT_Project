@@ -201,7 +201,7 @@ $ python3 complexconstructor -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDi
 
 The resulting structure is stored in the file `3KUY_model.pdb`, which is in the directory `3KUY`, .
 
-> To construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as the explained in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
+> In order to construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
