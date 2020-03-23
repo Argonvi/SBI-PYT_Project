@@ -144,7 +144,7 @@ $ ls
 
 If you obtain the following directories: `assets`,  `complexconstructor`,  `examples`, together with other items, you are in the correct place!
 
-> Inside the folder `examples` there are all the examples we will describe in this tutorial in the corresponding directories: `1gzx`, `5fj8`, etc. Each of them contains the required files to run Complex Constructor together with a pdb file of the reference structure, `exampleRef.pdb`, in order to check the superimposition between the constructed model and the real structure. 
+> Inside the folder `examples` there are all the examples we will describe in this tutorial in the corresponding directories: `1gzx`, `5fj8`, etc. Each of them contains the required files to run Complex Constructor and also a pdb file of the reference structure, `exampleRef.pdb`, in order to check the superimposition between the constructed model and the real structure. 
 <!--If Chimera or ICM is used, maybe the Ref files should be in the output foler??? -->
 
 ### 1GZX
