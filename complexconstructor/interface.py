@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter import *
 import os
 import re
-import helpText
+import complexconstructor.helpText as helpText
 import webbrowser
 
 
