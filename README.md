@@ -149,7 +149,7 @@ If you obtain the following directories: `assets`,  `complexconstructor`,  `exam
 
 ### 1GZX
 
-Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different aminoacid chains and each one of them appears two times, so the final structure has four chains. To perform the construction of T state haemoglobin, stoichiometry 2A2B, we use the .txt file where the stoichiometry is explicited, in this case, `1gzx_st.txt`, already in the `examples/1gzx` folder:
+Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different aminoacid chains and each one of them appears two times (stoichiometry 2A2B), so the final structure has four chains. In order to perform the construction of T-state haemoglobin (1GZX), we need a .txt file where the stoichiometry is explicited. This file can be found in the folder `examples/1gzx` and it is called `1gzx_st.txt`:
 
 ```shell
 1GZXa:2
