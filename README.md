@@ -31,7 +31,7 @@ On the other hand, the number of interactions that may occur between all the pro
 
 So, the complex structure coverage, including homologs, is around the 30%, much less than the mentioned coverage of monomers. That means there is still a long way to go into the complex-structure study field. 
 
-The 3D structure of interacting proteins is necessary for them to develop their function, it is also fundamental for molecular recognition and contributes to the complexity of protein interaction networks too. However, identifying the structure of interacting proteins, complexes, is not an easy task. In monomers, homology modelling can be used to nearly cover all folds to determine a protein structure but, for interactions it is not enough. 
+The 3D structure of interacting proteins is necessary for them to develop their function. It is also fundamental for molecular recognition and it contributes to the complexity of protein interaction networks. However, identifying the structure of interacting proteins, complexes, is not an easy task. In monomers, homology modelling can be used to nearly cover all folds to determine a protein structure but, for interactions it is not enough. 
 
 Complex Constructor tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of pdb files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
 
