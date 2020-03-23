@@ -164,7 +164,7 @@ $ python3 complexconstructor -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDi
 
 - `-fa`, mandatory: followed by the location of the FASTA file `1gzx.fa`.
 
-> This file contain two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
+> This file contains two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
 
 - `-pdb`, mandatory: followed by the location of directory with paired structures in pdb `1gzxDir`.
 
