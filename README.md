@@ -120,7 +120,7 @@ $ python3 complexconstructor -gui
 
 Furthermore, additional options can be set:
 
-<img src="/assets/gui.gif" title="GUI" alt="GUI" style="max-width:70%;" >
+<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/gui.gif" alt="GUI" style="max-width:70%;" >
 
 - In the main window you can specify if you want to create a log file where the process of the execution will be displayed. It will be stored in the output directory.
 
@@ -180,13 +180,13 @@ $ python3 complexconstructor -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDi
 
 2. Graphical interface execution:
 
-<img src="/assets/1gzxExample/1gzx.gif" title="1gzxGUI" alt="1gzxGUI" style="max-width:60%;" >
+<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzx.gif" title="1gzxGUI" alt="1gzxGUI" style="max-width:60%;" >
 
 The resulting structure is stored in the directory `1GZX`, file `1GZX_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" style="max-width:92%;">
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" style="max-width:92%;">
 
 
 We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
@@ -205,7 +205,7 @@ The resulting structure in directory `3KUY`, file `3KUY_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" style="max-width:92%;">
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" style="max-width:92%;">
 
 The whole complex is correctly constructed. 
 <!-- add info here, Zscore, energy...-->
@@ -222,7 +222,7 @@ The resulting structure in directory `4R3O`, file `4R3O_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC" >|<img src="/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" >|<img src="/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" style="max-width:92%;">
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" style="max-width:92%;">
 
 In this case, as well, the constructed model fits the reference structure. <!-- add info here, Zscore, energy...-->
 
@@ -238,7 +238,7 @@ The resulting structure in directory `5FJ8`, file `5FJ8_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref" >|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" style="max-width:92%;">
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref.png" alt="5fj8Ref" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" style="max-width:92%;">
 
 The model and the reference are superimposed with very little differences between both structures. In this particular case, the aminoacid chain Q, had several aminoacids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out this aminoacids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.
 <!-- add info here, Zscore, energy...-->
@@ -254,14 +254,14 @@ Resulting structure in directory `6GMH`, file `6GMH_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
 
 In this case, the pdb strucure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. That is why the 'Q' chain is not completelly constructed: from the original number of 884 aminoacids, after the deletion of the 'unknowns', 584 remained. But, here as well, the correctly characterized aminoacids, and all the DNA sequences, are constructed in the right way as we can see in the image of the superimposition. 
 <!-- add info here, Zscore, energy...-->
 
 ## Performance
 
-<img src="/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
+<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
 - Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
 
