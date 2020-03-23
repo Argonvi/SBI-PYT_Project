@@ -4,9 +4,12 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='complexconstructor',
-      version='0.1.1',
+      version='0.1.2',
       description='Generate macrocomplexes superimposing \
       paired interacting elements.',
+      data_files = [("", ['LICENSE'])],
+      license = "MIT",
+      scripts=['bin/cconstruct'],
       long_description=long_description,
       long_description_content_type="text/markdown",
       keywords='macrocomplex bioinformatics structural pdb protein',
