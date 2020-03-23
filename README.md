@@ -103,7 +103,7 @@ To execute Complex Constructor three arguments are required:
 - `-st` `--stoichiometry`: File in .txt format containing the stoichiometry of the complex. The information of the stoichiometry must be in the following format: the ID of the sequence chain (concordant with the FASTA file ID) followed by ' : ' and the number of times it has to be present in the complex.
 
      `ID_FASTA_file` : `stoichiometry` One per line . Take a look at some examples [here](#examples).
-
+     In case that this option is not used, the program will build the complex using each chain only once. 
 ### Graphical interface
 
 Otherwise, the macrocomplex can also be built using the graphical interface:
