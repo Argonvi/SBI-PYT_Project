@@ -25,7 +25,7 @@
 
 ## Why building complexes?
 
-The total number of proteins in humans is around 20K. From this quantity we already know the structure of 4K proteins. However, for 6K we have good templates and for another 6K of them, we have reasonably good templates; that means we have more or less 50-70% of the structure of human proteins covered.
+The total number of proteins in humans is around 20K. From this quantity we already know the structure of 4K proteins. However, for 6K we have good templates and for other 6K of them, we have reasonably good templates; that means we have more or less 50-70% of the structure of human proteins covered.
 
 On the other hand, the number of interactions that may occur between all the proteins is still unknown. There are some studies estimating 130-650K interactions, while others estimate more than millions. In this context, 120K interactions are confirmed from experiments and only 7K structures of complexes are known, which is a very small proportion of the total number of possible interactions anyway.
 
