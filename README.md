@@ -25,17 +25,17 @@
 
 ## Why building complexes?
 
-The total number of proteins in humans is around 20K. From this quantity we already know the structure of 4K proteins. However, for 6K we have good templates and for other 6K of them, we have reasonably good templates; that means we have more or less 50-70% of the structure of human proteins covered.
+The total number of proteins in humans is around 20K. From this quantity we already know the structure of 4K proteins. However, for 6K we have good templates and for another 6K of them, we have reasonably good templates; that means we have more or less 50-70% of the structure of the human proteins covered.
 
 On the other hand, the number of interactions that may occur between all the proteins is still unknown. There are some studies estimating 130-650K interactions, while others estimate more than millions. In this context, 120K interactions are confirmed from experiments and only 7K structures of complexes are known, which is a very small proportion of the total number of possible interactions anyway.
 
-So, the complex structure coverage, including homologs, is around the 30%, much less than the mentioned coverage of monomers. That means there is still a long way to go into the complex-structure study field. 
+So, the complex-structure coverage, including homologs, is around the 30%, much less than the mentioned coverage of monomers. That means there is still a long way to go into the complex-structure study field. 
 
-The 3D structure of interacting proteins is necessary for them to develop their function. It is also fundamental for molecular recognition and it contributes to the complexity of protein interaction networks. However, identifying the structure of interacting proteins, complexes, is not an easy task. In monomers, homology modelling can be used to nearly cover all folds to determine a protein structure but, for interactions it is not enough. 
+The 3D structure of interacting proteins is necessary for them to develop their function, it is also fundamental for molecular recognition and contributes to the complexity of protein interaction networks too. However, identifying the structure of interacting proteins, complexes, is not an easy task. In monomers, homology modelling can be used to nearly cover all folds to determine a protein structure but, for interactions it is not enough. 
 
 Complex Constructor tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of pdb files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
 
-The core of Complex Constructor is the `constructor` function, which is responsible for the building process. The pdbs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different pdb files are identified: they will have more than 99% of identity in their sequences and an RMSD of less than 0.05 after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements. The next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
+The core of Complex Constructor is the `constructor` function, which is the responsible of the building process. The pdbs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different pdb files are identified: they will have more than 99% of identity in their sequences and an RMSD of less than 0.05 after superimposing their structures. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair with a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements. The next step will repeat the process looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
 
 In addition, as a lot of complexes follow a determined stoichiometry, Complex Constructor can also make the construction following it. If a stoichiometry is defined, the final structure will contain the exact number of elements indicated by it.
 
@@ -100,10 +100,10 @@ To execute Complex Constructor three arguments are required:
 
 - `-v` `--verbose`: show the detailed progression of the building process in a file called 'ComplexConstructor.log'. It will be stored in the output directory.
 
-- `-st` `--stoichiometry`: File in .txt format containing the stoichiometry of the complex. The information of the stoichiometry must be in the following format: the ID of the sequence chain (concordant with the FASTA file ID) followed by ' : ' and the number of times it has to be present in the complex.
+- `-st` `--stoichiometry`: File containing a determined stoichiometry of the complex. The information of the stoichiometry must be: the ID of the sequence chain (concordant with the FASTA file ID) followed by the number of times it has to be present in the complex after ' : '.
 
-     `ID_FASTA_file` : `stoichiometry` One per line . Take a look at some examples [here](#examples).
-     In case that this option is not used, the program will build the complex using each chain only once. 
+     `ID_FASTA_file` : `stoichiometry` One per line in format .txt. Take a look at some examples [here](#examples).
+
 ### Graphical interface
 
 Otherwise, the macrocomplex can also be built using the graphical interface:
@@ -120,7 +120,7 @@ $ python3 complexconstructor -gui
 
 Furthermore, additional options can be set:
 
-<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/gui.gif" alt="GUI" style="max-width:70%;" >
+<img src="/assets/gui.gif" title="GUI" alt="GUI" style="max-width:70%;" >
 
 - In the main window you can specify if you want to create a log file where the process of the execution will be displayed. It will be stored in the output directory.
 
@@ -144,12 +144,12 @@ $ ls
 
 If you obtain the following directories: `assets`,  `complexconstructor`,  `examples`, together with other items, you are in the correct place!
 
-> Inside the folder `examples` there are all the examples we will describe in this tutorial in the corresponding directories: `1gzx`, `5fj8`, etc. Each of them contains the required files to run Complex Constructor and also a pdb file of the reference structure, `exampleRef.pdb`, in order to check the superimposition between the constructed model and the real structure. 
+> Inside the folder `examples` there are all the examples we will describe in this tutorial in the corresponding directories: `1gzx`, `5fj8`, etc. Each of them contains the required files to run Complex Constructor together with a pdb file of the reference structure, `exampleRef.pdb`, in order to check the superimposition between the constructed model and the real structure. 
 <!--If Chimera or ICM is used, maybe the Ref files should be in the output foler??? -->
 
 ### 1GZX
 
-Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different aminoacid chains and each one of them appears two times (stoichiometry 2A2B), so the final structure has four chains. In order to perform the construction of T state haemoglobin (1GZX), we need a .txt file where the stoichiometry is explicited. This file can be found in the folder `examples/1gzx` and it is called `1gzx_st.txt`:
+Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different aminoacid chains with stoichiometry two, so the final structure has four chains. To perform the construction of T state haemoglobin, stoichiometry 2A2B, we use the .txt file where the stoichiometry is explicited, in this case, `1gzx_st.txt`, already in the `examples/1gzx` folder:
 
 ```shell
 1GZXa:2
@@ -164,48 +164,48 @@ $ python3 complexconstructor -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDi
 
 - `-fa`, mandatory: followed by the location of the FASTA file `1gzx.fa`.
 
-> This file contains two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
+> This file contain two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
 
 - `-pdb`, mandatory: followed by the location of directory with paired structures in pdb `1gzxDir`.
 
-> In this case inside this folder we should have at least three pdb files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there were redundant pairs they wouldn't be considered. 
+> In this case inside this folder we should have at least three pdb files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there are redundant pairs they won't be considered. 
 
-- `-o`, mandatory: followed by the name of the output directory where the results will be stored, `1GZX`. 
+- `-o`, mandatory: followed by the name given to the output directory where the results will be stored, `1GZX`. 
 
-> If a directory with the same name already exists in the working folder, it will be overwritten.
+> If a directory with the same name already exists in the working folder it will be overwritten.
 
-- `-st`: followed by the location of the file that contains the stoichiometry information of the complex (2A2B), that is, the file `1gzx_st.txt`.
+- `-st`: followed by the stoychiometry information of the complex 2A2B that is in the file `1gzx_st.txt`.
 
-- `-v`: when it is used it turns ON the verbose option. It is always recommended to create a logfile where the process information will be displayed. In order to deactivate the creation of the logfile, do not add the `-v` flag. 
+- `-v`: turn ON the the verbose option. It is always recommended to create a logfile where the process information will be displayed. To deactivate the creation of the logfile, do not add the `-v` flag. 
 
 2. Graphical interface execution:
 
-<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzx.gif" title="1gzxGUI" alt="1gzxGUI" style="max-width:60%;" >
+<img src="/assets/1gzxExample/1gzx.gif" title="1gzxGUI" alt="1gzxGUI" style="max-width:60%;" >
 
 The resulting structure is stored in the directory `1GZX`, file `1GZX_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" style="max-width:92%;">
+|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" style="max-width:92%;">
 
 
 We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. The RMSD of the second chains of both model and reference, computed with ICM after supeimposing the first chains, is zero. 
 
 ### 3KUY
 
-3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one nuclotide chain, all of them have stoichiometry two, which makes a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
+3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one of nuclotides, all with stoichiometry two, which make a total of 10 chains. The procedure to run this example is the same as before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
 
 ```shell
 $ python3 complexconstructor -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDir -o 3KUY -st examples/3kuy/3kuy_st.txt -v
 ```
 
-The resulting structure is stored in the file `3KUY_model.pdb`, which is in the directory `3KUY`, .
+The resulting structure in directory `3KUY`, file `3KUY_model.pdb`.
 
-> In order to construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
+> To execute this example, and the same for all the rest, with the graphical interface repeat the same process as for the previous example with the inputs of the folder `examples/3kuy`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" style="max-width:92%;">
+|<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" style="max-width:92%;">
 
 The whole complex is correctly constructed. 
 <!-- add info here, Zscore, energy...-->
@@ -222,7 +222,7 @@ The resulting structure in directory `4R3O`, file `4R3O_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" style="max-width:92%;">
+|<img src="/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC" >|<img src="/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" >|<img src="/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" style="max-width:92%;">
 
 In this case, as well, the constructed model fits the reference structure. <!-- add info here, Zscore, energy...-->
 
@@ -238,7 +238,7 @@ The resulting structure in directory `5FJ8`, file `5FJ8_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref.png" alt="5fj8Ref" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" style="max-width:92%;">
+|<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC" >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref" >|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" style="max-width:92%;">
 
 The model and the reference are superimposed with very little differences between both structures. In this particular case, the aminoacid chain Q, had several aminoacids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out this aminoacids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.
 <!-- add info here, Zscore, energy...-->
@@ -254,14 +254,38 @@ Resulting structure in directory `6GMH`, file `6GMH_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
+|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
 
 In this case, the pdb strucure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. That is why the 'Q' chain is not completelly constructed: from the original number of 884 aminoacids, after the deletion of the 'unknowns', 584 remained. But, here as well, the correctly characterized aminoacids, and all the DNA sequences, are constructed in the right way as we can see in the image of the superimposition. 
 <!-- add info here, Zscore, energy...-->
 
+### Enterovirus capsid
+To make the prove with a complex with unknown structure we have run Complex Constructor with an enterovirus capsid, composed by three different aminoacid chains. To execute this example we provide an stoichiometry file with stoichiometry equal to 18 for all three chains. However, with a total of 54 chains the complex is not totally constructed. 
+
+The following image shows the construction of the complex with stoichiometry 32, a total of 96 chains. To perform the construction with so many chains, we had to modify the script: the program was able to generate a total of 54 chains, with letters A-Z and a-z, so the maximum stoichiometry for three chains was 18. In addition to this limitation, ICM and Chimera, allow a maximum of 99999 atoms to be represented, and the complex exceeded this number.
+
+To solve both issues, we made modifications for this particular case to create two different pdb files, like this, we divided the pdb structure in two files `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, to be able to repeat the chain letters in the second file and open both files with ICM or Chimera. These two pdb files are included in the directory `examples/entv`. 
+
+Nevertheless, as the modifications were just perfomed to build this particular case, the stoichiometry file we have included to run this example, is the one that will work with the 'default' script, this is, stoichiometry equal to 18 for the three chains. Like this, the resulting pdb file will be partly constructed. To run the enterovirus capside 'reduced' example: 
+
+```shell
+$ python3 complexconstructor -fa examples/entv/entv.fa -pdb examples/entv/entvDir -o ENTV -st examples/entv/entv_st.txt -v
+
+```
+
+The resulting structure is in directory `ENTV`, file `ENTV_model.pdb`, with the 'reduced' structure.
+
+The 'extended' structure, conatined in `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, is as follows:
+
+| **Complex Constructor** |
+| :---: |
+<img src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
+
+We can see that, the structure is not jet completed, but with a third pbd this would be solved. The structure of the capside is correctly visualized. 
+
 ## Performance
 
-<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
+<img src="/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
 - Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
 
@@ -293,6 +317,7 @@ In this case, the pdb strucure had bigger regions labelled as 'unknown'. As thos
 - The refinement of the structures obtained would have been also very usefull. 
 
 - We would have also liked to check the Z-scores of the resulting structures through the energy analisys to check the validity of the results.
+
 
 ## Team
 | <a href="https://github.com/Paulagomis" target="_blank">**Paula Gomis Rosa**</a> | <a href="https://github.com/Argonvi" target="_blank">**Arturo González Vilanova**</a> | <a href="https://github.com/MartaLoBalastegui" target="_blank">**Marta López Balastegui**</a> |
