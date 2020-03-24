@@ -1,5 +1,5 @@
 <img src="https://cdn.pixabay.com/photo/2017/10/25/06/13/protein-icon-2887050_960_720.png" title="ComplexConstructorLogo" alt="ComplexConstructorLogo" height="100" width="100">
-
+<div style="text-align: justify">
 <!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
 
 <!--***INSERT GRAPHIC HERE (include hyperlink in image)***-->
