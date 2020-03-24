@@ -1,5 +1,5 @@
 <img src="https://cdn.pixabay.com/photo/2017/10/25/06/13/protein-icon-2887050_960_720.png" title="ComplexConstructorLogo" alt="ComplexConstructorLogo" height="100" width="100">
-<div style="text-align: justify">
+
 <!-- [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) -->
 
 <!--***INSERT GRAPHIC HERE (include hyperlink in image)***-->
@@ -293,7 +293,6 @@ In this case, the pdb strucure had bigger regions labelled as 'unknown'. As thos
 - The refinement of the structures obtained would have been also very usefull. 
 
 - We would have also liked to check the Z-scores of the resulting structures through the energy analisys to check the validity of the results.
-</div>
 
 ## Team
 | <a href="https://github.com/Paulagomis" target="_blank">**Paula Gomis Rosa**</a> | <a href="https://github.com/Argonvi" target="_blank">**Arturo González Vilanova**</a> | <a href="https://github.com/MartaLoBalastegui" target="_blank">**Marta López Balastegui**</a> |
