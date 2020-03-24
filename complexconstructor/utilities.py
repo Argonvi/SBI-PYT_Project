@@ -4,7 +4,6 @@ import sys
 from Bio.PDB import *
 from Bio import SeqIO, pairwise2
 import copy
-import complexconstructor.interface as interface
 import complexconstructor.logProgress as logProgress
 
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -30,6 +29,7 @@ def checkCommands(commands):
     inputs=[]
     data=[]
     if commands.gui: #enter files through GUI
+        import complexconstructor.interface as interface
         if len(sys.argv)==2:
             inputList=interface.initGui()
             inputs = checkInputs(inputList[0], inputList[1]) #FASTA file, PDB dir
