@@ -293,7 +293,7 @@ In this case, the pdb strucure had bigger regions labelled as 'unknown'. As thos
 - The refinement of the structures obtained would have been also very usefull. 
 
 - We would have also liked to check the Z-scores of the resulting structures through the energy analisys to check the validity of the results.
-
+</div>
 
 ## Team
 | <a href="https://github.com/Paulagomis" target="_blank">**Paula Gomis Rosa**</a> | <a href="https://github.com/Argonvi" target="_blank">**Arturo González Vilanova**</a> | <a href="https://github.com/MartaLoBalastegui" target="_blank">**Marta López Balastegui**</a> |
