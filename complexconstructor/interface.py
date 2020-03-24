@@ -8,22 +8,19 @@ import webbrowser
 
 def initGui():
     cwd = os.getcwd()
-
     #initialize main window
-    root = Tk() 
-    root.title("ComplexConstructor") 
-    fileLogo='CB_icon.png'
-    logo = Image("photo", file=fileLogo)
-    logo_sm = Image("photo", file='CB_icon_sm.png')
+    root = Tk()
+    logo = Image("photo", file = os.path.dirname(os.path.realpath(__file__))+"/CB_icon.png")
+    logo_sm = Image("photo", file = os.path.dirname(os.path.realpath(__file__))+"/CB_icon_sm.png")
+    root.title("ComplexConstructor")
     root.call('wm','iconphoto',root._w, logo)
     root.configure(background = "#2da6e6")
-    
-    
+
     def simpleName(inputPath):
         """Returns the last element of a path to display just the input name"""
-        justInput=re.search('([^/]+)/?$', inputPath)   
-        return justInput.group(0)  
-    
+        justInput=re.search('([^/]+)/?$', inputPath)
+        return justInput.group(0)
+
     def fastaSelection():
         """Opens window with *.fa files in the current directory to select the FASTA file"""
         filetext="Select"
@@ -35,13 +32,13 @@ def initGui():
         return root.filename
 
     def pdbSelection():
-        """Opens window with directories present in the current folder to select the the one 
+        """Opens window with directories present in the current folder to select the the one
         with the pair interactions in PDB"""
         filetext="Select"
         root.directory = filedialog.askdirectory(title = "Select the directory with PDB files")
         print (root.directory)
         bP["text"]= simpleName(root.directory) if root.directory else filetext
-        return root.directory 
+        return root.directory
 
     def oSelection():
         """Stores the name introduced for the output file """
@@ -58,7 +55,7 @@ def initGui():
                                                                 ("all files","*.*")))
         print (root.filenameSt)
         frameSt.pack(pady="15", padx="50",anchor=W, fill=X, expand=YES)
-        bSt["text"]= simpleName(root.filenameSt) if root.filenameSt else filetext   
+        bSt["text"]= simpleName(root.filenameSt) if root.filenameSt else filetext
         labelO["text"]="Output directory name:                       "
         labelSt.lift()
         labelSt.pack(side=LEFT )
@@ -90,10 +87,10 @@ def initGui():
                 root.destroy()
             except:
                 messagebox.showerror("Ups!", "You should select the input FASTA file and the directory with the PDB interaction files.")
-                
+
         else:
             messagebox.showerror("Ups!", "You should specify and confirm the name of the directory where the output files will be stored.")
-             
+
 
     # Setting of the topmenu
     menubar = Menu(root, tearoff=0)
@@ -111,7 +108,7 @@ def initGui():
     helpmenu.add_command(label="About", command=openTutorial)
 
     menubar.add_cascade(label="Options", menu=filemenu)
-    menubar.add_cascade(label="Help", menu=helpmenu)  
+    menubar.add_cascade(label="Help", menu=helpmenu)
 
     root.config(menu=menubar)
 
@@ -119,16 +116,16 @@ def initGui():
     #Console frame
     frame = Frame(root)
     frame.pack(pady="10", padx="10")
-    
+
     frameWll = Frame(frame)
     frameWll.pack(pady="10")
-    
+
     #Initial text
     panel = Label(frameWll, image = logo_sm)
     panel.pack(side=LEFT, padx="9")
     wellcome = Label(frameWll, text="Introduce the FASTA file and the directory with the interactions in PDB:    ")
-    wellcome.pack(side=TOP,pady="10")    
-    
+    wellcome.pack(side=TOP,pady="10")
+
 
     # FASTA widget
     frameFA = Frame(frame)
@@ -157,7 +154,7 @@ def initGui():
     nameEntered = Entry(frameO, width = 15, textvariable = outputName)
     nameEntered.pack(side=LEFT, padx="5")
     bO = Button(frameO, text = "Confirm", command = oSelection)
-    bO.pack(side=LEFT)        
+    bO.pack(side=LEFT)
 
 
     #Verbose widget
@@ -176,16 +173,16 @@ def initGui():
     labelSt.lower()
     bSt = Button(frameSt, text = "Select", command = stSelection)
     bSt.lower()
-    
+
 
     #Submit widget
-    bEnter = Button(root, text="Build complex", command=runCB, bd="2", 
-                     relief="solid",padx="10", pady="10") #fg="red", bg="blue",     
-    bEnter.pack( side=BOTTOM ,pady="5") 
+    bEnter = Button(root, text="Build complex", command=runCB, bd="2",
+                     relief="solid",padx="10", pady="10") #fg="red", bg="blue",
+    bEnter.pack( side=BOTTOM ,pady="5")
     root.mainloop()
 
 
-    #Parse inputs 
+    #Parse inputs
     inputs=[]
     inputs.append(root.filename) # FASTA
     inputs.append(root.directory) # PDB dir
@@ -197,6 +194,3 @@ def initGui():
     inputs.append(outputName.get()) #Output folder
     print(inputs)
     return inputs
-
-    
-
