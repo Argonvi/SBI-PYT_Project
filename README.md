@@ -87,8 +87,17 @@ $ pip install biopython --upgrade
 
 ### Download the data to run the examples
 
-To run the different [examples](#examples) of this tutorial, download the folder `examples`. There are all the required inputs to execute the examples. 
+To run the different [examples](#examples) of this tutorial, download the folder `examples`. There are all the required inputs to execute the examples.
 
+You can download the compressed folder with the following command:
+
+```shell
+$ wget https://github.com/Argonvi/SBI-PYT_Project/raw/master/examples.tar.gz
+```
+Then uncompress with:
+```shell
+$ tar xvfz examples.tar.gz
+```
 
 ## Options
 
