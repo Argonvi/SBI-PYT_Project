@@ -159,7 +159,7 @@ As said before, to generate any macrocomplex structure it is required the FASTA 
 $  cd ComplexConstructorModels
 ```
 
-Like this, the output folders will be stored in this file. 
+Like this, the output folders will be stored in this directory. 
 
 > Inside the folder `examples` there are all the examples we will describe in this tutorial in the corresponding directories: `1gzx`, `5fj8`, etc. Each of them contains the required files to run Complex Constructor together with a pdb file of the reference structure, `exampleRef.pdb`, in order to check the superimposition between the constructed model and the real structure. 
 
