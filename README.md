@@ -312,7 +312,7 @@ We can see that, the structure is not jet completed, but with a third pbd this w
 
 - The aminoacids labelled as 'unknown' in the pdb files and as 'X' in the fasta sequences, cannot be correctly identified so they should not be present in the input files. As a consequence, those chains are just partly constructed in the final model.
 
-- Although the similarity of chains from different pdb files is double checked, only the ones with sequence identity over 99%, and also with an RMSD under 0.05 when both structures are superimposed, the small differences between them may be propagated when building big structures. It could be partly solved if the similarity conditions were harder or with small structure corrections everytime a chain is added.
+- Although the similarity of chains from different pdb files is double checked, only the ones with sequence identity over 99%,  the small differences between them may be propagated when building big structures. It could be partly solved if the similarity conditions were harder or with small structure corrections everytime a chain is added.
 
 - The refinement of the structures obtained would have been also very usefull. 
 
