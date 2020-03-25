@@ -54,7 +54,7 @@ There are two different ways to download the package: using `pip` or cloning the
 
 ### Install from pip
 
-- Install Complex Constructor with the Python package installer `pip`
+- Install Complex Constructor with the Python package installer `pip3`
 
 ```shell
 $ pip3 install complexconstructor
@@ -68,16 +68,10 @@ $ pip3 install complexconstructor
 $ git clone https://github.com/Argonvi/SBI-PYT_Project.git
 ```  
 
-Decompress the dowloaded folder
+Install the package
 
 ```shell
-$ tar xvfz complexconstructor-0.1.2.tar.gz
-``` 
-
-Move to the decompressed folder and install the package
-
-```shell
-$ cd complexconstructor-0.1.2
+$ cd SBI-PYT_Project
 $ sudo python3 setup.py install
 ```
 ### Setup
