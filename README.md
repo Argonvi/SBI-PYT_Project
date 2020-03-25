@@ -50,7 +50,7 @@ Prerequisites:
 
 - Python 3.0 `https://www.python.org/download/releases/3.0/`
 
-There are two different ways to download the package: using `pip` or cloning the repo.
+There are two different ways to download the package: using `pip3` or cloning the repo.
 
 ### Install from pip
 
@@ -78,11 +78,11 @@ $ sudo python3 setup.py install
 
 Complex Constructor requires the package BioPython `https://biopython.org/wiki/Download` 
 
-- The installation is easy using Python package management tool `pip`
+- The installation is easy using Python package management tool `pip3`
 
 ```shell
-$ pip install biopython
-$ pip install biopython --upgrade
+$ pip3 install biopython
+$ pip3 install biopython --upgrade
 ```
 
 ### Download the data to run the examples
