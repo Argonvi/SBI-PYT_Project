@@ -202,7 +202,7 @@ The resulting structure is stored in the current directory, `ComplexConstructorM
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=240 >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=240  >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=240 >
+|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=250 >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=250  >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=250 >
 
 
 We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a result of 0.000 angstroms.
@@ -221,7 +221,7 @@ The resulting structure in directory `3KUY`, file `3KUY_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=240  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=240  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=240 >
+|<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
 
 The whole complex is correctly constructed. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
