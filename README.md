@@ -202,7 +202,7 @@ The resulting structure is stored in the current directory, `ComplexConstructorM
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" style="width:92%;">
+|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=240 >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=240  >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=240 >
 
 
 We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a result of 0.000 angstroms.
@@ -221,7 +221,7 @@ The resulting structure in directory `3KUY`, file `3KUY_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" style="max-width:92%;">
+|<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=240  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=240  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=240 >
 
 The whole complex is correctly constructed. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
@@ -237,7 +237,7 @@ The resulting structure in directory `4R3O`, file `4R3O_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :----: | :----: | :----: |
-|<img src="/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC" >|<img src="/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" >|<img src="/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" style="max-width:92%;">
+|<img src="/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC"  height=240 >|<img src="/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" height=240  >|<img src="/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" height=240 >
 
 In this case, as well, the constructed model fits the reference structure. The RMSD between 250 pruned atom pairs is 0.000 angstroms.
 
@@ -268,7 +268,7 @@ Resulting structure in directory `6GMH`, file `6GMH_model.pdb`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC" >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC" style="max-width:92%;">
+|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC"  height=240 >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" height=240  >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC"  height=240 >
 
 In this case, the pdb strucure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. That is why the 'Q' chain is not completelly constructed: from the original number of 884 amino acids, after the deletion of the 'unknowns', 584 remained. But, here as well, the correctly characterized amino acids, and all the DNA sequences, are constructed in the right way as we can see in the image of the superimposition. The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
 
