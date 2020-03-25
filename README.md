@@ -295,13 +295,13 @@ The 'extended' structure, conatined in `ENTV_model_part1.pdb` and `ENTV_model_pa
 
 | **Complex Constructor** |
 | :---: |
-<img src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
+<img  align="center" src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
 
 We can see that, the structure is not jet completed, but with a third pbd this would be solved. The structure of the capside is correctly visualized. 
 
 ## Performance
 
-<img src="/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
+<img align="center" src="/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
 - Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
 
