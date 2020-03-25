@@ -57,7 +57,7 @@ There are two different ways to download the package: using `pip` or cloning the
 - Install Complex Constructor with the Python package installer `pip`
 
 ```shell
-$ pip install complexconstructor
+$ pip3 install complexconstructor
 ```
 
 ### Clone
