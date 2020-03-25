@@ -212,7 +212,7 @@ The whole complex is correctly constructed.
 
 ### 4R3O
 
-A bigger case is the complex 4R3O, but just made of aminoacid chains. It is also symmetric and composed by 14 chains, stoichimetry two for all of them, a total of 28 chains in the complex. Its input data in `examples/4r3o`.
+The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is also symmetric and  it is composed by 14 chains, all of them with stoichimetry two, a total of 28 chains in the complex. Its input data in `examples/4r3o`.
 
 ```shell
 $ python3 complexconstructor -fa examples/4r3o/4r3o.fa -pdb examples/4r3o/4r3oDir -o 4R3O -st examples/4r3o/4r3o_st.txt -v
