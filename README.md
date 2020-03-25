@@ -202,7 +202,7 @@ The resulting structure is stored in the current directory, `ComplexConstructorM
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" style="max-width:92%;">
+|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC" >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" style="width:92%;">
 
 
 We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a result of 0.000 angstroms.
