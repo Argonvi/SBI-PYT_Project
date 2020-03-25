@@ -17,7 +17,6 @@ out_directory=inputData[2]
 # Identify common elements between different pairs
 a = data_extraction(pdb_files,fasta_file,inputData[3])
 b = seq_dictionary(a)
-print(b)
 
 # Add possible stoichimetry 
 stoich=stoichometry(st_file,b)
@@ -26,7 +25,6 @@ if inputData[3]:
 
 # Build the structure
 mycomplex=constructor(b,stoich,inputData[3])
-list(mycomplex.get_chains())
 
 # Write results in output directory
 resultFile=out_directory+"_model.pdb"
