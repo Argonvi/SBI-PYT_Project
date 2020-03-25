@@ -25,13 +25,13 @@
 
 ## Why building complexes?
 
-The total number of proteins in humans is around 20K. From this quantity we already know the structure of 4K proteins. However, for 6K we have good templates and for another 6K of them, we have reasonably good templates; that means we have more or less 50-70% of the structure of the human proteins covered.
+The total number of proteins in humans is around 20K. From this quantity we already know the structure of 4K proteins. However, for 6K we have good templates and for other 6K of them, we have reasonably good templates; that means we have more or less 50-70% of the structure of human proteins covered.
 
 On the other hand, the number of interactions that may occur between all the proteins is still unknown. There are some studies estimating 130-650K interactions, while others estimate more than millions. In this context, 120K interactions are confirmed from experiments and only 7K structures of complexes are known, which is a very small proportion of the total number of possible interactions anyway.
 
-So, the complex-structure coverage, including homologs, is around the 30%, much less than the mentioned coverage of monomers. That means there is still a long way to go into the complex-structure study field. 
+So, the complex structure coverage, including homologs, is around the 30%, much less than the mentioned coverage of monomers. That means there is still a long way to go into the complex-structure study field. 
 
-The 3D structure of interacting proteins is necessary for them to develop their function, it is also fundamental for molecular recognition and contributes to the complexity of protein interaction networks too. However, identifying the structure of interacting proteins, complexes, is not an easy task. In monomers, homology modelling can be used to nearly cover all folds to determine a protein structure but, for interactions it is not enough. 
+The 3D structure of interacting proteins is necessary for them to develop their function. It is also fundamental for molecular recognition and contributes to the complexity of protein interaction networks. However, identifying the structure of interacting proteins, complexes, is not an easy task. In monomers, homology modelling can be used to nearly cover all folds to determine a protein structure but, for interactions it is not enough. 
 
 Complex Constructor tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of pdb files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
 
@@ -115,7 +115,7 @@ To execute Complex Constructor three arguments are required:
 
 - `-pdb` `--pdbDir`: directory containing the pdb files with the structure of the pairs that will conform the complex.
 
-- `-o` `--output`: directory name where the complex results will be stored. 
+- `-o` `--output`: name of the directory where the complex results will be stored. 
 
 > Note that, if the output directory already exists, the results will be overwritten.
 
@@ -124,10 +124,11 @@ To execute Complex Constructor three arguments are required:
 
 - `-v` `--verbose`: show the detailed progression of the building process in a file called 'ComplexConstructor.log'. It will be stored in the output directory.
 
-- `-st` `--stoichiometry`: File containing a determined stoichiometry of the complex. The information of the stoichiometry must be: the ID of the sequence chain (concordant with the FASTA file ID) followed by the number of times it has to be present in the complex after ' : '.
+- `-st` `--stoichiometry`: File in .txt format containing the stoichiometry of the complex. The information of the stoichiometry must be in the following order: the ID of the sequence chain (concordant with the FASTA file ID) followed by ' : ' and the number of times it has to be present in the complex.
 
-     `ID_FASTA_file` : `stoichiometry` One per line in format .txt. Take a look at some examples [here](#examples).
-
+     `ID_FASTA_file` : `stoichiometry` One per line . Take a look at some examples [here](#examples).
+     In case that this option is not used, the program will build the complex using each chain only once.
+     
 ### Graphical interface
 
 Otherwise, the macrocomplex can also be built using the graphical interface:
@@ -164,11 +165,11 @@ $  cd ComplexConstructorModels
 
 Like this, the output folders will be stored in this directory. 
 
-> Inside the folder `examples` there are all the examples we will describe in this tutorial in the corresponding directories: `1gzx`, `5fj8`, etc. Each of them contains the required files to run Complex Constructor together with a pdb file of the reference structure, `exampleRef.pdb`, in order to check the superimposition between the constructed model and the real structure. 
+> Inside the folder `examples` there are all the examples we will describe in this tutorial in the corresponding directories: `1gzx`, `5fj8`, etc. Each of them contains the required files to run Complex Constructor and also a pdb file of the reference structure, `exampleRef.pdb`, in order to check the superimposition between the constructed model and the real structure. 
 
 ### 1GZX
 
-Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different amino acid chains with stoichiometry two, so the final structure has four chains. To perform the construction of T state haemoglobin, stoichiometry 2A2B, we use the .txt file where the stoichiometry is explicited, in this case, `1gzx_st.txt`, already in the `examples/1gzx` folder:
+Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different aminoacid chains and each one of them appears two times (stoichiometry 2A2B), so the final structure has four chains. In order to perform the construction of T state haemoglobin (1GZX), we need a .txt file where the stoichiometry is explicited. This file can be found in the folder `examples/1gzx` and it is called `1gzx_st.txt`:
 
 ```shell
 1GZXa:2
@@ -183,19 +184,19 @@ $ cconstruct -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDir -o 1GZX -st ex
 
 - `-fa`, mandatory: followed by the location of the FASTA file `1gzx.fa`.
 
-> This file contain two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
+> This file contains two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
 
 - `-pdb`, mandatory: followed by the location of directory with paired structures in pdb `1gzxDir`.
 
 > In this case inside this folder we should have at least three pdb files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there are redundant pairs they won't be considered. 
 
-- `-o`, mandatory: followed by the name given to the output directory where the results will be stored, `1GZX`. 
+- `-o`, mandatory: followed by the name of the output directory where the results will be stored, `1GZX`. 
 
 > If a directory with the same name already exists in the working folder it will be overwritten.
 
-- `-st`: followed by the stoychiometry information of the complex 2A2B that is in the file `1gzx_st.txt`.
+- `-st`: followed by the location of the file that contains the stoichiometry information of the complex (2A2B), that is, the file  `1gzx_st.txt`.
 
-- `-v`: turn ON the the verbose option. It is always recommended to create a logfile where the process information will be displayed. To deactivate the creation of the logfile, do not add the `-v` flag. 
+- `-v`: when it is used it turns ON the verbose option. It is always recommended to create a logfile where the process information will be displayed. In order to deactivate the creation of the logfile, do not add the `-v` flag. 
 
 2. Graphical interface execution:
 
@@ -212,15 +213,15 @@ We can observe that the resulting structure from Complex Constructor fits the re
 
 ### 3KUY
 
-3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four amino acid chains and one of nuclotides, all with stoichiometry two, which make a total of 10 chains. The procedure to run this example is the same as before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
+3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one nuclotide chain, all of them have stoichiometry two, which makes a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
 
 ```shell
 $ cconstruct -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDir -o 3KUY -st examples/3kuy/3kuy_st.txt -v
 ```
 
-The resulting structure in directory `3KUY`, file `3KUY_model.pdb`.
+The resulting structure is stored in the file `3KUY_model.pdb`, which is in the directory `3KUY`, .v
 
-> To execute this example, and the same for all the rest, with the graphical interface repeat the same process as for the previous example with the inputs of the folder `examples/3kuy`.
+>  In order to construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as the explained in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
@@ -229,8 +230,8 @@ The resulting structure in directory `3KUY`, file `3KUY_model.pdb`.
 The whole complex is correctly constructed. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
+The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is also symmetric and  it is composed by 14 chains, all of them with stoichimetry two, a total of 28 chains in the complex. Its input data in `examples/4r3o`.
 
-A bigger case is the complex 4R3O, but just made of amino acid chains. It is also symmetric and composed by 14 chains, stoichimetry two for all of them, a total of 28 chains in the complex. Its input data in `examples/4r3o`.
 
 ```shell
 $ cconstruc -fa examples/4r3o/4r3o.fa -pdb examples/4r3o/4r3oDir -o 4R3O -st examples/4r3o/4r3o_st.txt -v
