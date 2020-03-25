@@ -65,20 +65,20 @@ $ pip3 install complexconstructor
 - Otherwise, you can clone the repo to your local machine
 
 ```shell
-git clone https://github.com/Argonvi/SBI-PYT_Project.git
+$ git clone https://github.com/Argonvi/SBI-PYT_Project.git
 ```  
 
 Decompress the dowloaded folder
 
 ```shell
-tar xvfz complexconstructor-0.1.2.tar.gz
+$ tar xvfz complexconstructor-0.1.2.tar.gz
 ``` 
 
 Move to the decompressed folder and install the package
 
 ```shell
-cd complexconstructor-0.1.2
-sudo python3 setup.py install
+$ cd complexconstructor-0.1.2
+$ sudo python3 setup.py install
 ```
 ### Setup
 
