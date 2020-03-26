@@ -234,7 +234,7 @@ The resulting structure is stored in the file `3KUY_model.pdb`, which is in the 
 We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
-The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is symmetric and  it is composed by 14 chains, all of them with stoichimetry two, making a total of 28 chains in the complex. Its input data in `examples/4r3o`.
+The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is symmetric and  it is composed by 14 chains, all of them with stoichimetry two, making a total of 28 chains in the complex. Its input data can be found in `examples/4r3o`. Execution with command-line arguments:
 
 
 ```shell
@@ -252,7 +252,7 @@ In this case, as well, the constructed model fits the reference structure. The R
 
 ### 5FJ8
 
-The next complex is composed by amino acid and nucleotide sequences but, in this case, it is not symmetric. It is composed by 20 chains and all of them are present just once in the structure. The required inputs to the construction are in `examples/5fj8`. 
+The next complex is composed by amino acid and nucleotide sequences but, in this case, it is not symmetric. It is composed by 20 chains and all of them are present just once in the structure. The required inputs for the construction are in `examples/5fj8`. 
 
 ```shell
 $ ccontruct -fa examples/5fj8/5fj8.fa -pdb examples/5fj8/5fj8Dir -o 5FJ8 -st examples/5fj8/5fj8_st.txt -v
@@ -267,7 +267,7 @@ The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the 
 The model and the reference are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced. The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
 
 ### 6GMH
-Another non-symetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains and also in this case, all of them appear only once in the structure.
+Another non-symetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains and also in this case, all of them appear only once in the structure. The required inputs for the construction are in `examples/6gmh`.
 
 ```shell
 $ cconstruct -fa examples/6gmh/6gmh.fa -pdb examples/6gmh/6gmhDir -o 6GMH -st examples/6gmh/6gmh_st.txt -v
