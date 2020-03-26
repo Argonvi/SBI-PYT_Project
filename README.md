@@ -299,7 +299,7 @@ The resulting structure is in directory `ENTV`, file `ENTV_model.pdb`, with the 
 The 'extended' structure, conatined in `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, is as follows:
 
 
-<img  margin="20% 0 20%" src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
+<img  hspace="70" src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
 
 We can see that, the structure is not jet completed, but with a third pbd this would be solved. The structure of the capside is correctly visualized. 
 
