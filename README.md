@@ -208,14 +208,14 @@ $ cconstruct -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDir -o 1GZX -st ex
 
 The resulting structure is stored in the current directory, `ComplexConstructorModels`, in the folder `1GZX`, file `1GZX_model.pdb`.
 
-In the superimposition image we can observe the reference structure in red and the structure obtained with Complex Constructor in blue. We observe that the colours are mixed in most of the chains as our model fits quite well the reference structure.  
+
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
 |<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=250 >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=250  >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=250 >
 
-
-We can observe that the resulting structure from Complex Constructor fits the reference downloaded from PDB quite well. Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a result of 0.000 angstroms.
+In the superimposition image we can observe the reference structure in red and the structure obtained with Complex Constructor in blue. We observe that the colours are mixed in most of the chains as our model fits fits the reference downloaded from PDB quite well.     
+Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a result of 0.000 angstroms.
 
 ### 3KUY
 
@@ -229,12 +229,13 @@ The resulting structure is stored in the file `3KUY_model.pdb`, which is in the 
 
 >  In order to construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as the one explained in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
 
-In the superimposition image we can observe the amino acid chains of the reference structure in red and the DNA chains in yellow. The colours of the structure obtained with Complex Constructor are blue and orange respectively. We observe that the colours are mixed in most of the chains as our model fits quite well the reference structure.  
+ 
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
 |<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
 
+In the superimposition image we can observe the amino acid chains of the reference structure in red and the DNA chains in yellow. The colours of the structure obtained with Complex Constructor are blue and orange respectively.   
 We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
