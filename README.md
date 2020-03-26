@@ -214,7 +214,7 @@ The resulting structure is stored in the current directory, `ComplexConstructorM
 | :---: | :---: | :---: |
 |<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=250 >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=250  >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=250 >
 
-In the superimposition image we can observe the reference structure in red and the structure obtained with Complex Constructor in blue. We observe that the colours are mixed in most of the chains as our model fits fits the reference downloaded from PDB quite well.     
+In the superimposition image we can observe the reference structure in red and the structure obtained with Complex Constructor in blue. We observe that the colours are mixed in most of the chains as our model fits fits the reference downloaded from PDB quite well.        
 Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a result of 0.000 angstroms.
 
 ### 3KUY
@@ -236,7 +236,8 @@ The resulting structure is stored in the file `3KUY_model.pdb`, which is in the 
 |<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
 
 In the superimposition image we can observe the amino acid chains of the reference structure in red and the DNA chains in yellow. The colours of the structure obtained with Complex Constructor are blue and orange respectively.   
-We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
+We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure.    
+The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
 The Human 20S Proteasome (4R3O), is a bigger complex but just made of amino acid chains. It is symmetric and it is composed by 14 chains, all of them with stoichiometry  two, making a total of 28 chains in the complex. Its input data can be found in `examples/4r3o`. Execution with command-line arguments:
@@ -253,7 +254,8 @@ The resulting structure is stored in the file `4R3O_model.pdb`, which is in the 
 | :----: | :----: | :----: |
 |<img src="/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC"  height=240 >|<img src="/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" height=240  >|<img src="/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" height=240 >
 
-In this case, as well, the constructed model fits the reference structure. The RMSD between 250 pruned atom pairs is 0.000 angstroms.
+In this case, as well, the constructed model fits the reference structure.     
+The RMSD between 250 pruned atom pairs is 0.000 angstroms.
 
 ### 5FJ8
 
@@ -269,7 +271,8 @@ The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the 
 | :---: | :---: | :---: |
 |<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC"  height=240 >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref"  height=240>|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" height=240>
 
-The model and the reference are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these 35 amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced. The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
+The model and the reference are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these 35 amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.     
+The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
 
 ### 6GMH
 Another non-symmetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains and as in the previous case, all of them appear only once in the structure. The required inputs for the construction are in `examples/6gmh`.
@@ -286,7 +289,8 @@ The resulting structure is stored in the file `6GMH_model.pdb`, which is in the 
 |<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC"  height=240 >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" height=240  >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC"  height=240 >
 
 In this case, the pdb structure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. In the Q chain, from a total of 884 amino acids, 300 of them were labelled as 'unknown', so only 584 remained in order to construct the model, (that is why this chain is not completely constructed in our model). It happened to be the same in chain M, but in this case only 8 amino acids were missing. On the other hand, the chains U, V and X had to be completely deleted in our model, since all their amino acid were labelled as 'unknown' in the pdb file.      
-Even though we had to remove several amino acids and some chains, the model is well constructed and it fits the reference structure as in previous examples, (as we can see in the image of the superimposition). The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
+Even though we had to remove several amino acids and some chains, the model is well constructed and it fits the reference structure as in previous examples, (as we can see in the image of the superimposition).     
+The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
 
 ### Enterovirus capsid
 In order to see how the Complex Constructor works with a complex whose structure is unknown, we have run Complex Constructor with an enterovirus capsid, composed by three different amino acid chains. To execute this example, we provide a stoichiometry file with stoichiometry equal to 18 for all three chains. However, with a total of 54 chains the complex is not totally constructed. 
