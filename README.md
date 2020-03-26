@@ -52,7 +52,7 @@ Prerequisites:
 
 There are two different ways to download the package: using `pip3` or cloning the repo.
 
-### Install from pip
+### Option 1. Install from pip
 
 - Install Complex Constructor with the Python package installer `pip3`
 
@@ -60,7 +60,7 @@ There are two different ways to download the package: using `pip3` or cloning th
 $ pip3 install complexconstructor
 ```
 
-### Clone
+### Option 2. Clone
 
 - Otherwise, you can clone the repo to your local machine
 
@@ -68,7 +68,7 @@ $ pip3 install complexconstructor
 $ git clone https://github.com/Argonvi/SBI-PYT_Project.git
 ```  
 
-Install the package
+- and then install the package
 
 ```shell
 $ cd SBI-PYT_Project
