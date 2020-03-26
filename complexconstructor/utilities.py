@@ -294,13 +294,18 @@ def superimpositor(first_chain, same_chain, third_chain,macrocomplex):
     return macrocomplex
 
 def write_pdb(structure,path):
-    "Writes a pdb file based of the specified structure in the given path."
+    """Writes a pdb file based of the specified structure in the given path."""
     io = PDBIO()
     io.set_structure(structure)
     io.save(path)
 
 def constructor(information,stoich, verb):
-    """Description"""
+    """Takes as input the dictionary created by the seq_dictionary function, the dictionary
+    of stoichiometry created by the stoichometry function and the verbose parameter.
+    Using the information from both dictionaries and the superimpositor function, it 
+    builds the macrocomplex. 
+    It returns the macrocomplex object after achieving the given stoichiometry.  
+    """
     chains_in_complex={}
 
     #Choose a model to start iterating
