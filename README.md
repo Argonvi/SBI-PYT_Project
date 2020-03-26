@@ -190,7 +190,7 @@ $ cconstruct -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDir -o 1GZX -st ex
 
 > This file contains two IDs followed by the corresponding sequence, e.g. `1GZXa`, `1GZXb`. Note that, the IDs in `1gzx_st.txt` have to be concordant with them.
 
-- `-pdb`, mandatory: followed by the location of directory with paired structures in pdb `1gzxDir`.
+- `-pdb`, mandatory: followed by the location of the directory with paired structures in pdb, that is `1gzxDir`.
 
 > In this case inside this folder we should have at least three pdb files, e.g. `1gzx_AB.pdb`, `1gzx_AC.pdb`, `1gzx_AD.pdb`. If there are redundant pairs they won't be considered. 
 
@@ -198,7 +198,7 @@ $ cconstruct -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDir -o 1GZX -st ex
 
 > If a directory with the same name already exists in the working folder it will be overwritten.
 
-- `-st`: followed by the location of the file that contains the stoichiometry information of the complex (2A2B), that is, the file  `1gzx_st.txt`.
+- `-st`: followed by the location of the file that contains the stoichiometry information, that is, the file  `1gzx_st.txt`.
 
 - `-v`: when it is used it turns ON the verbose option. It is always recommended to create a logfile where the process information will be displayed. In order to deactivate the creation of the logfile, do not add the `-v` flag. 
 
@@ -335,9 +335,7 @@ We can see that, the structure is not jet completed, but with a third pbd this w
 
 - The amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequences, cannot be correctly identified so they should not be present in the input files. As a consequence, those chains containing unknown amino acids are just partly constructed in the final model. 
 
-- Although the similarity of chains from different pdb files is double checked, only the ones with sequence identity over 99%, and also with an RMSD under 0.05 when both structures are superimposed, the small differences between them may be propagated when building big structures. It could be partly solved if the similarity conditions were harder or with small structure corrections everytime a chain is added. 
-
-- We would have also liked to check the Z-score for the macrocomplexes with unknown structure through the energy analisys. We thought about creating a .cmd file to be executed with ProSa 2003 in order to create a file with the z-score table. Like this, we would have been able to check if the structure was energetically valid. However, as the access to the Prosa software is temporarily limited we have left this part of the analisys for the moment.
+- We would have also liked to check the Z-score for the macrocomplexes with unknown structure through the energy analysis. We thought about creating a .cmd file to be executed with ProSa 2003 in order to create a file with the z-score table. Like this, we would have been able to check if the structure was energetically valid. However, as the access to the Prosa software is temporarily limited we have left this part of the analysis for the moment.
 
 
 ## Team
