@@ -298,7 +298,6 @@ The resulting structure is in directory `ENTV`, file `ENTV_model.pdb`, with the 
 
 The 'extended' structure, conatined in `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, is as follows:
 
-| **Complex Constructor** |
 | :---: |
 <img  align="center" src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
 
