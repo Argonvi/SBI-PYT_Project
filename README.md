@@ -208,6 +208,8 @@ $ cconstruct -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDir -o 1GZX -st ex
 
 The resulting structure is stored in the current directory, `ComplexConstructorModels`, in the folder `1GZX`, file `1GZX_model.pdb`.
 
+In the superimposition image we can observe the reference structure in red and the structure obtained with Complex Constructor in blue. We observe that the colours are mixed in most of the chains as our model fits quite well the reference structure.  
+
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
 |<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=250 >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=250  >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=250 >
