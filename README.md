@@ -223,25 +223,26 @@ We can observe that the resulting structure from Complex Constructor fits the re
 $ cconstruct -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDir -o 3KUY -st examples/3kuy/3kuy_st.txt -v
 ```
 
-The resulting structure is stored in the file `3KUY_model.pdb`, which is in the directory `3KUY`, .v
+The resulting structure is stored in the file `3KUY_model.pdb`, which is in the directory `3KUY`.
 
->  In order to construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as the explained in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
+>  In order to construct this complex (and all the following examples) using the graphical interface, we should repeat the same process as the one explained in the previous example, but in this case, we will take the inputs from the folder `examples/3kuy`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
 |<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
 
-The whole complex is correctly constructed. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
+We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the reference structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
-The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is also symmetric and  it is composed by 14 chains, all of them with stoichimetry two, a total of 28 chains in the complex. Its input data in `examples/4r3o`.
+The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is symmetric and  it is composed by 14 chains, all of them with stoichimetry two, which makes a total of 28 chains in the complex. Its input data in `examples/4r3o`.
 
 
 ```shell
 $ cconstruc -fa examples/4r3o/4r3o.fa -pdb examples/4r3o/4r3oDir -o 4R3O -st examples/4r3o/4r3o_st.txt -v
 ```
 
-The resulting structure in directory `4R3O`, file `4R3O_model.pdb`.
+The resulting structure is stored in the file `4R3O_model.pdb`, which is in the directory `4R3O`.
+
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :----: | :----: | :----: |
@@ -257,7 +258,7 @@ The next complex is composed by amino acid and nucleotide sequences but, in this
 $ ccontruct -fa examples/5fj8/5fj8.fa -pdb examples/5fj8/5fj8Dir -o 5FJ8 -st examples/5fj8/5fj8_st.txt -v
 ```
 
-The resulting structure in directory `5FJ8`, file `5FJ8_model.pdb`.
+The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the directory `5FJ8`.
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
@@ -272,7 +273,8 @@ Another non-symetric example, but also with DNA sequences, is 6GMH. It has 17 am
 $ cconstruct -fa examples/6gmh/6gmh.fa -pdb examples/6gmh/6gmhDir -o 6GMH -st examples/6gmh/6gmh_st.txt -v
 ```
 
-Resulting structure in directory `6GMH`, file `6GMH_model.pdb`.
+The resulting structure is stored in the file `6GMH_model.pdb`, which is in the directory `6GMH`.
+
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
@@ -294,7 +296,7 @@ $ python3 complexconstructor -fa examples/entv/entv.fa -pdb examples/entv/entvDi
 
 ```
 
-The resulting structure is in directory `ENTV`, file `ENTV_model.pdb`, with the 'reduced' structure.
+The resulting structure is in directory `ENTV`, in the file `ENTV_model.pdb`, with the 'reduced' structure.
 
 The 'extended' structure, conatined in `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, is as follows:
 
@@ -307,7 +309,7 @@ We can see that, the structure is not jet completed, but with a third pbd this w
 
 <img align="center" src="/assets/ComplexBuilderDiagram_.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
-- Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
+- Before adding a new chain to the macrocomplex, the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` calculates how many CA,P or N1 atoms from the new chain are closer than 2 angstroms to any other CA,P or N1 atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 35, the new chain won't be added to the macrocomplex. 
 
 ### Structure of the package
 
