@@ -217,7 +217,7 @@ We can observe that the resulting structure from Complex Constructor fits the re
 
 ### 3KUY
 
-3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one nuclotide chain, all of them have stoichiometry two, which makes a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
+3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one nuclotide chain, all of them have stoichiometry two, making a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
 
 ```shell
 $ cconstruct -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDir -o 3KUY -st examples/3kuy/3kuy_st.txt -v
@@ -231,10 +231,10 @@ The resulting structure is stored in the file `3KUY_model.pdb`, which is in the 
 | :---: | :---: | :---: |
 |<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
 
-We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the reference structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
+We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
-The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is symmetric and  it is composed by 14 chains, all of them with stoichimetry two, which makes a total of 28 chains in the complex. Its input data in `examples/4r3o`.
+The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is symmetric and  it is composed by 14 chains, all of them with stoichimetry two, making a total of 28 chains in the complex. Its input data in `examples/4r3o`.
 
 
 ```shell
