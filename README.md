@@ -252,7 +252,7 @@ In this case, as well, the constructed model fits the reference structure. The R
 
 ### 5FJ8
 
-The next complex is composed by amino acid and nucleotide sequences but, in this case, it is not symmetric. It is composed by 20 chains, all just present once in the structure. The required inputs to the construction are in `examples/5fj8`. 
+The next complex is composed by amino acid and nucleotide sequences but, in this case, it is not symmetric. It is composed by 20 chains and all of them are present just once in the structure. The required inputs to the construction are in `examples/5fj8`. 
 
 ```shell
 $ ccontruct -fa examples/5fj8/5fj8.fa -pdb examples/5fj8/5fj8Dir -o 5FJ8 -st examples/5fj8/5fj8_st.txt -v
@@ -264,7 +264,7 @@ The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the 
 | :---: | :---: | :---: |
 |<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC"  height=240 >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref"  height=240>|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" height=240>
 
-The model and the reference are superimposed with very little differences between both structures. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out this amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced. The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
+The model and the reference are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced. The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
 
 ### 6GMH
 Another non-symetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains.
