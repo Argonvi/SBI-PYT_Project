@@ -128,7 +128,9 @@ To execute Complex Constructor three arguments are required:
 
      `ID_FASTA_file` : `stoichiometry` One per line. 
      
-     In case this option is not used, the program will build the complex using each chain only once.Take a look at some examples [here](#examples).
+     In case this option is not used, the program will build the complex using each chain only once.
+     
+     Take a look at some examples [here](#examples).
      
      
 ### Graphical interface
