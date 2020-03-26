@@ -236,7 +236,7 @@ The resulting structure is stored in the file `3KUY_model.pdb`, which is in the 
 |<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
 
 In the superimposition image we can observe the amino acid chains of the reference structure in red and the DNA chains in yellow. The colours of the structure obtained with Complex Constructor are blue and orange respectively.   
-We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure.    
+We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure downloaded from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure.    
 The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
@@ -291,6 +291,31 @@ The resulting structure is stored in the file `6GMH_model.pdb`, which is in the 
 In this case, the pdb structure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. In the Q chain, from a total of 884 amino acids, 300 of them were labelled as 'unknown', so only 584 remained in order to construct the model, (that is why this chain is not completely constructed in our model). It happened to be the same in chain M, but in this case only 8 amino acids were missing. On the other hand, the chains U, V and X had to be completely deleted in our model, since all their amino acid were labelled as 'unknown' in the pdb file.      
 Even though we had to remove several amino acids and some chains, the model is well constructed and it fits the reference structure as in previous examples, (as we can see in the image of the superimposition).     
 The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
+
+
+
+
+### 6M17
+We have tried to build a more recent complex such as 6m17, which is a membrane protein of the SARS coronavirus. It has three amino acid chains and all of them have stoichiometry two, making a total of 6 chains.  The data to construct the complex is inside the folder `examples/6m17`. Execution with command-line arguments:
+
+```shell
+$ cconstruct -fa examples/6m17/6m17.fa -pdb examples/6m17/6m17Dir -o 6M17 -st examples/6m17/6m17_st.txt -v
+```
+
+The resulting structure is stored in the file `6M17_model.pdb`, which is in the directory `6M17`.
+
+ 
+
+| **Complex Constructor** | **Reference structure** | **Superimposition** |
+| :---: | :---: | :---: |
+|<img src="/assets/6m17Example/6m17CC.png" title="6m17CC" alt="6m17CC" height=260  >|<img src="/assets/6m17Example/6m17Ref.png" title="6m17ref" alt="6m17Ref" height=260  >|<img src="/assets/6m17Example/6m17Ref_CC.png" title="6m17Ref_CC" alt="6m17Ref_CC" height=260 >
+  
+We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure from PDB, we can see that all the chains fit quite well with the reference structure.    
+The RMSD computed with Chimera between 748 pruned atom pairs is 0.000 angstroms.
+
+
+
+
 
 ### Enterovirus capsid
 In order to see how the Complex Constructor works with a complex whose structure is unknown, we have run Complex Constructor with an enterovirus capsid, composed by three different amino acid chains. To execute this example, we provide a stoichiometry file with stoichiometry equal to 18 for all three chains. However, with a total of 54 chains the complex is not totally constructed. 
