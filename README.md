@@ -68,7 +68,7 @@ $ pip3 install complexconstructor
 $ git clone https://github.com/Argonvi/SBI-PYT_Project.git
 ```  
 
-- and then install the package
+- Install the package
 
 ```shell
 $ cd SBI-PYT_Project
