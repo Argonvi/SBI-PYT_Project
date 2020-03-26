@@ -284,13 +284,13 @@ In this case, the pdb structure had bigger regions labelled as 'unknown'. As tho
 Even though we had to remove several amino acids and some chains, the model is well constructed and it fits the reference structure as in previous examples, (as we can see in the image of the superimposition). The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
 
 ### Enterovirus capsid
-To make the prove with a complex with unknown structure we have run Complex Constructor with an enterovirus capsid, composed by three different amino acid chains. To execute this example we provide an stoichiometry file with stoichiometry equal to 18 for all three chains. However, with a total of 54 chains the complex is not totally constructed. 
+In order to see how the Complex Constructor works with a complex whose structure is unknown, we have run Complex Constructor with an enterovirus capsid, composed by three different amino acid chains. To execute this example we provide a stoichiometry file with stoichiometry equal to 18 for all three chains. However, with a total of 54 chains the complex is not totally constructed. 
 
 The following image shows the construction of the complex with stoichiometry 32, a total of 96 chains. To perform the construction with so many chains, we had to modify the script: the program was able to generate a total of 54 chains, with letters A-Z and a-z, so the maximum stoichiometry for three chains was 18. In addition to this limitation, ICM and Chimera, allow a maximum of 99999 atoms to be represented, and the complex exceeded this number.
 
-To solve both issues, we made modifications for this particular case to create two different pdb files, like this, we divided the pdb structure in two files `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, to be able to repeat the chain letters in the second file and open both files with ICM or Chimera. These two pdb files are included in the directory `examples/entv`. 
+To solve both issues, we made modifications for this particular case so that we could create two different pdb files, like this, we divided the pdb structure in two files `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, to be able to repeat the chain letters in the second file and open both files with ICM or Chimera. These two pdb files are included in the directory `examples/entv`. 
 
-Nevertheless, as the modifications were just perfomed to build this particular case, the stoichiometry file we have included to run this example, is the one that will work with the 'default' script, this is, stoichiometry equal to 18 for the three chains. Like this, the resulting pdb file will be partly constructed. To run the enterovirus capside 'reduced' example: 
+Nevertheless, as the modifications were just perfomed to build this particular case, the stoichiometry file that we have included to run this example, is the one that will work with the 'default' script, this is, stoichiometry equal to 18 for all the three chains. Like this, the resulting pdb file will be partly constructed. To run the enterovirus capside 'reduced' example use the following commands: 
 
 ```shell
 $ python3 complexconstructor -fa examples/entv/entv.fa -pdb examples/entv/entvDir -o ENTV -st examples/entv/entv_st.txt -v
@@ -304,7 +304,7 @@ The 'extended' structure, conatined in `ENTV_model_part1.pdb` and `ENTV_model_pa
 
 <img  hspace="70" src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
 
-We can see that, the structure is not jet completed, but with a third pbd this would be solved. The structure of the capside is correctly visualized. 
+We can see that, the structure is not completed yet, but using a third pbd would allow adding more chains and complete the complex. The structure of the capside is correctly visualized. 
 
 ## Performance
 
