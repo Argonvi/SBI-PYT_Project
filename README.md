@@ -161,7 +161,7 @@ Finally, in the top menu you can consult the Complex Constructor 'Help' as well.
 
 As said before, to generate any macrocomplex structure it is required the FASTA file and a direcory with paired structures in pdb format. All the data needed to execute the following examples is in the folder `examples`, remember that you have to download it as described in the [installation](#installation) section.  
 
-- The output folder will be created in the 'current' directory, the one from which you execute the Complex Constructor. Our recommendation to follow the following examples is to create a working directory, for example `ComplexConstructorModels`, and place the `examples` directory inside it, `ComplexConstructorModels/examples`. Now navigate using the `cd` command to reach `ComplexConstructorModels` directory
+- The output folder will be created in the 'current' directory, the one from which you execute the Complex Constructor. Our recommendation to follow the following examples is to create a working directory, for example `ComplexConstructorModels`, and place the `examples` directory inside it, `ComplexConstructorModels/examples`. Now navigate using the `cd` command to reach `ComplexConstructorModels` directory.
 
 ```shell
 $  cd ComplexConstructorModels
