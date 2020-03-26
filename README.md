@@ -306,7 +306,7 @@ We can see that, the structure is not jet completed, but with a third pbd this w
 
 ## Performance
 
-<img align="center" src="/assets/ComplexBuilderDiagram.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
+<img align="center" src="/assets/ComplexBuilderDiagram_.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
 - Before adding a new chain to the macrocomplex the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` finds how many CA atoms from the new chain are closer than 2 angstroms to any other CA atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 20, the new chain won't be added to the macrocomplex. 
 
@@ -314,9 +314,9 @@ We can see that, the structure is not jet completed, but with a third pbd this w
 
 #### ComplexConstructor
 
-- `main.py`: main module of Comple Constructor. It connects with all the rest of modules. 
+- `main.py`: main module of Complex Constructor. It connects with all the rest of modules. 
 
-- `utilities.py`: module with all the functions needed to run the construction of macrocomeplexes, as `constructor` or `superimpositor`.
+- `utilities.py`: module with all the functions needed to run the construction of macrocomplexes, as the `constructor` function or `superimpositor`.
 
 - `argparser.py`: reads and organizes the command-line arguments.
 
@@ -335,7 +335,7 @@ We can see that, the structure is not jet completed, but with a third pbd this w
 
 - The amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequences, cannot be correctly identified so they should not be present in the input files. As a consequence, those chains containing unknown amino acids are just partly constructed in the final model. 
 
-- We would have also liked to check the Z-score for the macrocomplexes with unknown structure through the energy analysis. We thought about creating a .cmd file to be executed with ProSa 2003 in order to create a file with the z-score table. Like this, we would have been able to check if the structure was energetically valid. However, as the access to the Prosa software is temporarily limited we have left this part of the analysis for the moment.
+- We would have also liked to check the Z-score for the macrocomplexes with unknown structure through the energy analysis. We thought about creating a .cmd file to be executed with ProSa 2003 in order to create a file with the z-score table. Like this, we would have been able to check if the structure was energetically valid. However, as the access to the Prosa software is temporarily inaccessible we have left this part of the analysis for the moment.
 
 
 ## Team
