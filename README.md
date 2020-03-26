@@ -308,7 +308,7 @@ The resulting structure is stored in the file `6M17_model.pdb`, which is in the 
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/6m17Example/6m17CC.png" title="6m17CC" alt="6m17CC" height=260  >|<img src="/assets/6m17Example/6m17Ref.png" title="6m17ref" alt="6m17Ref" height=260  >|<img src="/assets/6m17Example/6m17REF_CC.png" title="6m17REF_CC" alt="6m17Ref_CC" height=260 >
+|<img src="/assets/6m17Example/6m17CC.png" title="6m17CC" alt="6m17CC" height=260  >|<img src="/assets/6m17Example/6m17Ref.png" title="6m17REF" alt="6m17REF" height=260  >|<img src="/assets/6m17Example/6m17REF_CC.png" title="6m17REF_CC" alt="6m17Ref_CC" height=260 >
   
 We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure from PDB, we can see that all the chains fit quite well with the reference structure.    
 The RMSD computed with Chimera between 748 pruned atom pairs is 0.000 angstroms.
