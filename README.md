@@ -153,7 +153,7 @@ Furthermore, additional options can be set:
 
 - In the main window you can specify if you want to create a log file where the process of the execution will be displayed. It will be stored in the output directory.
 
-- In the top menu, in the 'Options' dropdown, there is the 'Add Stoichiometry' option. You can upload a file with a determined stoichiometry to be applied to the macrocomplex. As said before, the format of this file has to be the ID of the sequence, concordant with the one in the FASTA file, followed by ':' and a number. This number will be the number of times the corresponging sequence will be in the final complex.
+- In the top menu, in the 'Options' dropdown, there is the 'Add Stoichiometry' option. You can upload a file with a determined stoichiometry to be applied to the macrocomplex. As said before, the format of this file has to be the ID of the sequence, concordant with the one in the FASTA file, followed by ':' and a number. This number will be the number of times the corresponding sequence will be in the final complex.
 
 Finally, in the top menu you can consult the Complex Constructor 'Help' as well.
 
