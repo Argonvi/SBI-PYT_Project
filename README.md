@@ -35,7 +35,7 @@ The 3D structure of interacting proteins is necessary for them to develop their 
 
 Complex Constructor tries to generate macrocomplex structures. To do so, the superimposing technique is used: it receives a list of pdb files, each of these files contains the structure of an interacting pair and, by superimposing the common elements of different pairs, it builds the final structure. Although there are other methods to generate macrocomplexes, the superimposition is fast and effective. Furthermore, not only protein-protein interacting pairs can be analyzed, but also proteins with DNA, to end up generating a macrocomplex structure of proteins and DNA chains. 
 
-The core of Complex Constructor is the `constructor` function, which is the responsible of the building process. The pdbs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different pdb files are identified: they will have more than 99% of identity in their sequences. sAfter this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair that has a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements. In the next step, the process will be repeated by looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
+The core of Complex Constructor is the `constructor` function, which is the responsible of the building process. The pdbs of the interacting pairs are analyzed and classified using the information of the FASTA file. The common chains in different pdb files are identified: they will have more than 99% of identity in their sequences. After this classification, `constructor` begins to append elements to the macrocomplex: it starts with a pair, then it looks for another pair that has a common element with the starting one and, if after superimposing the common element, the structure has not clashed, it appends the new element. Like this, the macrocomplex have now three elements. In the next step, the process will be repeated by looking for another pair, superimposing the common element and checking the possible clashes. The program is described [here](#performance).
 
 In addition, as a lot of complexes follow a determined stoichiometry, Complex Constructor can also make the construction following it. If a stoichiometry is defined, the final structure will contain the exact number of elements indicated by it. In other case, the structure will contain each different chain only once. 
 
@@ -173,7 +173,7 @@ Like this, the output folders will be stored in this directory.
 
 ### 1GZX
 
-Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different aminoacid chains and each one of them appears two times (stoichiometry 2A2B), so the final structure has four chains. In order to perform the construction of T state haemoglobin (1GZX), we need a .txt file where the stoichiometry is explicited. This file can be found in the folder `examples/1gzx` and it is called `1gzx_st.txt`:
+Let's begin with the first example, the protein 1GZX. It is a small complex composed by two different amino acid chains and each one of them appears two times (stoichiometry 2A2B), so the final structure has four chains. In order to perform the construction of T state haemoglobin (1GZX), we need a .txt file where the stoichiometry is specified. This file can be found in the folder `examples/1gzx` and it is called `1gzx_st.txt`:
 
 ```shell
 1GZXa:2
@@ -217,7 +217,7 @@ We can observe that the resulting structure from Complex Constructor fits the re
 
 ### 3KUY
 
-3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four aminoacid chains and one nuclotide chain, all of them have stoichiometry two, making a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
+3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four amino acid chains and one nucleotide chain, all of them have stoichiometry two, making a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
 
 ```shell
 $ cconstruct -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDir -o 3KUY -st examples/3kuy/3kuy_st.txt -v
@@ -234,7 +234,7 @@ The resulting structure is stored in the file `3KUY_model.pdb`, which is in the 
 We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure obtained from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure. The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
-The Human 20S Proteasome (4R3O), is a bigger complex but just made of aminoacid chains. It is symmetric and  it is composed by 14 chains, all of them with stoichimetry two, making a total of 28 chains in the complex. Its input data can be found in `examples/4r3o`. Execution with command-line arguments:
+The Human 20S Proteasome (4R3O), is a bigger complex but just made of amino acid chains. It is symmetric and it is composed by 14 chains, all of them with stoichiometry  two, making a total of 28 chains in the complex. Its input data can be found in `examples/4r3o`. Execution with command-line arguments:
 
 
 ```shell
@@ -267,7 +267,7 @@ The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the 
 The model and the reference are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these 35 amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced. The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
 
 ### 6GMH
-Another non-symetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains and as in the previous case, all of them appear only once in the structure. The required inputs for the construction are in `examples/6gmh`.
+Another non-symmetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains and as in the previous case, all of them appear only once in the structure. The required inputs for the construction are in `examples/6gmh`.
 
 ```shell
 $ cconstruct -fa examples/6gmh/6gmh.fa -pdb examples/6gmh/6gmhDir -o 6GMH -st examples/6gmh/6gmh_st.txt -v
@@ -280,17 +280,17 @@ The resulting structure is stored in the file `6GMH_model.pdb`, which is in the 
 | :---: | :---: | :---: |
 |<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC"  height=240 >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" height=240  >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC"  height=240 >
 
-In this case, the pdb structure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. In the Q chain, from a total of 884 amino acids, 300 of them were labelled as 'unknown', so only 584 remained in order to construct the model, (that is why this chain is not completelly constructed in our model). It happened to be the same in chain M, but in this case only 8 amino acids were missing. On the other hand, the chains U, V and X had to be completely deleted in our model, since all their amino acid were labelled as 'unknown' in the pdb file.      
+In this case, the pdb structure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. In the Q chain, from a total of 884 amino acids, 300 of them were labelled as 'unknown', so only 584 remained in order to construct the model, (that is why this chain is not completely constructed in our model). It happened to be the same in chain M, but in this case only 8 amino acids were missing. On the other hand, the chains U, V and X had to be completely deleted in our model, since all their amino acid were labelled as 'unknown' in the pdb file.      
 Even though we had to remove several amino acids and some chains, the model is well constructed and it fits the reference structure as in previous examples, (as we can see in the image of the superimposition). The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
 
 ### Enterovirus capsid
-In order to see how the Complex Constructor works with a complex whose structure is unknown, we have run Complex Constructor with an enterovirus capsid, composed by three different amino acid chains. To execute this example we provide a stoichiometry file with stoichiometry equal to 18 for all three chains. However, with a total of 54 chains the complex is not totally constructed. 
+In order to see how the Complex Constructor works with a complex whose structure is unknown, we have run Complex Constructor with an enterovirus capsid, composed by three different amino acid chains. To execute this example, we provide a stoichiometry file with stoichiometry equal to 18 for all three chains. However, with a total of 54 chains the complex is not totally constructed. 
 
 The following image shows the construction of the complex with stoichiometry 32, a total of 96 chains. To perform the construction with so many chains, we had to modify the script: the program was able to generate a total of 54 chains, with letters A-Z and a-z, so the maximum stoichiometry for three chains was 18. In addition to this limitation, ICM and Chimera, allow a maximum of 99999 atoms to be represented, and the complex exceeded this number.
 
 To solve both issues, we made modifications for this particular case so that we could create two different pdb files, like this, we divided the pdb structure in two files `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, to be able to repeat the chain letters in the second file and open both files with ICM or Chimera. These two pdb files are included in the directory `examples/entv`. 
 
-Nevertheless, as the modifications were just perfomed to build this particular case, the stoichiometry file that we have included to run this example, is the one that will work with the 'default' script, this is, stoichiometry equal to 18 for all the three chains. Like this, the resulting pdb file will be partly constructed. To run the enterovirus capside 'reduced' example use the following commands: 
+Nevertheless, as the modifications were just performed to build this particular case, the stoichiometry file that we have included to run this example, is the one that will work with the 'default' script, this is, stoichiometry equal to 18 for all the three chains. Like this, the resulting pdb file will be partly constructed. To run the enterovirus capside 'reduced' example use the following commands: 
 
 ```shell
 $ python3 complexconstructor -fa examples/entv/entv.fa -pdb examples/entv/entvDir -o ENTV -st examples/entv/entv_st.txt -v
@@ -299,7 +299,7 @@ $ python3 complexconstructor -fa examples/entv/entv.fa -pdb examples/entv/entvDi
 
 The resulting structure is in directory `ENTV`, in the file `ENTV_model.pdb`, with the 'reduced' structure.
 
-The 'extended' structure, conatined in `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, is as follows:
+The 'extended' structure, contained in `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, is as follows:
 
 
 <img  hspace="70" src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
