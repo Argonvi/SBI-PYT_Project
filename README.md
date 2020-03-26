@@ -267,7 +267,7 @@ The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the 
 The model and the reference are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced. The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
 
 ### 6GMH
-Another non-symetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains.
+Another non-symetric example, but also with DNA sequences, is 6GMH. It has 17 amino acid chains and 3 DNA chains and also in this case, all of them appear only once in the structure.
 
 ```shell
 $ cconstruct -fa examples/6gmh/6gmh.fa -pdb examples/6gmh/6gmhDir -o 6GMH -st examples/6gmh/6gmh_st.txt -v
