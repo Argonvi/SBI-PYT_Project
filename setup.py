@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='complexconstructor',
-      version='0.1.2',
+      version='0.1.5',
       description='Generate macrocomplexes superimposing \
       paired interacting elements.',
       data_files = [("", ['LICENSE'])],
