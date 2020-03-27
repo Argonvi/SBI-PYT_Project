@@ -149,7 +149,7 @@ $  cconstruct -gui
 
 Furthermore, additional options can be set:
 
-<img src="/assets/GUI.gif" title="GUI" alt="GUI" style="max-width:70%;" >
+<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/GUI.gif" title="GUI" alt="GUI" style="max-width:70%;" >
 
 - In the main window you can specify if you want to create a log file where the process of the execution will be displayed. It will be stored in the output directory.
 
@@ -204,7 +204,7 @@ $ cconstruct -fa examples/1gzx/1gzx.fa -pdb examples/1gzx/1gzxDir -o 1GZX -st ex
 
 2. Graphical interface execution:
 
-<img src="/assets/1gzxExample/1GZX.gif" title="1gzxGUI" alt="1gzxGUI" style="max-width:60%;" >
+<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1GZX.gif" title="1gzxGUI" alt="1gzxGUI" style="max-width:60%;" >
 
 The resulting structure is stored in the current directory, `ComplexConstructorModels`, in the folder `1GZX`, file `1GZX_model.pdb`.
 
@@ -212,7 +212,7 @@ The resulting structure is stored in the current directory, `ComplexConstructorM
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=250 >|<img src="/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=250  >|<img src="/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=250 >
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxCC.png" title="1gzxCC" alt="1gzxCC"  height=250 >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxREF.png" title="1gzxREF" alt="1gzxREF" height=250  >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/1gzxExample/1gzxREF_CC.png" title="1gzxREF_CC" alt="1gzxREF_CC" height=250 >
 
 In the superimposition image we can observe the reference structure in red and the structure obtained with Complex Constructor in blue. We observe that the colours are mixed in most of the chains as our model fits fits the reference downloaded from PDB quite well.        
 Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a result of 0.000 angstroms.
@@ -233,7 +233,7 @@ The resulting structure is stored in the file `3KUY_model.pdb`, which is in the 
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyCC.png" title="3kuyCC" alt="3kuyCC" height=260  >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyRef.png" title="3kuyref" alt="3kuyRef" height=260  >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/3kuyExample/3kuyRef_CC.png" title="3kuyRef_CC" alt="3kuyRef_CC" height=260 >
 
 In the superimposition image we can observe the amino acid chains of the reference structure in red and the DNA chains in yellow. The colours of the structure obtained with Complex Constructor are blue and orange respectively.   
 We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure downloaded from PDB, we can see that both protein chains and DNA chains fit quite well with the reference structure.    
@@ -252,7 +252,7 @@ The resulting structure is stored in the file `4R3O_model.pdb`, which is in the 
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :----: | :----: | :----: |
-|<img src="/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC"  height=240 >|<img src="/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" height=240  >|<img src="/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" height=240 >
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oCC.png" title="4r3oCC" alt="4r3oCC"  height=240 >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oRef.png" title="4r3oref" alt="4r3oRef" height=240  >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/4r3oExample/4r3oRef_CC.png" title="4r3oRef_CC" alt="4r3oRef_CC" height=240 >
 
 In this case, as well, the constructed model fits the reference structure.     
 The RMSD between 250 pruned atom pairs is 0.000 angstroms.
@@ -269,7 +269,7 @@ The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the 
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC"  height=240 >|<img src="/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref"  height=240>|<img src="/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" height=240>
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC"  height=240 >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref"  height=240>|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" height=240>
 
 The model and the reference are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these 35 amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.     
 The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
@@ -286,7 +286,7 @@ The resulting structure is stored in the file `6GMH_model.pdb`, which is in the 
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC"  height=240 >|<img src="/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" height=240  >|<img src="/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC"  height=240 >
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhCC.png" title="6gmhCC" alt="6gmhCC"  height=240 >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhREF.png" title="6gmhref" alt="6gmhRef" height=240  >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6gmhExample/6gmhREF_CC.png" title="6gmhRef_CC" alt="6gmhRef_CC"  height=240 >
 
 In this case, the pdb structure had bigger regions labelled as 'unknown'. As those regions are not recognized by Complex Constructor, we removed them from the input pdb pairs and from the FASTA sequences, as in the previous example. In the Q chain, from a total of 884 amino acids, 300 of them were labelled as 'unknown', so only 584 remained in order to construct the model, (that is why this chain is not completely constructed in our model). It happened to be the same in chain M, but in this case only 8 amino acids were missing. On the other hand, the chains U, V and X had to be completely deleted in our model, since all their amino acid were labelled as 'unknown' in the pdb file.      
 Even though we had to remove several amino acids and some chains, the model is well constructed and it fits the reference structure as in previous examples, (as we can see in the image of the superimposition).     
@@ -308,7 +308,7 @@ The resulting structure is stored in the file `6M17_model.pdb`, which is in the 
 
 | **Complex Constructor** | **Reference structure** | **Superimposition** |
 | :---: | :---: | :---: |
-|<img src="/assets/6m17Example/6m17CC.png" title="6m17CC" alt="6m17CC" height=230  >|<img src="/assets/6m17Example/6m17REF.png" title="6m17REF" alt="6m17REF" height=230  >|<img src="/assets/6m17Example/6m17REF_CC.png" title="6m17REF_CC" alt="6m17REF_CC" height=230 >
+|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6m17Example/6m17CC.png" title="6m17CC" alt="6m17CC" height=230  >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6m17Example/6m17REF.png" title="6m17REF" alt="6m17REF" height=230  >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/6m17Example/6m17REF_CC.png" title="6m17REF_CC" alt="6m17REF_CC" height=230 >
   
 We observe that the whole complex is correctly constructed and after superimposing the obtained structure with the structure from PDB, we can see that all the chains fit quite well with the reference structure.    
 The RMSD computed with Chimera between 748 pruned atom pairs is 0.000 angstroms.
@@ -336,13 +336,13 @@ The resulting structure is in directory `ENTV`, in the file `ENTV_model.pdb`, wi
 The 'extended' structure, contained in `ENTV_model_part1.pdb` and `ENTV_model_part2.pdb`, is as follows:
 
 
-<img  hspace="70" src="/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
+<img  hspace="70" src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/entvExample/entv.gif" title="entv" alt="entv" style="max-width:60%;" >
 
 We can see that, the structure is not completed yet, but using a third pbd would allow adding more chains and complete the complex. The structure of the capside is correctly visualized. 
 
 ## Performance
 
-<img align="center" src="/assets/ComplexBuilderDiagram_.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
+<img align="center" src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/ComplexBuilderDiagram_.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
 - Before adding a new chain to the macrocomplex, the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` calculates how many CA,P or N1 atoms from the new chain are closer than 2 angstroms to any other CA,P or N1 atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 35, the new chain won't be added to the macrocomplex. 
 
