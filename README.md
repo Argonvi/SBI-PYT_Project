@@ -124,7 +124,8 @@ To execute Complex Constructor three arguments are required:
 
 - `-v` `--verbose`: show the detailed progression of the building process in a file called 'ComplexConstructor.log'. It will be stored in the output directory.
 
-- `-st` `--stoichiometry`: name of the file in .txt format containing the stoichiometry of the complex. The information of the stoichiometry must be in the following order: the ID of the sequence chain (concordant with the FASTA file ID) followed by ' : ' and the number of times it has to be present in the complex. 
+- `-st` `--stoichiometry`: name of the file in .txt format containing the stoichiometry of the complex. The information of the stoichiometry must be in the following order:   
+     the ID of the sequence chain (concordant with the FASTA file ID) followed by ' : ' and the number of times it has to be present in the complex. 
 
      `ID_FASTA_file` : `stoichiometry` One per line. 
      
