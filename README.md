@@ -221,7 +221,7 @@ Using Chimera we computed the RMSD between 146 pruned atom pairs and obtained a 
 
 ### 3KUY
 
-3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four amino acid chains and one nucleotide chain, all of them have stoichiometry two, making a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
+3KUY is a complex composed by a DNA coil and a core made of protein chains. There are four  different amino acid chains and one nucleotide chain, all of them have stoichiometry two, making a total of 10 chains. The procedure to run this example is the same as the explained before. The data to construct the complex is inside the folder `examples/3kuy`. Execution with command-line arguments:
 
 ```shell
 $ cconstruct -fa examples/3kuy/3kuy.fa -pdb examples/3kuy/3kuyDir -o 3KUY -st examples/3kuy/3kuy_st.txt -v
@@ -242,7 +242,7 @@ We observe that the whole complex is correctly constructed and after superimposi
 The RMSD computed with Chimera between 106 pruned atom pairs is 0.000 angstroms.
 
 ### 4R3O
-The Human 20S Proteasome (4R3O), is a bigger complex but just made of amino acid chains. It is symmetric and it is composed by 14 chains, all of them with stoichiometry  two, making a total of 28 chains in the complex. Its input data can be found in `examples/4r3o`. Execution with command-line arguments:
+The Human 20S Proteasome (4R3O), is a bigger complex but just made of amino acid chains. It is symmetric and it is composed by 14 different chains, all of them with stoichiometry  two, making a total of 28 chains in the complex. Its input data can be found in `examples/4r3o`. Execution with command-line arguments:
 
 
 ```shell
@@ -261,7 +261,7 @@ The RMSD between 250 pruned atom pairs is 0.000 angstroms.
 
 ### 5FJ8
 
-The next complex is composed by amino acid and nucleotide sequences but, in this case, it is not symmetric. It is composed by 20 chains and all of them are present just once in the structure. The required inputs for the construction are in `examples/5fj8`. 
+The next complex is composed by amino acid and nucleotide sequences but, in this case, it is not symmetric. It is composed by 20 different chains and all of them are present just once in the structure. The required inputs for the construction are in `examples/5fj8`. 
 
 ```shell
 $ ccontruct -fa examples/5fj8/5fj8.fa -pdb examples/5fj8/5fj8Dir -o 5FJ8 -st examples/5fj8/5fj8_st.txt -v
@@ -298,7 +298,7 @@ The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
 
 
 ### 6M17
-We have tried to build a more recent complex such as 6m17, which is a membrane protein of the SARS coronavirus. It has three amino acid chains and all of them have stoichiometry two, making a total of 6 chains.  The data to construct the complex is inside the folder `examples/6m17`. Execution with command-line arguments:
+We have tried to build a more recent complex such as 6m17, which is a membrane protein of the SARS coronavirus. It has three different amino acid chains and all of them have stoichiometry two, making a total of 6 chains.  The data to construct the complex is inside the folder `examples/6m17`. Execution with command-line arguments:
 
 ```shell
 $ cconstruct -fa examples/6m17/6m17.fa -pdb examples/6m17/6m17Dir -o 6M17 -st examples/6m17/6m17_st.txt -v
