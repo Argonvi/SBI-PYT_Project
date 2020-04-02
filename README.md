@@ -264,7 +264,7 @@ The RMSD between 250 pruned atom pairs is 0.000 angstroms.
 The next complex is composed by amino acid and nucleotide sequences but, in this case, it is not symmetric. It is composed by 20 different chains and all of them are present just once in the structure. The required inputs for the construction are in `examples/5fj8`. 
 
 ```shell
-$ ccontruct -fa examples/5fj8/5fj8.fa -pdb examples/5fj8/5fj8Dir -o 5FJ8 -st examples/5fj8/5fj8_st.txt -v
+$ cconstruct -fa examples/5fj8/5fj8.fa -pdb examples/5fj8/5fj8Dir -o 5FJ8 -st examples/5fj8/5fj8_st.txt -v
 ```
 
 The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the directory `5FJ8`.
