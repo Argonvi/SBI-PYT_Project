@@ -329,7 +329,7 @@ To solve both issues, we made modifications for this particular case so that we 
 Nevertheless, as the modifications were just performed to build this particular case, the stoichiometry file that we have included to run this example, is the one that will work with the 'default' script, this is, stoichiometry equal to 18 for all the three chains. Like this, the resulting pdb file will be partly constructed. To run the enterovirus capside 'reduced' example use the following commands: 
 
 ```shell
-$ cconstruct -fa examples/entv/entv.fa -pdb examples/entv/entvDir -o ENTV -st examples/entv/entv_st.txt -v
+$ cconstruct -fa examples/entv/entv.fa -pdb examples/entv/entvDir -o ENTV -st examples/entv/entero_st.txt -v
 
 ```
 
