@@ -98,7 +98,7 @@ Then uncompress them with:
 $ tar xvfz examples.tar.gz
 $ tar xvfz examples2.tar.gz
 ```
-> We recommend to move the files from examples2 to the folder examples in order to facilitate the execution of the commands explained in the [examples](#examples).  
+> Our recommendation is to move the files from examples2 to the folder examples in order to facilitate the execution of the commands explained in the [examples](#examples).  
 
 ## Options
 
