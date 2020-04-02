@@ -87,17 +87,18 @@ $ pip3 install biopython --upgrade
 
 ### Download the data to run the examples
 
-To run the different [examples](#examples) of this tutorial, download the folder `examples`. Inside it you can find all the required inputs to execute the examples.
-
-You can download the compressed folder with the following command:
+To run the different [examples](#examples) of this tutorial, you will need the folder `examples`. If you have used the clone option for the installation, you already have this folder. If you have installed Complex Constructor using  `pip3` you can download the compressed folders all the required inputs to execute the examples with the following commands: 
 
 ```shell
 $ wget https://github.com/Argonvi/SBI-PYT_Project/raw/master/examples.tar.gz
+$ wget https://github.com/Argonvi/SBI-PYT_Project/raw/master/examples2.tar.gz
 ```
-Then uncompress with:
+Then uncompress them with:
 ```shell
 $ tar xvfz examples.tar.gz
+$ tar xvfz examples2.tar.gz
 ```
+> We recommend to move the files from examples2 to the folder examples in order to facilitate the execution of the commands explained in the [examples](#examples).  
 
 ## Options
 
