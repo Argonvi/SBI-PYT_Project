@@ -273,7 +273,7 @@ The resulting structure is stored in the file `5FJ8_model.pdb`, which is in the 
 | :---: | :---: | :---: |
 |<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8CC.png" title="5fj8CC" alt="5fj8CC"  height=240 >|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref.png" title="5fj8ref" alt="5fj8Ref"  height=240>|<img src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/5fj8Example/5fj8Ref_CC.png" title="5fj8Ref_CC" alt="5fj8Ref_CC" height=240>
 
-The created model and the reference structure are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these 35 amino acids from input files, and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.     
+The created model and the reference structure are superimposed quite well as in previous cases. In this particular case, the amino acid chain Q, had several amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequence. To deal with this, we had to take out these 35 amino acids from input files (FASTA file and pdb files), and so, the Q chain is partly constructed in the model. Nevertheless, the rest of the structure is correctly reproduced.     
 The RMSD between 1422 pruned atom pairs is 0.000 angstroms.
 
 ### 6GMH
