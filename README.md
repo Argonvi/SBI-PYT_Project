@@ -62,7 +62,7 @@ $ pip3 install complexconstructor
 
 ### Option 2. Clone
 
-- Otherwise, you can clone the repo to your local machine
+- Otherwise, you can clone the repository to your local machine
 
 ```shell
 $ git clone https://github.com/Argonvi/SBI-PYT_Project.git
