@@ -298,7 +298,7 @@ The RMSD between 1441 pruned atom pairs is 0.000 angstroms.
 
 
 ### 6M17
-We have tried to build a more recent complex such as 6m17, which is a membrane protein of the SARS coronavirus. It has three different amino acid chains and all of them have stoichiometry two, making a total of 6 chains.  The data to construct the complex is inside the folder `examples/6m17`. Execution with command-line arguments:
+We have tried to build a newer complex such as 6m17, which is a membrane protein of the SARS coronavirus. It has been released at PDB on march 2020.  Knowing the structure of this membrane protein and how it interacts with other proteins can be very useful in order to find a vaccine or a drug that prevents us from this virus.  It has three different amino acid chains and all of them have stoichiometry two, making a total of 6 chains.  The data to construct the complex is inside the folder `examples/6m17`. Execution with command-line arguments:
 
 ```shell
 $ cconstruct -fa examples/6m17/6m17.fa -pdb examples/6m17/6m17Dir -o 6M17 -st examples/6m17/6m17_st.txt -v
