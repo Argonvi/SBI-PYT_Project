@@ -246,7 +246,7 @@ The Human 20S Proteasome (4R3O), is a bigger complex but just made of amino acid
 
 
 ```shell
-$ cconstruc -fa examples/4r3o/4r3o.fa -pdb examples/4r3o/4r3oDir -o 4R3O -st examples/4r3o/4r3o_st.txt -v
+$ cconstruct -fa examples/4r3o/4r3o.fa -pdb examples/4r3o/4r3oDir -o 4R3O -st examples/4r3o/4r3o_st.txt -v
 ```
 
 The resulting structure is stored in the file `4R3O_model.pdb`, which is in the directory `4R3O`.
