@@ -1,4 +1,3 @@
 include README.md
 include LICENSE
-include CB_icon.png
-include CB_icon_sm.png
+include complexconstructor/*.png
