@@ -373,7 +373,7 @@ We can see that, the structure is not completed yet, but using a third pbd would
 
 - The amino acids labelled as 'unknown' in the pdb files and as 'X' in the FASTA sequences, cannot be correctly identified so they should not be present in the input files. As a consequence, those chains containing unknown amino acids are just partly constructed in the final model. 
 
-- We would have also liked to check the Z-score for the macrocomplexes with unknown structure through the energy analysis. We thought about creating a .cmd file to be executed with ProSa 2003 in order to create a file with the z-score table. Like this, we would have been able to check if the structure was energetically valid. However, as the access to the Prosa software is temporarily inaccessible we have left this part of the analysis for the moment.
+- We would have also liked to check the Z-score for the macrocomplexes with unknown structure through the energy analysis. We thought about creating a .cmd file to be executed with ProSa 2003 in order to create a file with the z-score table. Like this, we would have been able to check if the structure was energetically valid. However, as the Prosa software is temporarily inaccessible we have left this part of the analysis for the moment.
 
 
 ## Team
