@@ -346,7 +346,7 @@ We can see that, the structure is not completed yet, but using a third pbd would
 
 <img align="center" src="https://raw.githubusercontent.com/Argonvi/SBI-PYT_Project/master/assets/ComplexBuilderDiagram_.jpg" title="ComplexConstructorLogo" alt="ComplexConstructorDiagram" >
 
-- Before adding a new chain to the macrocomplex, the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` calculates how many CA,P or N1 atoms from the new chain are closer than 2 angstroms to any other CA,P or N1 atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 35, the new chain won't be added to the macrocomplex. 
+- Before adding a new chain to the macrocomplex, the number of clashes between the new chain and the previous structure is checked. The function `sequence_clashing` calculates how many CA, P or N1 atoms from the new chain are closer than 2 angstroms to any other CA,P or N1 atom of the previous macrocomplex, this is, the number of clashes. If the number of clashes is above 35, the new chain won't be added to the macrocomplex. 
 
 ### Structure of the package
 
